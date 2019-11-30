@@ -209,11 +209,30 @@
 <li><a href="#ssh-attacker-scenario">SSH Attacker Scenario</a></li>
 </ul>
 </li>
-<li><a href="#authentication">Authentication</a>
-<ul>
 <li><a href="#passwords">Passwords</a>
 <ul>
-<li><a href="#storing-passwords">Storing Passwords</a></li>
+<li><a href="#hasing-password">Hasing password</a></li>
+<li><a href="#uses-of-hash-functions">Uses of hash functions</a></li>
+<li><a href="#hashing-issues">Hashing issues</a></li>
+<li><a href="#rainbow-tables">Rainbow tables</a></li>
+<li><a href="#salting">Salting</a></li>
+<li><a href="#key-derivation-functions">Key Derivation Functions</a>
+<ul>
+<li><a href="#scrypt">SCrypt</a></li>
+<li><a href="#other-password-guessing-prevention-measures">Other Password Guessing Prevention Measures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#authentication">Authentication</a>
+<ul>
+<li><a href="#two-factor-authentication">Two Factor Authentication</a></li>
+<li><a href="#password-recovery">Password Recovery</a></li>
+<li><a href="#centralized-certificate-authorities-ca">Centralized Certificate Authorities (CA)</a></li>
+<li><a href="#other-schemes">Other schemes</a></li>
+<li><a href="#verify-logged-in-users">Verify Logged in Users</a>
+<ul>
+<li><a href="#session-ids">Session IDs</a></li>
 </ul>
 </li>
 </ul>
@@ -1375,10 +1394,7 @@ to intentions in an adverserial environment.</li>
 </ul>
 </li>
 </ul>
-<h2 id="authentication">Authentication</h2>
-<pre><code>The act of verifying the identity of actors in the system
-</code></pre>
-<h3 id="passwords">Passwords</h3>
+<h2 id="passwords">Passwords</h2>
 <ul>
 <li>
 <p>By increasing alphabet, the length only grows constant with the size</p>
@@ -1399,14 +1415,152 @@ to intentions in an adverserial environment.</li>
 </ul>
 </li>
 </ul>
-<h4 id="storing-passwords">Storing Passwords</h4>
-<ul>
-<li><strong>Hasing password</strong>
+<h3 id="hasing-password">Hasing password</h3>
 <ul>
 <li>One way(given y, difficult to find x)</li>
 <li>Collision free(difficult to find x and x´ such that h(x)=h(x´))</li>
 <li>Small input yields large difference in output</li>
 <li>Quick to compute</li>
+</ul>
+<h3 id="uses-of-hash-functions">Uses of hash functions</h3>
+<ul>
+<li>Checksumming data</li>
+<li>Data identifier</li>
+<li>Hashing passwords</li>
+<li>Signature verification/generation</li>
+<li>Building crypto primitives</li>
+</ul>
+<h3 id="hashing-issues">Hashing issues</h3>
+<ul>
+<li>Same hash for same reused password</li>
+<li>Hashes can be computed in a dictionairy an attacker could use to brute force the password</li>
+</ul>
+<h3 id="rainbow-tables">Rainbow tables</h3>
+<ul>
+<li>time-space tradeoff when creating look-up table for hash values -&gt; plaintext</li>
+</ul>
+<h3 id="salting">Salting</h3>
+<ul>
+<li>Generates random string and store it in the hash</li>
+<li>Harder to crack</li>
+<li>Does not help againt brute force attack on single password</li>
+<li>Unix systems use 128-bit salts</li>
+</ul>
+<h3 id="key-derivation-functions">Key Derivation Functions</h3>
+<ul>
+<li>Requirements:
+<ul>
+<li>One-way</li>
+<li>Collision free</li>
+<li>Small input to large output</li>
+<li>CPU intensive</li>
+<li>Memory expensive</li>
+<li>Sequential</li>
+<li><strong>Naïve key derivation</strong>
+<ul>
+<li>Generate random byte-strings and store it before and after hash</li>
+<li>attacker must guess the second string</li>
+<li>The second string works as a cost parameter</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="scrypt">SCrypt</h4>
+<ul>
+<li>
+<p>Previous key derivation is trivially computed in paralell at no additional memory cost</p>
+</li>
+<li>
+<p>SCrypt is maximally memory hard</p>
+</li>
+<li>
+<p><strong>Downside:</strong> Due to its use in crypto-currencies, fast specialized circuits for scrpyt</p>
+</li>
+<li>
+<p>r block size parameter</p>
+</li>
+<li>
+<p>N CPU/Memory cost parameter</p>
+</li>
+<li>
+<p>p parallelism parameter</p>
+</li>
+</ul>
+<h4 id="other-password-guessing-prevention-measures">Other Password Guessing Prevention Measures</h4>
+<ul>
+<li>Rate limiting password attempts</li>
+<li>Proof-of-work from client</li>
+</ul>
+<h2 id="authentication">Authentication</h2>
+<pre><code>The act of verifying the identity of actors in the system
+</code></pre>
+<h3 id="two-factor-authentication">Two Factor Authentication</h3>
+<ul>
+<li>
+<p>Additional authetication mechanism to passwords</p>
+</li>
+<li>
+<p>Examples:</p>
+<ul>
+<li>SMS codes</li>
+<li>Print out codes</li>
+<li>Time based passwords (TOTP)</li>
+<li>Approval from allready authenticated device</li>
+<li>Public key crypto(U2F/FIDO, WebAuth)</li>
+</ul>
+</li>
+<li>
+<p>Could be vulnerable to phising</p>
+</li>
+<li>
+<p>Public-key systems in browsers can prevent proxy-attacks</p>
+</li>
+<li>
+<p>WebAuthn is a new W3C standard</p>
+</li>
+</ul>
+<h3 id="password-recovery">Password Recovery</h3>
+<ul>
+<li><strong>Trust upon first use</strong>
+<ul>
+<li>Man in the middle does not strike first</li>
+<li>Trust upon first session and use that as authentication for the next sessions</li>
+</ul>
+</li>
+</ul>
+<h3 id="centralized-certificate-authorities-ca">Centralized Certificate Authorities (CA)</h3>
+<ul>
+<li>Trust a central authority to verify public keys</li>
+<li>Issues ceritificates for public keys</li>
+</ul>
+<h3 id="other-schemes">Other schemes</h3>
+<ul>
+<li>Preexisting shared secrets</li>
+<li>Out-of-band communication</li>
+</ul>
+<h3 id="verify-logged-in-users">Verify Logged in Users</h3>
+<ul>
+<li>How do we verify the requests from a logged in user is actually consistently from the authenticated user?</li>
+</ul>
+<h4 id="session-ids">Session IDs</h4>
+<ul>
+<li>
+<p><strong>Requires:</strong></p>
+<ul>
+<li>Entropy: Session ID must not be guessable</li>
+<li>Secrecy: Session ID must not be leaked</li>
+</ul>
+</li>
+<li>
+<p><strong>Entropy</strong></p>
+<ul>
+<li>Finite resource on any system</li>
+<li>Not all random generators are suitabe for creating session ID
+<ul>
+<li>Java.util.random for examples, is guessable by only looking at a few bytes</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

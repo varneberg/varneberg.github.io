@@ -100,9 +100,22 @@
       - [Retaining Slave State](#retaining-slave-state)
     - [Priviledge in SSHD](#priviledge-in-sshd)
     - [SSH Attacker Scenario](#ssh-attacker-scenario)
+  - [Passwords](#passwords)
+    - [Hasing password](#hasing-password)
+    - [Uses of hash functions](#uses-of-hash-functions)
+    - [Hashing issues](#hashing-issues)
+    - [Rainbow tables](#rainbow-tables)
+    - [Salting](#salting)
+    - [Key Derivation Functions](#key-derivation-functions)
+      - [SCrypt](#scrypt)
+      - [Other Password Guessing Prevention Measures](#other-password-guessing-prevention-measures)
   - [Authentication](#authentication)
-    - [Passwords](#passwords)
-      - [Storing Passwords](#storing-passwords)
+    - [Two Factor Authentication](#two-factor-authentication)
+    - [Password Recovery](#password-recovery)
+    - [Centralized Certificate Authorities (CA)](#centralized-certificate-authorities-ca)
+    - [Other schemes](#other-schemes)
+    - [Verify Logged in Users](#verify-logged-in-users)
+      - [Session IDs](#session-ids)
 
 ## Student Knowlegde
 
@@ -958,11 +971,7 @@
       - Fork bomb
       - Intensive computations
 
-## Authentication
-
-    The act of verifying the identity of actors in the system
-
-### Passwords
+## Passwords
 
 - By increasing alphabet, the length only grows constant with the size
 
@@ -975,10 +984,111 @@
     - Context specific words
     - Previous breached passwords
 
-#### Storing Passwords
+### Hasing password
 
-- **Hasing password**
-  - One way(given y, difficult to find x)
-  - Collision free(difficult to find x and x´ such that h(x)=h(x´))
-  - Small input yields large difference in output
-  - Quick to compute
+- One way(given y, difficult to find x)
+- Collision free(difficult to find x and x´ such that h(x)=h(x´))
+- Small input yields large difference in output
+- Quick to compute
+
+### Uses of hash functions
+
+- Checksumming data
+- Data identifier
+- Hashing passwords
+- Signature verification/generation
+- Building crypto primitives
+
+### Hashing issues
+
+- Same hash for same reused password
+- Hashes can be computed in a dictionairy an attacker could use to brute force the password
+
+### Rainbow tables
+
+- time-space tradeoff when creating look-up table for hash values -> plaintext
+
+### Salting
+
+- Generates random string and store it in the hash
+- Harder to crack
+- Does not help againt brute force attack on single password
+- Unix systems use 128-bit salts
+
+### Key Derivation Functions
+
+- Requirements:
+  - One-way
+  - Collision free
+  - Small input to large output
+  - CPU intensive
+  - Memory expensive
+  - Sequential
+  - **Naïve key derivation**
+    - Generate random byte-strings and store it before and after hash
+    - attacker must guess the second string
+    - The second string works as a cost parameter
+
+#### SCrypt
+
+- Previous key derivation is trivially computed in paralell at no additional memory cost
+- SCrypt is maximally memory hard
+- **Downside:** Due to its use in crypto-currencies, fast specialized circuits for scrpyt
+
+- r block size parameter
+- N CPU/Memory cost parameter
+- p parallelism parameter
+
+#### Other Password Guessing Prevention Measures
+
+- Rate limiting password attempts
+- Proof-of-work from client
+
+## Authentication
+
+    The act of verifying the identity of actors in the system
+
+### Two Factor Authentication
+
+- Additional authetication mechanism to passwords
+- Examples:
+  - SMS codes
+  - Print out codes
+  - Time based passwords (TOTP)
+  - Approval from allready authenticated device
+  - Public key crypto(U2F/FIDO, WebAuth)
+
+- Could be vulnerable to phising
+- Public-key systems in browsers can prevent proxy-attacks
+- WebAuthn is a new W3C standard
+
+### Password Recovery
+
+- **Trust upon first use**
+  - Man in the middle does not strike first
+  - Trust upon first session and use that as authentication for the next sessions
+
+### Centralized Certificate Authorities (CA)
+
+- Trust a central authority to verify public keys
+- Issues ceritificates for public keys
+
+### Other schemes
+
+- Preexisting shared secrets
+- Out-of-band communication
+
+### Verify Logged in Users
+
+- How do we verify the requests from a logged in user is actually consistently from the authenticated user?
+
+#### Session IDs
+
+- **Requires:**
+  - Entropy: Session ID must not be guessable
+  - Secrecy: Session ID must not be leaked
+
+- **Entropy**
+  - Finite resource on any system
+  - Not all random generators are suitabe for creating session ID
+    - Java.util.random for examples, is guessable by only looking at a few bytes
