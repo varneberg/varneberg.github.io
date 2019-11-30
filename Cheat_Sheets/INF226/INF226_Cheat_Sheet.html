@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>INF226 Cheat Sheet</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="inf226-cheat-sheet">INF226 Cheat Sheet</h1>
+<ul>
+<li><a href="#inf226-cheat-sheet">INF226 Cheat Sheet</a>
+<ul>
+<li><a href="#student-knowlegde">Student Knowlegde</a></li>
+<li><a href="#requirements-assumptions-and-mechanisms">Requirements, assumptions and mechanisms</a>
+<ul>
+<li><a href="#security-definition">Security Definition</a>
+<ul>
+<li><a href="#logical-arguments">Logical Arguments</a></li>
+<li><a href="#software-security-logic">Software Security Logic</a>
+<ul>
+<li><a href="#examples-of-requirements">Examples of requirements</a></li>
+<li><a href="#examples-of-mechanisms">Examples of Mechanisms</a></li>
+<li><a href="#examples-of-assumptions">Examples of assumptions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#vulnerabilities-and-exploits">Vulnerabilities and Exploits</a>
+<ul>
+<li><a href="#vulnerability-definition">Vulnerability Definition</a></li>
+<li><a href="#vulnerability-disclosure">Vulnerability Disclosure</a></li>
+<li><a href="#exploit-definition">Exploit Definition</a></li>
+<li><a href="#remote-code-executionrce">Remote Code Execution(RCE)</a></li>
+<li><a href="#buffer-overflow">Buffer Overflow</a>
+<ul>
+<li><a href="#the-call-stack">The Call Stack</a></li>
+<li><a href="#buffer-overread">Buffer Overread</a></li>
+<li><a href="#shell-code-exploit">Shell-Code exploit</a></li>
+<li><a href="#no-op-sled">NO-OP sled</a></li>
+<li><a href="#return-oriented-programmingrop">Return Oriented Programming(ROP)</a></li>
+<li><a href="#prevention-of-buffer-overflow">Prevention of Buffer Overflow</a></li>
+<li><a href="#stack-canaries">Stack Canaries</a></li>
+<li><a href="#address-space-layout-randomisationaslr">Address Space Layout Randomisation(ASLR)</a></li>
+<li><a href="#wxwrite-xor-executeable">W^X(Write XOR Executeable)</a></li>
+<li><a href="#best-practieses-to-avoid-buffer-overflow">Best Practieses to Avoid Buffer Overflow</a></li>
+<li><a href="#memory-safety">Memory Safety</a></li>
+</ul>
+</li>
+<li><a href="#undefined-behaviour">Undefined Behaviour</a></li>
+<li><a href="#sql-injection">SQL Injection</a>
+<ul>
+<li><a href="#about-sql">About SQL</a></li>
+<li><a href="#problems-with-sql">Problems with SQL</a></li>
+<li><a href="#preventing-sql-injections">Preventing SQL Injections</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#threats-to-software">Threats to Software</a>
+<ul>
+<li><a href="#stride">STRIDE</a>
+<ul>
+<li><a href="#spoofing">Spoofing</a></li>
+<li><a href="#tampering">Tampering</a></li>
+<li><a href="#repudiation">Repudiation</a></li>
+<li><a href="#information-disclosure">Information Disclosure</a></li>
+<li><a href="#denial-of-service">Denial of Service</a></li>
+<li><a href="#elevation-of-priviledge">Elevation of Priviledge</a></li>
+</ul>
+</li>
+<li><a href="#ranking-threats-dread">Ranking threats (DREAD)</a></li>
+</ul>
+</li>
+<li><a href="#functional-decomposition-and-threat-model">Functional Decomposition and Threat Model</a>
+<ul>
+<li><a href="#functional-decomposition">Functional Decomposition</a></li>
+<li><a href="#threat-model">Threat Model</a>
+<ul>
+<li><a href="#threat-model-example-scenario">Threat Model Example Scenario</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#trusts-and-boundaries">Trusts and Boundaries</a>
+<ul>
+<li><a href="#trust">Trust</a></li>
+<li><a href="#transport-security">Transport Security</a></li>
+<li><a href="#defence-in-depth">Defence in Depth</a></li>
+<li><a href="#trusting-trust">Trusting Trust</a>
+<ul>
+<li><a href="#trusting-compilers">Trusting Compilers</a>
+<ul>
+<li><a href="#functional-equivalence">Functional Equivalence</a></li>
+<li><a href="#detection-strategy">Detection Strategy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#cve">CVE</a>
+<ul>
+<li><a href="#cnas">CNAs</a></li>
+<li><a href="#cvss">CVSS</a>
+<ul>
+<li><a href="#base-metrics">Base Metrics</a></li>
+<li><a href="#impact-metrics">Impact Metrics</a></li>
+<li><a href="#temporal-metrics">Temporal Metrics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#cwe">CWE</a></li>
+<li><a href="#nvd">NVD</a></li>
+<li><a href="#security-tools">Security Tools</a>
+<ul>
+<li><a href="#static-analysis">Static analysis</a></li>
+<li><a href="#dynamic-analysis">Dynamic analysis</a></li>
+</ul>
+</li>
+<li><a href="#access-control">Access Control</a>
+<ul>
+<li><a href="#access-control-aspects">Access Control Aspects</a></li>
+<li><a href="#mandatory-access-controlmac">Mandatory Access Control(MAC)</a></li>
+<li><a href="#discretionary-access-controldac">Discretionary Access Control(DAC)</a></li>
+<li><a href="#access-control-models">Access Control Models</a></li>
+<li><a href="#access-control-lists">Access Control lists</a>
+<ul>
+<li><a href="#users-and-groups">Users and Groups</a></li>
+</ul>
+</li>
+<li><a href="#r%c3%b4le-based-access-controlrbac">Rôle Based Access Control(RBAC)</a>
+<ul>
+<li><a href="#r%c3%b4le-of-os">Rôle of OS</a></li>
+</ul>
+</li>
+<li><a href="#capability-based-access-control">Capability Based Access Control</a>
+<ul>
+<li><a href="#file-descriptors">File Descriptors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#memory-protection">Memory Protection</a>
+<ul>
+<li><a href="#virtual-memory-mapping">Virtual Memory Mapping</a></li>
+</ul>
+</li>
+<li><a href="#file-system-abstraction">File System Abstraction</a>
+<ul>
+<li><a href="#unix-file-system">Unix File System</a></li>
+</ul>
+</li>
+<li><a href="#system-calls">System Calls</a>
+<ul>
+<li><a href="#openbsd-pledge">OpenBSD Pledge</a></li>
+</ul>
+</li>
+<li><a href="#os-virtualisation">OS Virtualisation</a>
+<ul>
+<li><a href="#linux-kernel-namespaces">Linux Kernel namespaces</a></li>
+<li><a href="#docker">Docker</a>
+<ul>
+<li><a href="#containers">Containers</a></li>
+<li><a href="#separation-mechanisms">Separation mechanisms</a></li>
+<li><a href="#capabilities">Capabilities</a></li>
+<li><a href="#docker-security">Docker Security</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#priviledge-separation">Priviledge Separation</a>
+<ul>
+<li><a href="#principle-of-least-priviledge">Principle of Least Priviledge</a></li>
+</ul>
+</li>
+<li><a href="#preventing-priviledge-escalation-in-ssh">Preventing Priviledge Escalation in SSH</a>
+<ul>
+<li><a href="#privilegde-separation-in-ssh">Privilegde Separation in SSH</a></li>
+<li><a href="#implementing-monitorslave-pattern">Implementing Monitor/Slave Pattern</a>
+<ul>
+<li><a href="#identifying-priviledged-operations">Identifying Priviledged Operations</a></li>
+<li><a href="#request-types">Request types</a></li>
+<li><a href="#phases">Phases</a></li>
+<li><a href="#slavemonitor-connection">Slave/Monitor Connection</a></li>
+<li><a href="#slavemaster-communication">Slave/Master Communication</a></li>
+<li><a href="#change-of-identity">Change of Identity</a></li>
+<li><a href="#retaining-slave-state">Retaining Slave State</a></li>
+</ul>
+</li>
+<li><a href="#priviledge-in-sshd">Priviledge in SSHD</a></li>
+<li><a href="#ssh-attacker-scenario">SSH Attacker Scenario</a></li>
+</ul>
+</li>
+<li><a href="#authentication">Authentication</a>
+<ul>
+<li><a href="#passwords">Passwords</a>
+<ul>
+<li><a href="#storing-passwords">Storing Passwords</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="student-knowlegde">Student Knowlegde</h2>
+<ul>
+<li>The student has to:
+<ul>
+<li>Understand issues related to system development</li>
+<li>Explain common weaknesses in software security</li>
+<li>Identify common threats, risks and attack vectors</li>
+<li>Know best practises to defend software</li>
+</ul>
+</li>
+</ul>
+<h2 id="requirements-assumptions-and-mechanisms">Requirements, assumptions and mechanisms</h2>
+<h3 id="security-definition">Security Definition</h3>
+<ul>
+<li>Software security is the ability of software to function according
+to intentions in an adverserial environment.</li>
+</ul>
+<h4 id="logical-arguments">Logical Arguments</h4>
+<ul>
+<li>Conclusion</li>
+<li>Assumptions</li>
+<li>Deduction</li>
+</ul>
+<h4 id="software-security-logic">Software Security Logic</h4>
+<ul>
+<li>Identify security requirements
+<ul>
+<li>Capture the intentions of the software</li>
+<li>Making requirements = spelling out our intentions</li>
+</ul>
+</li>
+<li>Make assumptions about the enviroment the software until run
+<ul>
+<li>Making assumptions = spelling out our knowledge of the enviroment</li>
+</ul>
+</li>
+<li>Design mechanisms satisfying the requirements given the assumptions</li>
+</ul>
+<h5 id="examples-of-requirements">Examples of requirements</h5>
+<ul>
+<li>Availability of the service</li>
+<li>Capacity</li>
+<li>Integrity of data</li>
+<li>Authenticity of data</li>
+<li>Recoverability</li>
+</ul>
+<h5 id="examples-of-mechanisms">Examples of Mechanisms</h5>
+<ul>
+<li>Choice of programming language</li>
+<li>Rate limiting</li>
+<li>Sanity checks on user inputs</li>
+<li>Access control lists</li>
+<li>Optimisation of algorithms</li>
+<li>Encryption</li>
+</ul>
+<h5 id="examples-of-assumptions">Examples of assumptions</h5>
+<ul>
+<li>
+<p><strong>Assumptions pointing towards problems:</strong></p>
+<ul>
+<li>User input cannot be trusted to have property X</li>
+<li>IP addresses can be spoofed</li>
+<li>Computer resources are finite</li>
+<li>Programmers write bugs</li>
+</ul>
+</li>
+<li>
+<p><strong>Assumptions pointing towards solutions:</strong></p>
+<ul>
+<li>If the program checks the input, we know it has property X</li>
+<li>An attacker cannot guess a random 128 bit number.</li>
+<li>The semantics of the program.</li>
+<li>The type checker is correct.</li>
+<li>Internet routing is quite robust</li>
+</ul>
+</li>
+</ul>
+<h2 id="vulnerabilities-and-exploits">Vulnerabilities and Exploits</h2>
+<h3 id="vulnerability-definition">Vulnerability Definition</h3>
+<ul>
+<li>When software is in a cirumstance where the program fails to hehave according to intentions</li>
+<li>When the program fails to be secure</li>
+</ul>
+<h3 id="vulnerability-disclosure">Vulnerability Disclosure</h3>
+<ul>
+<li>Should the vulnerability found be publicly disclosed?
+<ul>
+<li>How much detail?</li>
+<li>Include an exploit?</li>
+<li>Embargo period?</li>
+</ul>
+</li>
+<li><strong>Stances:</strong>
+<ul>
+<li>No disclosure: No details made public</li>
+<li>Coordinated disclosure: Reveal details once the the fixes has been made</li>
+<li>Full-disclosure: Full details should be publicly disclosed</li>
+</ul>
+</li>
+</ul>
+<h3 id="exploit-definition">Exploit Definition</h3>
+<ul>
+<li>Procedure which upon execution leads to a circumstance described a vulnerability, demonstrating the insecurity of the program</li>
+</ul>
+<h3 id="remote-code-executionrce">Remote Code Execution(RCE)</h3>
+<ul>
+<li>The most serious vulnerability</li>
+<li>Gives that attacker premission to execute code on the victims machine</li>
+</ul>
+<h3 id="buffer-overflow">Buffer Overflow</h3>
+<h4 id="the-call-stack">The Call Stack</h4>
+<ul>
+<li>Stores return address for function call</li>
+<li>On funciton call the pointer is pushed on the stack</li>
+<li>When function is down the pointer is popped from the stack</li>
+</ul>
+<h4 id="buffer-overread">Buffer Overread</h4>
+<ul>
+<li>Reading outside of the bounds of an array</li>
+</ul>
+<h4 id="shell-code-exploit">Shell-Code exploit</h4>
+<ul>
+<li>Fill the buffer with attackers code</li>
+<li>Overwrite return pointer to point to the array</li>
+<li>Often spawns a shell, giving the attacker RCE access to the machine</li>
+</ul>
+<h4 id="no-op-sled">NO-OP sled</h4>
+<ul>
+<li>When an attacker does not know the address of the buffer</li>
+<li>Attacker fills the buffer with NO-OPs and puts the shell at the end of buffer</li>
+</ul>
+<h4 id="return-oriented-programmingrop">Return Oriented Programming(ROP)</h4>
+<ul>
+<li>Using preexisting code instead of uploading shell code</li>
+</ul>
+<h4 id="prevention-of-buffer-overflow">Prevention of Buffer Overflow</h4>
+<ul>
+<li>Write better C code</li>
+<li>Static analysis</li>
+<li>Stack Canaries</li>
+<li>W^X</li>
+<li>Address space layout randomisation</li>
+</ul>
+<h4 id="stack-canaries">Stack Canaries</h4>
+<ul>
+<li>Secret value placed on the stack every time program is started</li>
+<li>When function returns the value, checks if return pointer has been modified</li>
+<li>If modified, program exits immeadiately</li>
+</ul>
+<h4 id="address-space-layout-randomisationaslr">Address Space Layout Randomisation(ASLR)</h4>
+<ul>
+<li>Practise of randomising the layout when allocating memory in the system</li>
+<li>Makes it more difficult, because attacker must guess the location of functions and libraries</li>
+</ul>
+<h4 id="wxwrite-xor-executeable">W^X(Write XOR Executeable)</h4>
+<ul>
+<li>
+<p>Memory allocations gives the memory different properties</p>
+<ul>
+<li>Writeable</li>
+<li>Executeable</li>
+</ul>
+</li>
+<li>
+<p>OS enfoces that writeable memory cannot be executeable</p>
+<ul>
+<li>Prevents loading shell code in writeable buffers</li>
+<li>Does not prevent ROP</li>
+</ul>
+</li>
+</ul>
+<h4 id="best-practieses-to-avoid-buffer-overflow">Best Practieses to Avoid Buffer Overflow</h4>
+<ul>
+<li>Use memory-safe languages</li>
+<li>Use memory-safe abstractions in unsafe languages(e.g vectors and smart pointers in C++)</li>
+<li>Use the compiler</li>
+<li>Run Static analysers to identify bugs</li>
+</ul>
+<h4 id="memory-safety">Memory Safety</h4>
+<ul>
+<li>
+<p>Each part of the program is only given access to explicit memory locations they are permitted</p>
+</li>
+<li>
+<p><strong>Example</strong></p>
+<ul>
+<li>Code from function could access:
+<ul>
+<li>Arguments from the caller</li>
+<li>Local variables</li>
+<li>Global variables</li>
+</ul>
+</li>
+<li><strong>Not</strong> variabes of other functions</li>
+</ul>
+</li>
+<li>
+<p><strong>Breaking memory-safety:</strong></p>
+<ul>
+<li>Pointer arithmetic</li>
+<li>Unconstrained casting</li>
+<li>No bounds-check on arrays access</li>
+<li>Unsafe pointer de-allocation</li>
+</ul>
+</li>
+<li>
+<p><strong>Memory-Safe languages:</strong></p>
+<ul>
+<li>Java/C#(counds check on arrays, runs in virtual machine)</li>
+<li>Most scripting languages</li>
+<li>Most functional Languages</li>
+</ul>
+</li>
+<li>
+<p><strong>Not Memory-Safe languages:</strong></p>
+<ul>
+<li>Assembly</li>
+<li>C</li>
+<li>C++</li>
+</ul>
+</li>
+<li>
+<p>Achieving memory safety</p>
+<ul>
+<li>Garbage collection</li>
+<li>Resource allocation in initialisation(RAII) and borrows checker</li>
+</ul>
+</li>
+</ul>
+<h3 id="undefined-behaviour">Undefined Behaviour</h3>
+<ul>
+<li>When code behaves unspecified be the language standard
+<ul>
+<li>For example in C, dereffering Null</li>
+</ul>
+</li>
+</ul>
+<h3 id="sql-injection">SQL Injection</h3>
+<h4 id="about-sql">About SQL</h4>
+<ul>
+<li>Relation databases</li>
+<li>Domain specific language</li>
+<li>Queries contructed for other languages</li>
+<li>Queries are constructed from user input</li>
+</ul>
+<h4 id="problems-with-sql">Problems with SQL</h4>
+<ul>
+<li>Confusion between code and data</li>
+<li>Strings are used to represent data and queries</li>
+</ul>
+<h4 id="preventing-sql-injections">Preventing SQL Injections</h4>
+<ul>
+<li><strong>Prepared Statements</strong>
+<ul>
+<li>Statement with placeholders(&quot;?&quot;) where the user data will go later</li>
+<li>Separates the user input and SQL queries sent to the server</li>
+<li>Allows type checking arguments</li>
+<li>Could lead to better performance</li>
+</ul>
+</li>
+</ul>
+<h2 id="threats-to-software">Threats to Software</h2>
+<h3 id="stride">STRIDE</h3>
+<ul>
+<li>
+<p>Sparks imagination when developing threat model</p>
+</li>
+<li>
+<p><strong>S</strong>poofing</p>
+</li>
+<li>
+<p><strong>T</strong>ampering</p>
+</li>
+<li>
+<p><strong>R</strong>epudiation</p>
+</li>
+<li>
+<p><strong>I</strong>nformation disclosure</p>
+</li>
+<li>
+<p><strong>D</strong>enial of service</p>
+</li>
+<li>
+<p><strong>E</strong>levation of priviledge</p>
+</li>
+</ul>
+<h4 id="spoofing">Spoofing</h4>
+<ul>
+<li>
+<p>Transmissions with intentialle mislabeled source</p>
+</li>
+<li>
+<p>When a person tricks the program to think he is someone else, giving him the credentiability of someone else</p>
+</li>
+<li>
+<p>URL spoofing</p>
+<ul>
+<li><a href="http://www.apple.com/">www.apple.com/</a> is actually <a href="http://www.xn--80ak6aa92e.com/">www.аррӏе.com/</a></li>
+<li>Browser displays as unicode characters, making it look like the apple website</li>
+</ul>
+</li>
+</ul>
+<h4 id="tampering">Tampering</h4>
+<ul>
+<li>Modification of persistend data or data in transport</li>
+<li>Examples
+<ul>
+<li>Injecting ads, malware etc in open wifi networks webpages</li>
+<li>SQL injection to tamper with database</li>
+</ul>
+</li>
+</ul>
+<h4 id="repudiation">Repudiation</h4>
+<ul>
+<li>Denial of perfoming unauthorized operations in systems where this cannot be tranced</li>
+<li>Repudiate: to refuse acknowledge</li>
+<li>For example a E-mails spoof, an untoward email was sent by a politician to another</li>
+<li>Does the sender have repudiation?</li>
+</ul>
+<h4 id="information-disclosure">Information Disclosure</h4>
+<ul>
+<li>Access data in an unauthorized fashiong</li>
+<li>Debug infor on production systems</li>
+<li>Passwords and other sensitive information logged as part of requests</li>
+</ul>
+<h4 id="denial-of-service">Denial of Service</h4>
+<ul>
+<li>Rendering a service unaccessible to intended users</li>
+<li>Flooding the service</li>
+<li>Exploiting vulnerability</li>
+<li>DNS hijacking</li>
+</ul>
+<h4 id="elevation-of-priviledge">Elevation of Priviledge</h4>
+<ul>
+<li>User gains more rights within a system then expected</li>
+</ul>
+<h3 id="ranking-threats-dread">Ranking threats (DREAD)</h3>
+<ul>
+<li><strong>D</strong>amage potential</li>
+<li><strong>R</strong>epoducibility</li>
+<li><strong>E</strong>xploitation</li>
+<li><strong>A</strong>ffected users</li>
+<li><strong>D</strong>iscoverability</li>
+</ul>
+<h2 id="functional-decomposition-and-threat-model">Functional Decomposition and Threat Model</h2>
+<h3 id="functional-decomposition">Functional Decomposition</h3>
+<ul>
+<li>An overview of components of the system</li>
+<li>A detailed map of comunication between componenents</li>
+<li>Description of the function of each of the components</li>
+</ul>
+<h3 id="threat-model">Threat Model</h3>
+<ul>
+<li>Applicates our assumptions about a system</li>
+<li>What threats (Stride) applies to each component?</li>
+<li>Trust relationship between components?</li>
+<li>Which threats apply to each relationshipt?</li>
+</ul>
+<h4 id="threat-model-example-scenario">Threat Model Example Scenario</h4>
+<ul>
+<li><strong>Assumption:</strong> Some process on the system is misbehaving
+<ul>
+<li>e.g a buffer overflow in a service caused an attacker to gain RCE</li>
+</ul>
+</li>
+<li><strong>Requirement:</strong> Limit the impact of this break-in</li>
+<li><strong>Mechanisms:</strong></li>
+</ul>
+<h2 id="trusts-and-boundaries">Trusts and Boundaries</h2>
+<h3 id="trust">Trust</h3>
+<ul>
+<li>Is not binary
+<ul>
+<li>Can not trust HTTP requests with private info</li>
+</ul>
+</li>
+<li>Is not linear
+<ul>
+<li>Different users, different relationships</li>
+</ul>
+</li>
+<li>When data is communicated between component with different trust, it crosses a <strong>boundary</strong></li>
+</ul>
+<h3 id="transport-security">Transport Security</h3>
+<ul>
+<li>First level of security
+<ul>
+<li>E.g Sql injections can be sent over HTTPS</li>
+</ul>
+</li>
+<li>Secrecy</li>
+<li>Authenticity</li>
+<li>Integrity</li>
+</ul>
+<h3 id="defence-in-depth">Defence in Depth</h3>
+<ul>
+<li>Analyse what happens when a security mechanism fails</li>
+<li>Are other parts affected?</li>
+<li>Linchpins?</li>
+<li>When mechanisms fails
+<ul>
+<li>Detect failure</li>
+<li>Migitate failure</li>
+</ul>
+</li>
+</ul>
+<h3 id="trusting-trust">Trusting Trust</h3>
+<ul>
+<li>Should trusting trust be a part of threat model?</li>
+<li>At some point one must trust the people behind the software</li>
+</ul>
+<h4 id="trusting-compilers">Trusting Compilers</h4>
+<ul>
+<li>Must trust the compiler to compile correctly</li>
+<li>A compiler could recognize code and compile backdoors</li>
+<li>To trust a compiler:
+<ul>
+<li>Read compiler source code</li>
+<li>The circle of compilers:
+<ul>
+<li>Must trust the compiler who compiled the compiler</li>
+<li>And the compiler who compiled that compiler and so on</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="functional-equivalence">Functional Equivalence</h5>
+<ul>
+<li>Two programs are functionally equivalent if the output from the programs are same given the same input</li>
+</ul>
+<h5 id="detection-strategy">Detection Strategy</h5>
+<ul>
+<li>To test a compiler:
+<ul>
+<li>Requires independent compiler</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">{S_{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> is the source code of compiler <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>E</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">{E_{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> the executeable of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span></span> is a compiler independent of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span></span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>E</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">{E_{T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> is the executeable of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span></span>
+<ol>
+<li>Compile <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">{S_{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> using <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>E</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">{E_{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> to get an executable <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span></span></li>
+<li>Compile <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">{S_{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> using <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>E</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">{E_{T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> to get an executable <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">{Y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span></span></li>
+<li>Compile <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">{S_{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> using <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span></span> to get an executable <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">{V}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span></span></span></span></span></li>
+<li>Compile <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">{S_{A}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> using <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">{Y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span></span> to get an executable <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">{W}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span></span></span></span></span></li>
+<li>Compare <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">{V}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">{W}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span></span></span></span></span> bitwise</li>
+</ol>
+</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">{Y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span></span> will be different binaries, but functionally equivalent</li>
+</ul>
+</li>
+</ul>
+<h2 id="cve">CVE</h2>
+<pre><code>Common Vulnerabilities and Exposures
+</code></pre>
+<ul>
+<li>Maintained be The Mitre Corporation</li>
+<li>Allows referencing vulnerabilities accross systems</li>
+<li>Easy to track and find vulnerabilities and fixes</li>
+<li>Entries consists of:
+<ul>
+<li>A unique number
+<ul>
+<li>CVE-YYYY-XXXX</li>
+</ul>
+</li>
+<li>Description</li>
+<li>Public references</li>
+</ul>
+</li>
+</ul>
+<h3 id="cnas">CNAs</h3>
+<pre><code>Assigns CVE numbers
+</code></pre>
+<ul>
+<li>Different scopes:
+<ul>
+<li>The Mitre Corporation(Primary CNA)</li>
+<li>Distributed Weakness Filing Project(open-source projects)</li>
+<li>Corporations(Google, Intel, Netflix,..)</li>
+</ul>
+</li>
+</ul>
+<h3 id="cvss">CVSS</h3>
+<pre><code>Common Vulnerability Scoring System
+</code></pre>
+<ul>
+<li>Assigns score to vulnerability</li>
+<li>0 to 10</li>
+<li>Metrics:
+<ul>
+<li>Base metrics, intrinsic properties</li>
+<li>Temporal metrics, changes to the vulnerability over time</li>
+<li>Enviromental metrics, specifics to the enviroment of the software</li>
+</ul>
+</li>
+</ul>
+<h4 id="base-metrics">Base Metrics</h4>
+<ul>
+<li>Access Vector
+<ul>
+<li>Local</li>
+<li>Adjacent network</li>
+<li>Network</li>
+</ul>
+</li>
+<li>Attack complexity(High, Medium, Low)</li>
+<li>Authenticity(Multiple, Single, None)</li>
+</ul>
+<h4 id="impact-metrics">Impact Metrics</h4>
+<ul>
+<li>Rated on a scale from None/Partial/Complete impact
+<ul>
+<li>Confidentiality</li>
+<li>Integreity</li>
+<li>Availability</li>
+</ul>
+</li>
+</ul>
+<h4 id="temporal-metrics">Temporal Metrics</h4>
+<pre><code> Metrics who changes over time:
+</code></pre>
+<ul>
+<li><strong>Exploitability</strong>
+<ul>
+<li>Unproven</li>
+<li>Proof-of-concept</li>
+<li>Functional</li>
+<li>High</li>
+</ul>
+</li>
+<li><strong>Remediation level</strong>
+<ul>
+<li>Official fix</li>
+<li>Temporary fix</li>
+<li>Workaround</li>
+<li>Unavailable</li>
+</ul>
+</li>
+<li><strong>Report confidence</strong>
+<ul>
+<li>Unconfirmed</li>
+<li>Uncorroborated</li>
+<li>Confirmed</li>
+</ul>
+</li>
+</ul>
+<h2 id="cwe">CWE</h2>
+<pre><code>Common Weakness Enumeration
+</code></pre>
+<ul>
+<li>List of common weaknesses present in software</li>
+<li>More fine-grained then Owasp Top 10, but similar</li>
+<li>CWE's often given as outputs from security analysis tools</li>
+<li>Structured by:
+<ul>
+<li>Architecture concepts</li>
+<li>Development concepts</li>
+<li>Research conepts</li>
+</ul>
+</li>
+</ul>
+<h2 id="nvd">NVD</h2>
+<pre><code>National Vulnerability Database
+</code></pre>
+<ul>
+<li>Contains analysis of known vulnerabilities
+<ul>
+<li>CVE numbers</li>
+<li>CWE numbers</li>
+<li>CVSS</li>
+<li>Versions affected</li>
+</ul>
+</li>
+</ul>
+<h2 id="security-tools">Security Tools</h2>
+<h3 id="static-analysis">Static analysis</h3>
+<pre><code>Inspects source code
+</code></pre>
+<ul>
+<li>Program flow analysis</li>
+<li>Contrains analysis</li>
+<li>Logic tests</li>
+<li>Linting</li>
+</ul>
+<h3 id="dynamic-analysis">Dynamic analysis</h3>
+<pre><code>Inspects running software
+</code></pre>
+<ul>
+<li><strong>Fuzzer</strong>
+<ul>
+<li>Feeds random data in to the program to trigger anomalies</li>
+</ul>
+</li>
+<li><strong>Crawlers</strong>
+<ul>
+<li>Maps the attack surface of the program</li>
+</ul>
+</li>
+<li><strong>Man-in-the-middle proxy</strong>
+<ul>
+<li>Analyses data from normal usage</li>
+</ul>
+</li>
+</ul>
+<h2 id="access-control">Access Control</h2>
+<pre><code>Decides which users can do what
+</code></pre>
+<ul>
+<li>Read/write to objects</li>
+<li>Perform operations(start processes, allocat memory,..)</li>
+<li>Grant/revoke access</li>
+</ul>
+<h3 id="access-control-aspects">Access Control Aspects</h3>
+<ul>
+<li>Physical</li>
+<li>Logical</li>
+<li>Cryptographic</li>
+<li>Social</li>
+</ul>
+<h3 id="mandatory-access-controlmac">Mandatory Access Control(MAC)</h3>
+<pre><code>Access control policies are fixed by a central authority
+</code></pre>
+<ul>
+<li>Central, non-transferable access</li>
+<li>Operating systems have mandatory access control over resources(cpu, memory, storage)</li>
+<li>In addition there are systems for implementing more MAC security:
+<ul>
+<li>SELinux</li>
+<li>Linux Security Modules (AppArmor)</li>
+<li>Mandatory Integrity Control on Windows (Extending ACLs)</li>
+<li>Language based mechanisms (e.g. Java Security Manager)</li>
+</ul>
+</li>
+</ul>
+<h3 id="discretionary-access-controldac">Discretionary Access Control(DAC)</h3>
+<pre><code>Users specifies premissions for their own objects
+</code></pre>
+<ul>
+<li>At least some priviledges are transferable</li>
+<li>File systems</li>
+<li>E-mail</li>
+<li>WIFI passwords</li>
+</ul>
+<h3 id="access-control-models">Access Control Models</h3>
+<ul>
+<li>Access control lists</li>
+<li>Role based access control</li>
+<li>Capability based access control</li>
+</ul>
+<h3 id="access-control-lists">Access Control lists</h3>
+<ul>
+<li>Premissions are given to each object, giving users different permissions with it</li>
+<li>Each object has a list of permissions assigned to different users</li>
+<li>Premissions structured according to <strong>users and groups</strong></li>
+</ul>
+<h4 id="users-and-groups">Users and Groups</h4>
+<ul>
+<li>User ID (UID)</li>
+<li>Group ID (GID)</li>
+<li>A program gets a Process ID(PID) when its run
+<ul>
+<li>Prevents users accessing eachothers memory</li>
+<li>Files has Owner UID and Group GID
+<ul>
+<li>Read</li>
+<li>Write</li>
+<li>Execute</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>SUID</strong>
+<ul>
+<li>Set UID(SUID)
+<ul>
+<li>Process is set to file owner</li>
+</ul>
+</li>
+<li>Set GID(SGID)
+<ul>
+<li>Process is set to file group</li>
+</ul>
+</li>
+<li>Sticky-Bit
+<ul>
+<li>File can only be renamed/deleted by the files owner or root</li>
+</ul>
+</li>
+<li>Can also apply for directories, not only files</li>
+</ul>
+</li>
+</ul>
+<h3 id="r%c3%b4le-based-access-controlrbac">Rôle Based Access Control(RBAC)</h3>
+<pre><code>A set of roles abstract the permissions from the users
+</code></pre>
+<ul>
+<li>Actions are always performed by a rôle</li>
+<li>Users must reauthenticate to change a rôle</li>
+</ul>
+<pre><code class="language-haskell"><div>                    [<span class="hljs-type">Role0</span>]         <span class="hljs-comment">--&gt;   [Permission0]</span>
+            <span class="hljs-comment">--&gt;                 |</span>
+[<span class="hljs-type">User0</span>]                         |
+            <span class="hljs-comment">--&gt;                 '-&gt;</span>
+                    [<span class="hljs-type">Role1</span>]         <span class="hljs-comment">--&gt;  [Permission1]</span>
+            <span class="hljs-comment">--&gt;             |</span>
+[<span class="hljs-type">User1</span>]                     |
+            <span class="hljs-comment">--&gt;             '-&gt;</span>
+                    [<span class="hljs-type">Role2</span>]         <span class="hljs-comment">--&gt;   [Permission2]</span>
+</div></code></pre>
+<ul>
+<li>Example of usage:
+<ul>
+<li>U = {alice, bob}</li>
+<li>R = {doctor, patient}</li>
+<li>P = {writePerscription, withdrawMedicine}</li>
+<li>RôlePerm = {(doctor,writePerscription), (patient, withdrawMedicine)}</li>
+<li>UserRoles = {(alice, doctor), (bob, patient), (alice, patient)}</li>
+</ul>
+</li>
+</ul>
+<h4 id="r%c3%b4le-of-os">Rôle of OS</h4>
+<ul>
+<li>Ochestrate processes(software)
+<ul>
+<li>Provide abstract interface for hardware(drivers)</li>
+<li>Communicate with programs through <strong>system calls</strong>
+<ul>
+<li>Interrupts and returns control to OS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Different protections for different resources</li>
+<li><strong>Memory</strong>
+<ul>
+<li>Virtual memory mapping</li>
+<li>Limits</li>
+</ul>
+</li>
+<li><strong>Cpu</strong>
+<ul>
+<li>Scheduling policy</li>
+</ul>
+</li>
+<li><strong>File systems</strong>
+<ul>
+<li>Permissions</li>
+<li>Chroot or other restrictions</li>
+<li>Quotas</li>
+</ul>
+</li>
+<li><strong>Open files/sockets/network connections</strong>
+<ul>
+<li>File descriptors</li>
+<li>Limits</li>
+</ul>
+</li>
+</ul>
+<h3 id="capability-based-access-control">Capability Based Access Control</h3>
+<pre><code>Users has capabilities
+</code></pre>
+<ul>
+<li>A capability is
+<ul>
+<li>A reference to an object</li>
+<li>A set of permissions for that object</li>
+</ul>
+</li>
+<li>Used whenever a resource is accessed</li>
+</ul>
+<pre><code class="language-haskell"><div>
+[<span class="hljs-type">User0</span>] <span class="hljs-comment">--&gt; [Capability0]</span>
+            [<span class="hljs-type">Object0</span>    ]
+            [<span class="hljs-type">Read</span>       ]
+
+[<span class="hljs-type">User0</span>] <span class="hljs-comment">----------------&gt;   [Capability2]</span>
+                            [<span class="hljs-type">Object0</span>    ]
+                            [<span class="hljs-type">Read</span>       ]
+                            [<span class="hljs-type">Write</span>      ]
+
+
+[<span class="hljs-type">User0</span>] <span class="hljs-comment">--&gt; [Capability2]</span>
+            [<span class="hljs-type">Object1</span>    ]
+            [<span class="hljs-type">Read</span>       ]
+            [<span class="hljs-type">Write</span>      ]
+</div></code></pre>
+<h4 id="file-descriptors">File Descriptors</h4>
+<pre><code>    File descriptors are capabilities of accessing a file
+</code></pre>
+<ul>
+<li>
+<p>Each process has its own file-descriptor table</p>
+</li>
+<li>
+<p>Used also for:</p>
+<ul>
+<li>stdout/stdin/stderr</li>
+<li>pipes</li>
+<li>sockets(network access)</li>
+</ul>
+</li>
+<li>
+<p>OS checks permissions when opening files and creating descriptor</p>
+<ul>
+<li>Can be transferred between processes</li>
+<li>Recipient processs does nt need to have permission to access the file to use the file-descriptor</li>
+</ul>
+</li>
+</ul>
+<h2 id="memory-protection">Memory Protection</h2>
+<h3 id="virtual-memory-mapping">Virtual Memory Mapping</h3>
+<ul>
+<li>
+<p>Inconvenient to let programs use physical memory</p>
+</li>
+<li>
+<p><strong>With virtual memory:</strong></p>
+<ul>
+<li>Each program gets their own virtual address space</li>
+<li>Memory locations not decided at compile time</li>
+<li>Memory fragmentation hidden from programs</li>
+<li>Easy to page out to swap</li>
+</ul>
+</li>
+<li>
+<p>As a consequence processes cannot directly adress the memory of other processes</p>
+</li>
+<li>
+<p><strong>Exceptions:</strong></p>
+<ul>
+<li>Processes can allocate shared memory</li>
+<li>Processes can attach them selves as a debugger for another process</li>
+</ul>
+</li>
+</ul>
+<h2 id="file-system-abstraction">File System Abstraction</h2>
+<h3 id="unix-file-system">Unix File System</h3>
+<ul>
+<li>
+<p>Directories group the files into logical parts</p>
+<ul>
+<li>/bin</li>
+<li>/sbin</li>
+<li>/etc</li>
+<li>/dev</li>
+<li>/home</li>
+<li>tmp</li>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p>Operating system can restrict access by changing root directory to a different directory with <strong>Chroot</strong></p>
+<ul>
+<li>Provides system virtualisation</li>
+<li>Chroot does not however:</li>
+<li>Restrict network access</li>
+<li>Restrict usage of system resrouces</li>
+<li>Prevent comunication between processes</li>
+</ul>
+</li>
+</ul>
+<h2 id="system-calls">System Calls</h2>
+<h3 id="openbsd-pledge">OpenBSD Pledge</h3>
+<pre><code>Mechanism restricting what system calls are allowed for each process
+</code></pre>
+<ul>
+<li>Calling plegde with a list of system call groups, restricts the process from accessing most system calls not on the list</li>
+</ul>
+<h2 id="os-virtualisation">OS Virtualisation</h2>
+<ul>
+<li>In addition to manually separate priviledges using the OS's mechanisms we can:
+<ul>
+<li>Abstract away the the OS systematicalle
+<ul>
+<li>OS virtualization(Docker, FreeBSD..)</li>
+</ul>
+</li>
+<li>Abstract away hardware:
+<ul>
+<li>Full virtualization: run different ISA</li>
+<li>Paravirtualization: Runs cpu instructions natively</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="linux-kernel-namespaces">Linux Kernel namespaces</h3>
+<ul>
+<li>Groups processes so each group has individual:
+<ul>
+<li>Filesystem mount tables</li>
+<li>Process tables</li>
+<li>Network stack</li>
+<li>UID tables</li>
+</ul>
+</li>
+</ul>
+<h3 id="docker">Docker</h3>
+<h4 id="containers">Containers</h4>
+<ul>
+<li>Not virtual machines!
+<ul>
+<li>If resource not namespaced by linux kernel, it is global and can be affected by the container</li>
+</ul>
+</li>
+<li>Containers are systematicalli separated using OS mechanisms</li>
+<li>Templated by images
+<ul>
+<li>Image constructs container</li>
+<li>Predictable enviroment</li>
+</ul>
+</li>
+<li>Construction and administration through container daemon</li>
+</ul>
+<h4 id="separation-mechanisms">Separation mechanisms</h4>
+<ul>
+<li>Chroot</li>
+<li>Namespaces
+<ul>
+<li>Gives each container individual:
+<ul>
+<li>Mount tables</li>
+<li>Process tables</li>
+<li>Network stack</li>
+<li>UID tables</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cgroups to limit resrouces of each container</li>
+</ul>
+<h4 id="capabilities">Capabilities</h4>
+<ul>
+<li>For each container</li>
+<li>Abstraction of OS level restrictions</li>
+<li>Whitelisted capabilities</li>
+</ul>
+<h4 id="docker-security">Docker Security</h4>
+<ul>
+<li>Divided in:
+<ul>
+<li>Underlying OS level separation mechanisms</li>
+<li>Dockererd daemon attack surface</li>
+<li>Security of container configuration</li>
+</ul>
+</li>
+</ul>
+<h2 id="priviledge-separation">Priviledge Separation</h2>
+<h3 id="principle-of-least-priviledge">Principle of Least Priviledge</h3>
+<pre><code>    Every program and every user should operate using the least amount og priviledge necessary to complete the job
+</code></pre>
+<h2 id="preventing-priviledge-escalation-in-ssh">Preventing Priviledge Escalation in SSH</h2>
+<ul>
+<li><strong>OpenSSH</strong>
+<ul>
+<li>Part of OpenBSD project</li>
+<li>Found on most unix systems</li>
+<li>Secure remote access (PKI)</li>
+</ul>
+</li>
+</ul>
+<h3 id="privilegde-separation-in-ssh">Privilegde Separation in SSH</h3>
+<ul>
+<li>
+<p><strong>Monitor</strong></p>
+<ul>
+<li>Priviledged</li>
+<li>Provides interface for slaves to perform priviledged operations</li>
+<li>Validates requests</li>
+<li>Finite state machine</li>
+<li>Perform actions on slaves behalf</li>
+</ul>
+</li>
+<li>
+<p><strong>Slave</strong></p>
+<ul>
+<li>Unpriviledged</li>
+<li>Does most of the work</li>
+<li>Calls on monitor when priviledged operations must be performed</li>
+</ul>
+</li>
+<li>
+<p>[Encryption keys] [File system] &lt;--&gt; [Monitor] &lt;--&gt; [Slave] &lt;--&gt; [Client]</p>
+</li>
+</ul>
+<h3 id="implementing-monitorslave-pattern">Implementing Monitor/Slave Pattern</h3>
+<ul>
+<li><strong>Goal:</strong> Limit the amount of code running in a priviledged process</li>
+</ul>
+<h4 id="identifying-priviledged-operations">Identifying Priviledged Operations</h4>
+<pre><code>    Defines a service specific monitor/slave interface
+</code></pre>
+<ul>
+<li>File access</li>
+<li>Accessing crypto keys</li>
+<li>Data base access</li>
+<li>Spawning pseudo-terminals</li>
+<li>Binding to a network interface</li>
+</ul>
+<h4 id="request-types">Request types</h4>
+<ul>
+<li>Information</li>
+<li>Capabilities</li>
+<li>Change of identy</li>
+</ul>
+<h4 id="phases">Phases</h4>
+<ul>
+<li>
+<p><strong>Pre authentication</strong></p>
+<ul>
+<li>Slave has as little priviledge as possible</li>
+<li>Monitor only accespts authentication from slave</li>
+</ul>
+</li>
+<li>
+<p><strong>Post authentication</strong></p>
+<ul>
+<li>Slave has normal user priviledges</li>
+<li>Monitor validates requests requiring additional priviledges</li>
+</ul>
+</li>
+</ul>
+<h4 id="slavemonitor-connection">Slave/Monitor Connection</h4>
+<ul>
+<li>On connection, service spawns a seperate monitor/slave pair for that connection</li>
+<li>Slave is created by:
+<ol>
+<li>Changing UID and GID to unused values</li>
+<li>Chrooted into an empty, unwriteable directory</li>
+<li>Marked as P-SUGID</li>
+<li>pledge(&quot;stdio, NULL)</li>
+</ol>
+</li>
+<li>Slave is given the file descriptor for the connection</li>
+</ul>
+<h4 id="slavemaster-communication">Slave/Master Communication</h4>
+<ul>
+<li>Through IPC mechanisms
+<ul>
+<li>Pipe</li>
+<li>Shared memory</li>
+<li>Socket-pair</li>
+</ul>
+</li>
+</ul>
+<h4 id="change-of-identity">Change of Identity</h4>
+<ul>
+<li>Slave should run as normal user when autheticated</li>
+<li>Unix does however not support changing UID of a rpocess without UID=0
+<ul>
+<li>Solution:
+<ol>
+<li>Terminate slave and</li>
+<li>Monitor spawns a new process with correct UID/GID</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>To continue, slave sessions must be retained</li>
+</ul>
+<h4 id="retaining-slave-state">Retaining Slave State</h4>
+<ul>
+<li>
+<p>To retain a slave_</p>
+<ul>
+<li>Serialize data structures and transfer to master</li>
+<li>Allocate dynamic memory resources on memory shared with master</li>
+</ul>
+</li>
+<li>
+<p>When new slave is spawned:</p>
+<ul>
+<li>Serialize data structures are passed through IPC</li>
+<li>Memory shared with new slave</li>
+</ul>
+</li>
+</ul>
+<h3 id="priviledge-in-sshd">Priviledge in SSHD</h3>
+<ul>
+<li>
+<p><strong>Allows:</strong></p>
+<ul>
+<li>Access allow Diffie-Hellman</li>
+<li>Signes a challenge with server private key to authenticate the connection</li>
+<li>User validation</li>
+<li>Password authentication</li>
+<li>Public key authentication</li>
+</ul>
+</li>
+<li>
+<p><strong>Change of identity</strong></p>
+<ul>
+<li>Data structures are serialized</li>
+<li>Shared memory transferred</li>
+</ul>
+</li>
+<li>
+<p><strong>Priviledged operations in sshd</strong></p>
+<ul>
+<li>In post-authentication phase:
+<ul>
+<li>Key exchange supports renewing crypto keys</li>
+<li>Pseudo terminal creation (PTY)
+<ul>
+<li>Requires root permissions to change ownership of device</li>
+<li>Passes file descriptor to the client</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ssh-attacker-scenario">SSH Attacker Scenario</h3>
+<ul>
+<li><strong>Assumption</strong>: RCE gives an attacker control over the slave
+<ul>
+<li>Possible Esclation paths:
+<ul>
+<li><strong>Taking over system processes</strong>
+<ul>
+<li>Restricted by UID</li>
+<li>Other slaves protected by P_SGUID</li>
+</ul>
+</li>
+<li><strong>System calls to change the file system</strong>
+<ul>
+<li>Root file system empty and unwriteable</li>
+</ul>
+</li>
+<li><strong>Local network connections</strong>
+<ul>
+<li>Not preventable by this mechanism</li>
+<li>May abuse IP trust relationships</li>
+</ul>
+</li>
+<li><strong>Information Gathering</strong>
+<ul>
+<li>System time</li>
+<li>PID of process</li>
+</ul>
+</li>
+<li><strong>Using up system resources</strong>
+<ul>
+<li>Fork bomb</li>
+<li>Intensive computations</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="authentication">Authentication</h2>
+<pre><code>The act of verifying the identity of actors in the system
+</code></pre>
+<h3 id="passwords">Passwords</h3>
+<ul>
+<li>
+<p>By increasing alphabet, the length only grows constant with the size</p>
+</li>
+<li>
+<p><strong>Nist</strong></p>
+<ul>
+<li>Require a minimum length of 8 or greater</li>
+<li>Allow atleast 64 character</li>
+<li>Check lists of known passwords
+<ul>
+<li>Dictionairy words</li>
+<li>Repetetive characters</li>
+<li>Context specific words</li>
+<li>Previous breached passwords</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="storing-passwords">Storing Passwords</h4>
+<ul>
+<li><strong>Hasing password</strong>
+<ul>
+<li>One way(given y, difficult to find x)</li>
+<li>Collision free(difficult to find x and x´ such that h(x)=h(x´))</li>
+<li>Small input yields large difference in output</li>
+<li>Quick to compute</li>
+</ul>
+</li>
+</ul>
+
+    </body>
+    </html>
