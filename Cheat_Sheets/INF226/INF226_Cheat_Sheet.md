@@ -148,6 +148,32 @@
       - [CSRF Capabilities](#csrf-capabilities)
       - [Capabilities for Collaboration](#capabilities-for-collaboration)
       - [Universal Persistence](#universal-persistence)
+  - [Capsicum](#capsicum)
+    - [Capsicum Capabilities](#capsicum-capabilities)
+    - [Enforcing Capabilities in Capsicum](#enforcing-capabilities-in-capsicum)
+    - [Restricting existing kernel primitives](#restricting-existing-kernel-primitives)
+    - [Adopting Programs To Capsicum](#adopting-programs-to-capsicum)
+      - [tcpdump](#tcpdump)
+      - [dhclient](#dhclient)
+      - [gzip](#gzip)
+      - [Chromium](#chromium)
+  - [Serialization](#serialization)
+    - [Incorrect Deserialization](#incorrect-deserialization)
+  - [Security Trough The Software Development Cycle](#security-trough-the-software-development-cycle)
+    - [Software Development Cycle](#software-development-cycle)
+    - [Non-Functional Requirements](#non-functional-requirements)
+      - [Availability](#availability)
+      - [Capacity](#capacity)
+      - [Scalability](#scalability)
+      - [Performance](#performance)
+      - [Effiency](#effiency)
+      - [Maintainability and Extensibility](#maintainability-and-extensibility)
+      - [Portability](#portability)
+      - [Recoverability](#recoverability)
+      - [Cohesion](#cohesion)
+    - [Security Review](#security-review)
+    - [Logging](#logging)
+    - [Monitoring](#monitoring)
 
 ## Student Knowlegde
 
@@ -435,6 +461,12 @@
 - What threats (Stride) applies to each component?
 - Trust relationship between components?
 - Which threats apply to each relationshipt?
+- What motivates an attacker?
+- What attack vectors can an attacker use?
+- **To perform this analysis**:
+  - Functional decomposition(diagram of software components)
+  - An overview of trust-relationships between components
+  - Good knowledge of security pitfalls(injectio, XSS, CSRF,..)
 
 #### Threat Model Example Scenario
 
@@ -1221,12 +1253,12 @@
   - ...
 - Do not implement youself!!
 - For String places in HTML
-  - & → & amp;
-  - < → & lt;
-  - > → & gt;
-  - " → & quot;
-  - ' → & #x27;
-  - / → & #x2F;
+  - " & → & amp; "
+  - " < → & lt; "
+  - " > → & gt; "
+  - " " → & quot; "
+  - " ' → & #x27; "
+  - " / → & #x2F; "
 
 - **Don'ts**
   - Some places to avoid place untrusted data
@@ -1369,3 +1401,241 @@
 - Problem:
   - Hoe to retain capabilities when a program restarts?
     - A login manages could reconnect the user to their running programs
+
+## Capsicum
+
+- Design goals:
+  1. Provide capability based security for Unix programs
+  2. Extend, not replace Unix API's
+  3. Performance comparable to already emplyed priviledge separation mechanisms
+
+- Introduces a special capability mode for processes
+- Provides new kernel primitives(cap_enter, cap_new, ...)
+- Changing external primitives when in capability mode
+- USerspace library
+
+### Capsicum Capabilities
+
+- Capabilities are file descriptors along with a set of access rights
+  - Around 60 access rights
+- New capabilities are created through cap_new by giving it a file descriptor and rights mask
+  - Capabilities transferre through inter process communication(IPC) channels(e.g sockets)
+
+### Enforcing Capabilities in Capsicum
+
+- Capability modes restricts access to globlal name spaces such as:
+  - Process ID
+  - File paths
+  - POSIX IPC(inter process-communication)
+  - System clocks/timers
+
+### Restricting existing kernel primitives
+
+- In order to enforce these restrictives, man kernel primitives must be changed
+- opennat(desc, path) opens a file located at relative path from the directory refrenced in desc
+  - No " .. " allowed in capability mode to repent path traversal
+- In capability mode, the only PID is the process's own PID
+- Child processes can be accessed through capabilities 
+
+### Adopting Programs To Capsicum
+
+- Typical strucutre of programs using capsicum:
+  - Obtain resrouces(using system abient authorities)
+  - Wrap resrouces in capabilities
+  - Enter capability mode
+  - Use resources
+- Each program uses capability in isolation. The system itself is based on the traditional security model
+
+#### tcpdump
+
+- Outputs descriptions of network packets matching given filter
+
+- Priviledges are aquired early
+- Priviledged operations are separate from the messy parsing of packets
+- DNS resolver relied on file access, therefor hade to be changed to external daemon
+
+#### dhclient
+
+- Is OpenBSD's DHCP client and is already using priviledge separation
+
+#### gzip
+
+    Command-line-compression tool
+
+- Priviledge separation through chroot/unprivildged UID is stupid
+- Modifying gzip to use libcapsicum
+  - Three critical functions are put in capability mode
+  - 409 lines added to gzip
+
+#### Chromium
+
+- Open souce siblig of Chrome browser
+- Has different sandboxing with different implementations on different platforms
+  - Each tab is a rendered platform
+  - Resources already forwarded through file descriptors
+- Before capsicum, the FreeBSD port of chrome did not use any sandboxing
+
+## Serialization
+
+- **Serialization**: The process of turning objects of a programming language into byte arrays for transport
+
+- **Deserialization**: The process or turning byte statck back into objects
+
+- Java serialization
+  - Has reflection, gives dunamic method invocation
+    - Takes a method name string, ang argument strings
+    - Applies it to an object
+- JSON
+- Pickle(Python)
+  - Pickle library is dangerous
+- Protocol buffers
+
+### Incorrect Deserialization
+
+- The code deserialating is at the forefront of the program security
+- Bugs could lead to RCE
+
+## Security Trough The Software Development Cycle
+
+- Definition: The ability of software to function according to intentions in an adverserial enviroment
+- Assumptions -> Security mechanisms -> Security requirements
+
+### Software Development Cycle
+  
+  1. Requirements
+      - Map security and privacy requirements
+  2. Design
+       - Threat Modeling
+       - Security design review  
+  3. Implementations
+       - Static analysis
+       - Peer review
+  4. Testing
+      - Security test cases
+      - Dynamic analysis
+  5. Deployment
+      - Final Security review
+      - Application security monitoring and response plan  
+
+### Non-Functional Requirements
+
+- Security and privacy
+- Availability, capacity, performance and efficiency
+- Extensibility, maintainability, portability and scalability
+- Recoverability
+- Manageability and serviceability
+- Cohesion
+
+#### Availability
+
+    The proportion of time a system spends in a functional state
+
+- Causes for downtime:
+  - Malicous attacks
+  - Software bugs
+  - Hardware failures
+  - Failure of service 
+  - Excessive usage
+
+- Increasing availability
+  - Write secure software
+  - Not having bugs
+  - Redundance
+  - Less reliance of service
+  - Testing
+  - Scalability
+
+#### Capacity
+
+    The maximum number of simulaneous users/transactions
+
+#### Scalability
+
+    The ability to increase capacity
+
+- What are the bottle-necks?
+  - Load balancing
+  - Location
+  - Secure communicaton between instances
+  - Secure communication between instances
+  - Eventual consistency 
+
+#### Performance
+
+- Responsiveness of the software to users
+- Rate of transaction processing
+
+#### Effiency
+
+    The ability to make use of scares resources
+
+- Memory/cache
+- CPU power
+- Storage
+- Network bandwidth
+- Latency
+
+#### Maintainability and Extensibility
+
+- How easy it is to develop and deploy fixes and new features
+- How easy is it to maintain the code?
+  - Readability
+  - Structural properties
+  - Documentation
+- Merging
+  - How often?
+  - How to ensure quality?
+- How easy is it to develop a new version?
+  - Malicous updates?
+
+#### Portability
+
+    The ability of the software to run on different system with little adaptation
+
+#### Recoverability
+
+    The time to recover from disruptive events
+
+- Backups
+- Failover systems
+- Update deployment
+
+#### Cohesion
+
+    The degree to which parts of a system/module belong together
+
+- Strong cohesion: Each module is robust and reusable
+
+### Security Review 
+
+- Security design review
+- Peer review
+  - Reviweing commits
+  - Pair programming
+- Final security review before deployment
+
+### Logging
+
+- Error messages should:
+  - Be logged to a separate safe storage 
+  - be append only
+- What to log:
+  1. Authentication events
+  2. Attempted instrusions
+  3. Violations of invariants
+  4. Unusual behaviour
+  5. Performance statistics
+
+- What not to log:
+  1. Sensitive information
+  2. Keys
+  3. Passwords
+  4. User data
+
+### Monitoring 
+
+- To respons to an ongiong threat:
+  1. Detection
+  2. Logging
+  3. Monitoring
+  4. Response
