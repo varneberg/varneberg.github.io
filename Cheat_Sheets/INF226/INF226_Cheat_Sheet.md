@@ -68,6 +68,7 @@
     - [Discretionary Access Control(DAC)](#discretionary-access-controldac)
     - [Access Control Models](#access-control-models)
     - [Access Control lists](#access-control-lists)
+      - [The Confused Deputy](#the-confused-deputy)
       - [Users and Groups](#users-and-groups)
     - [Rôle Based Access Control(RBAC)](#r%c3%b4le-based-access-controlrbac)
       - [Rôle of OS](#r%c3%b4le-of-os)
@@ -116,6 +117,37 @@
     - [Other schemes](#other-schemes)
     - [Verify Logged in Users](#verify-logged-in-users)
       - [Session IDs](#session-ids)
+  - [Stream Ciphers and Message Authetication Codes](#stream-ciphers-and-message-authetication-codes)
+    - [Stream Ciphers](#stream-ciphers)
+    - [Message Authetication Codes](#message-authetication-codes)
+      - [Keyed Hash Function](#keyed-hash-function)
+    - [TLS](#tls)
+  - [Cross-Site Scripting](#cross-site-scripting)
+    - [Samy Worm](#samy-worm)
+      - [How Samy Worm Works](#how-samy-worm-works)
+    - [XML HttpRequest](#xml-httprequest)
+    - [XSS Prevention](#xss-prevention)
+      - [Filtering Input](#filtering-input)
+      - [Escaping Output](#escaping-output)
+      - [Text Formatting](#text-formatting)
+  - [Cross-Site Request Forgery(CSRF)](#cross-site-request-forgerycsrf)
+    - [CSRF Protection](#csrf-protection)
+  - [Securing The Session Token(Cookie)](#securing-the-session-tokencookie)
+    - [Cookies and Same-Origin](#cookies-and-same-origin)
+    - [The Secure Flag](#the-secure-flag)
+    - [The SameSite Flag](#the-samesite-flag)
+    - [The HTTP Only Flag](#the-http-only-flag)
+    - [Content Security Policy(CSP)](#content-security-policycsp)
+  - [Using Capabilities](#using-capabilities)
+    - [Approaces](#approaces)
+    - [Capabilities Properties](#capabilities-properties)
+      - [Transferrable Capabilities](#transferrable-capabilities)
+      - [Capabilites Abstraction](#capabilites-abstraction)
+      - [Memory Safe Capabilities](#memory-safe-capabilities)
+      - [Revokability](#revokability)
+      - [CSRF Capabilities](#csrf-capabilities)
+      - [Capabilities for Collaboration](#capabilities-for-collaboration)
+      - [Universal Persistence](#universal-persistence)
 
 ## Student Knowlegde
 
@@ -632,6 +664,12 @@
 - Each object has a list of permissions assigned to different users
 - Premissions structured according to **users and groups**
 
+#### The Confused Deputy
+
+- Typical faillure
+- Priviledged process(deputy) is tricked to perform bad actions on behalf of less priviledged process
+- Can for be e.g copilers, browsers acting as deputy on the behalf
+
 #### Users and Groups
 
 - User ID (UID)
@@ -777,7 +815,6 @@
 
 ## System Calls
 
-
 ### OpenBSD Pledge
 
     Mechanism restricting what system calls are allowed for each process
@@ -828,7 +865,7 @@
 
 - For each container
 - Abstraction of OS level restrictions
-- Whitelisted capabilities
+- Whitelisted capabilities are allowed
 
 #### Docker Security
 
@@ -1092,3 +1129,243 @@
   - Finite resource on any system
   - Not all random generators are suitabe for creating session ID
     - Java.util.random for examples, is guessable by only looking at a few bytes
+
+## Stream Ciphers and Message Authetication Codes
+
+### Stream Ciphers
+
+- Most are based on block ciphers
+  - Fixed input and output length
+  - Same key gives same output
+  - [Seed = key] --> [Crypto RNG] --> [ [Pseudo random stream] [Plaintext data stream] ]--> (XOR) --> [Cipher Stream]
+  - Based on cryto pseudo-random generators
+  - Proves safe extension to arbitrary inputs
+  - **Are mallabe**
+
+### Message Authetication Codes
+
+#### Keyed Hash Function
+
+- [[Key]  [Message]] --> [Keyed hash function] --> [MAC]
+- Produces a hash dependent on key
+- Used to autheticate keys
+  - Derive a key from shared secret
+  - Sender computes hash of encrypted message and attaches hash
+  - Reciever computes keyed hash recieved message and compare with attached hash
+- Provides authenticity and integrity
+
+- **Message structure**
+  - [MAC] --> [IV] --> [Encrypted message]
+
+### TLS
+
+- Transport Layer Security
+- Version 1,3
+- Provides:
+  - Confidentiality
+  - Authentication
+  - Forware secrecy
+
+- Uses AES and CBC-MAC
+- ChaCha20 and Poly1305 MAC
+- HTTPS
+
+## Cross-Site Scripting
+
+- When web-server unintentionally serves javasript from an attacker to client browser
+- How to inject script:
+  - User data from one user visible to another
+  - URL variables
+  - User data from post requests
+  - Evaluating user data in client side script
+
+### Samy Worm
+
+- Spread MySpace
+- Fastest worm
+- Mostly harless
+- Cross site scripting worm
+
+#### How Samy Worm Works
+
+- MySpace tried to protect by only allow < a >, < img > and < div > and strip javascript
+- Javascript in CSS meany eny tag could be used
+- Browsers accept javascript
+
+### XML HttpRequest
+
+- Scripts make HTTP request to the current origin
+- When injected, the attacker could do anything the user could do
+  - GET pages
+  - Post forms
+- Samy used POST request to update profiles
+
+### XSS Prevention
+
+#### Filtering Input
+
+- For simple things
+- Disallow characters
+- Can work for usernames or e-mail addresses
+
+#### Escaping Output
+
+- How to escape HTML depends on the context
+- Important situations:
+  - HTML body < div>DATA< /div>
+  - Quoted attributs < div id = "DATA">< /div>
+  - Unquoted attributed
+  - Quoted Strings in javascript
+  - CSS attribute values
+  - JSON data
+  - ...
+- Do not implement youself!!
+- For String places in HTML
+  - & → & amp;
+  - < → & lt;
+  - > → & gt;
+  - " → & quot;
+  - ' → & #x27;
+  - / → & #x2F;
+
+- **Don'ts**
+  - Some places to avoid place untrusted data
+  - Tag names
+  - Attribute names
+  - Scripts
+  - Directly in CSS
+
+#### Text Formatting
+
+- We want to let the user format their input, but worry about them getting to use HTML
+- Solutions:
+  - HTML sanitisers
+  - User another markup language with safe conversion
+
+## Cross-Site Request Forgery(CSRF)
+
+- Forces a user to execute unwanted actions on a site they are currently authenticated on
+- Targets state change requests
+- Browser requests automatically includes credentials
+- Site can not distinguish between a forged request and legit request
+
+### CSRF Protection
+
+- What should be protected:
+  - Links
+  - Forms
+  - All other POST/GET
+- **Do not** put CSRF token in a cookie
+  - Attacker could set the cookie from the domain, making him able to forge requests
+
+## Securing The Session Token(Cookie)
+
+- Three flags should be set
+  1. Secure
+  2. SameSite
+  3. HttpOnly
+- If site uses a lot of javascript, store it locally
+
+### Cookies and Same-Origin
+
+- Restricts script to only resources from the same origin
+- Cookies are not covered by default by same-origin
+- Solution = set secure flag on cookie
+
+### The Secure Flag
+
+- Sets the cookie to only transmit if the site is HTTPS
+
+### The SameSite Flag
+
+- Three values:
+    1. **None**: cookie is always sent
+    2. **Strict**: ookie is sent when the request is from the same origin
+    3. **Lax**: cookie is only sendt only with GET request
+
+### The HTTP Only Flag
+
+- Prevents stealing user cookie with javascript
+- Cookie is always sent with HTTP-header
+- Making it not available to scripts
+
+### Content Security Policy(CSP)
+
+- Set in the HTTP header
+- Control which sources content are allowed to come from
+- Voilation reported to the server
+- Limits inline scripts
+- Limitations:
+  - Correctly escaped HTML output is still needed
+  - Difficult to get third party scrips to adhere policies
+- Cannot rely on browser support for CSP
+- Asset types
+  - default-src: all assets
+  - style-src: stylesheets
+  - frame-src: iframe srouces
+  - EventSource -font-src: font files(flash and others)
+
+## Using Capabilities
+
+- **Recap**:
+  - Consists of:
+    - Reference to an object
+    - A set of permissions for the object
+  - Used whenever a resource is accessed
+
+- Give only the capabilities needed
+- Decide what capabilites to give to different resrouces
+- Capabilites should be **unforgeable**, otherwise it's a usesless security measure
+
+### Approaces
+
+1. **Enforced by supervisor(os, vm, compiler, ...)**
+2. **Unguessable capabilites(random tokens, crypto signatures,...)**
+     - Relies on entropy and cryptograhic security
+     - Can be referenced by random number
+     - Can be signed
+
+### Capabilities Properties
+
+#### Transferrable Capabilities
+
+- Should be transferrable between users
+  - Generally capabilites do not care who uses them
+  - This prevents possibly confused deputies
+
+#### Capabilites Abstraction
+
+- The following properties are treated the same:
+  - The capability of reading from a file
+  - The capability of reading from a network connection
+
+#### Memory Safe Capabilities
+
+- Can be obtained by:
+  - Endowment: a user might have intrinsic capabilite given at creation
+  - Creation: User gets capability to access an object he creates
+  - Introduction: User transfers a capability to another user
+- Approach relies on memory safety of the language
+
+#### Revokability
+
+- The creator of a capability should be able to revoke it
+- Can be temporal or partial
+
+#### CSRF Capabilities
+
+- CSRF-tokens can be viewd as capabilities
+- Denotes and object and limits permissions to specified request types
+- Unforgable(unguessable)
+
+#### Capabilities for Collaboration
+
+- Run a program with shared capabilities to access shared resources
+
+#### Universal Persistence
+
+- The state of a resource stay the same with the same capabilities
+- E.g a program state stays the same so it's never restarted
+- Problem:
+  - Hoe to retain capabilities when a program restarts?
+    - A login manages could reconnect the user to their running programs
