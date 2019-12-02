@@ -174,6 +174,40 @@
     - [Security Review](#security-review)
     - [Logging](#logging)
     - [Monitoring](#monitoring)
+  - [State](#state)
+    - [Program State](#program-state)
+  - [Immutability](#immutability)
+    - [Immutability in Java](#immutability-in-java)
+      - [Strings in Java](#strings-in-java)
+      - [Sum Types in Java](#sum-types-in-java)
+      - [Making Immutable classes](#making-immutable-classes)
+    - [Expressivity](#expressivity)
+    - [The Maybe Type](#the-maybe-type)
+      - [Null Reference](#null-reference)
+      - [NullPointerExceptions](#nullpointerexceptions)
+  - [CERT Top 10 Secure Coding Practieses](#cert-top-10-secure-coding-practieses)
+  - [Privacy and Legal Rights](#privacy-and-legal-rights)
+    - [Privacy](#privacy)
+    - [Legal Protection](#legal-protection)
+    - [GDPR](#gdpr)
+    - [Minimise data collection](#minimise-data-collection)
+    - [Consent](#consent)
+    - [Obligations of the Controller and Processor](#obligations-of-the-controller-and-processor)
+    - [Onion Routing](#onion-routing)
+      - [TOR](#tor)
+      - [I2P](#i2p)
+  - [Mobile Security](#mobile-security)
+    - [Mobile Threats](#mobile-threats)
+    - [Mobile Network Security](#mobile-network-security)
+    - [Android Security](#android-security)
+      - [Intent Permission](#intent-permission)
+      - [Android Activities](#android-activities)
+      - [Universal Cross-Sute Scripting (UXSS)](#universal-cross-sute-scripting-uxss)
+      - [SQL Injection in Content Providers](#sql-injection-in-content-providers)
+      - [Sandoxing and Encryption](#sandoxing-and-encryption)
+      - [Android Storage](#android-storage)
+      - [Malware on Android](#malware-on-android)
+    - [iOS](#ios)
 
 ## Student Knowlegde
 
@@ -1276,6 +1310,7 @@
 
 ## Cross-Site Request Forgery(CSRF)
 
+- Tricks the browser to use its session cookie to approve actions initiated by a third party site
 - Forces a user to execute unwanted actions on a site they are currently authenticated on
 - Targets state change requests
 - Browser requests automatically includes credentials
@@ -1289,6 +1324,8 @@
   - All other POST/GET
 - **Do not** put CSRF token in a cookie
   - Attacker could set the cookie from the domain, making him able to forge requests
+  - Add anti-CSRF tokens on all forms
+  - SameSite flag
 
 ## Securing The Session Token(Cookie)
 
@@ -1632,10 +1669,370 @@
   3. Passwords
   4. User data
 
-### Monitoring 
+### Monitoring
 
 - To respons to an ongiong threat:
   1. Detection
   2. Logging
   3. Monitoring
   4. Response
+
+## State
+
+### Program State
+
+- Program state consists of:
+  - Variables
+  - File descriptors
+  - Cookies
+  - Client Storage
+
+- Some states control the flow of the program
+- Some state is just data being passed around
+- Controlling the state of a program is essential to security
+  - Bugs can occur if the program reaches an unanticipated state
+
+- An object is the combinations of a representation and interface
+- **Preservation of invariants**: The methods of an object ensures the internal state is a valid representation
+
+- Problem:
+  - If you pass reference to a mutable objevt, you give permission to mutate the object
+  - If you accept a reference to a mutable object, you must also accept it mutates beyond your control
+
+## Immutability
+
+    An object cannot be changed after creation
+
+### Immutability in Java
+
+#### Strings in Java
+
+- String interning: Every copy is only stored once
+- String doesnt change, so we never have to recompute hashcode
+- Thread safe
+- Security
+
+#### Sum Types in Java
+
+- Any reference in Java can be null
+- Every reference behaves like A + 1 (where 1 represents null value)
+
+#### Making Immutable classes
+
+- An immutable class can hide a muteable object by
+  1. Keeping the only reference to this object
+  2. Not modifying the object
+  3. Not providing setters
+  4. Declare the class as final
+
+### Expressivity
+
+- Which types the language can express
+- Different types for different languages
+- **Rich expressivity** allows:
+  - More chechs to be performed by type-checker
+  - Easier to read code 
+  - Better code reuse
+
+- Common type formers:
+  - Parameterised types (generics)
+  - Record ttpes/product types
+  - Sum types
+  - Function types
+  - Dependent types
+
+### The Maybe Type
+
+- Used to throw exceptions to prevent NullPointerExceptions
+
+#### Null Reference
+
+- Often given special meanings by functions or classes
+  - No elements found
+  - No parameter present
+- Important to remeber null checks
+
+#### NullPointerExceptions
+
+- Leads to unexpected control flows
+- Unexprected states could be unsecure
+
+## CERT Top 10 Secure Coding Practieses
+
+
+1. **Praticse defence in depth**
+   - Keep the number of linchpins down
+   - Plan for failure of individual components
+   - Program defensively
+
+2. **Validate Input**
+   - Regard all input with suspicion
+   - Map the surface of the program to detemine the input points
+   - Formualte explicit descriptions of all possible inputs(protocol, format,...)
+   - Validate inputs according to theses descriptions
+
+3. **Sanitize Data to Other Systems**
+   - Covers
+     - SQL Injections
+     - XSS
+     - Command injection
+     - File paths
+
+   - Whenever a astring is transferred:
+     1. Idenetify protocol of format
+     2. Identify which parts come from unstrusted sources
+     3. Sanitize the data appropriately
+
+4. **Deny by Default**
+
+5. **Adhere the principle of least priviledge**
+
+6. **Architect and design for policy enforcement**
+
+7. **Keep it simple**
+
+8. **Adopt a secure coding standard**
+     - How to make programs secure and correct programs vary from language and platform
+     - Make yourself familiar with how security challenges are handled on your platform
+
+9. **Heed compiler warnings**
+
+10. **Use effective quality assurance tools**
+    - Fuzzers
+    - Property bases checking
+
+## Privacy and Legal Rights
+
+### Privacy
+
+    The ability of the individual to control their personal information
+
+- **Threats to privacy**
+  1. Collection of information
+  2. Aggregation of information
+     - To combine existing data to infer new information
+  3. Dissemination of information
+     - Spreading personal information
+
+### Legal Protection
+
+- **EU directive**
+  - GDPR
+- **Norwegian law**
+  - Personopplysnings loven
+  - Datatilsynet is the norwegian supervidosry authority related to privacy issues
+
+### GDPR
+
+- General data protection regulation
+- The rights of individuals
+- Obligations of data processesors
+
+- Fundamental principles:
+  1. Lawfullness
+  2. Fairness
+      - The data processing should not exceed what the data subject can reasonably expect
+  3. Transparancy
+      - Information about what is collected must be clearly stated
+
+- Rights
+  1. Right of access
+  2. Right to rectification
+  3. Right to erasure
+  4. Right to data restriction
+  5. Right to data portability
+  6. Right to object
+
+- Should have a "Forget me" function
+- See data collected
+- Be carefull about third part access to data
+
+### Minimise data collection
+
+- Do not collect the data you do not need
+- Keep the data log only for as long as you need
+
+### Consent
+
+- Must be demonstratable
+- Must be formulated clear and in plain language
+- Must be specifc to each kind of data
+- Must be possible to withdraw
+
+- **Aquiring consent**
+  - Divide into categories
+  - Ask for consent for each category upon registration of users
+  - Store separate consents as field in a database
+  - Interface for chaning consent settings
+  - No prefilled checkboxes
+
+### Obligations of the Controller and Processor
+
+- Data protection by design and by default
+- Security of processing
+- Communication of a personal data breach to the data subject
+- Notification of a personal data breach to the supervisory authority
+  - Not later than 72 hours
+- Data protection impact assessment
+- Position of the data protection officer
+  - Meant to ensure that the organization complies with privacy laws
+  - Shall have direct communication with leaders who make decisions in privacy matters
+  - Must perform audits of compliance
+  - Protection from being layed-off
+
+- The processor shall implement
+  1. The pseudonymation and ecryption of personal data
+  2. The ability to ensure the ongoing:
+     - Confidentiality
+     - Integrity
+     - Availability and
+     - Resilience of processing systems and services
+  3. The ability to restore the availability and access to personal data in a timely manner in the event of physical or technical incident
+  4. A process for regularly testing, assessing the evaluating the effectiveness og technical and organisational measures for ensuring the security of the processing
+  
+### Onion Routing
+
+- Mixed network
+  - Communication is redirected through several hosts before reaching its destination
+  - Not usefull if the data reveals information about source/destination
+  - Solved by onion routing through encryption
+
+- An onion has encryption layers
+  - On layer can only be decrypted by a specific relay
+  - Relay forwards message to next relay until it has reached its destination
+
+#### TOR
+
+- Based on firefox
+- Can reveal hidden services living in the network
+- Node network
+  - Client
+  - Relay
+  - Out-proxy
+- Attacks on Tor
+  - Timing attacks
+  - Browser fingerprinting
+  - Avoiding proxy
+  - Malicous exit nodes
+  - ...
+
+#### I2P
+
+- Garlic routing
+- Peer to Peer
+- Undirectional routing
+- All nodes participate routing for other nodes
+- Each peer has a fixed number of client tunnels
+- Services have public input tunnels
+
+## Mobile Security
+
+- Attack vectors
+  - SMS
+  - Telephone
+  - Base Stations
+  - WiFi
+
+- Mobile applications can access
+  1. Sensors
+     - Can be used for sureveillance
+  2. Network
+  3. Storage
+- Runs bytecode as OS process
+- Can communicated with other devices
+- Can have Two-factor authetication tokens 
+
+### Mobile Threats
+
+- Mobiles are increasingly valuable targets
+- Stores a lot of personal data
+  - Advertisment
+  - Phising
+  - Extorrsion
+- Stores organisational data
+  - Contacts
+  - Calendar
+  - Documents(trade secrets)
+- Session cookies on phone
+- - Can be coin mined
+- Connected to bill systems(NFC, phone bills)
+
+### Mobile Network Security
+
+- Networks are encrypted from phones to the base station
+  - A5 block ciphers
+  - Encryption can be turned off
+- Rogue base stations can MITM mobile signals
+- Important that applications use TLS or other application layer encryption
+
+### Android Security
+
+- Based on linux
+  - Each app has its own UID
+  - Each app has its own Lonux process
+- Java as application platform
+  - Each app as its own VM
+
+- Android are centered around components
+  1. Activities
+  2. Services
+  3. Content providers
+  4. Broadcast providers
+- Each component implemented by a class in Java
+- Components communicate through an Inter Component Communication(ICC) system called intents
+  - Intents consists of:
+    - Action string
+    - Data to operate on (URI)
+
+#### Intent Permission
+
+- Intent listeners are either exported or private to the application
+  - Exported are accessible from any app
+  - Private are only accessible from components within the app
+
+#### Android Activities
+
+- User interface components displayed when the user interacts with the application
+- Activities recieve intents, and in response interacts with the user
+
+#### Universal Cross-Sute Scripting (UXSS)
+
+- Chrome and firefox have been vulnerable on android through intents
+
+#### SQL Injection in Content Providers
+
+- Content providers resolve URI's and extract data for activities and services
+- Stores in SQLite databases, but interface provides no prevention of SQL injection attacks
+
+#### Sandoxing and Encryption
+
+- Android processes are separated using usual Linux mechanisms
+  - **SELinux** provides Mandatory Access Control(MAC)
+    - Each application runs in its own SELinux sandbox
+  - **Seccomp** filters system calls
+
+#### Android Storage
+
+- Android uses dm-crypt to encrypt its 
+- Provides confidentiality, but not integrity
+- Provides encrypted storage of encryption keys through Android KeyStore
+  - Hardware based through trusted execution enviroment or
+  - Software based
+
+#### Malware on Android
+
+- Dangerous permissions
+  - Give the application permissions to resources on phone
+- Preinstalled software
+  - Sets up backdoors
+  - Exfiltrate personal information
+  - Install TLS root certificates
+  - Some preinstalled apps contained malware
+- Collusion found in third party libraries
+
+### iOS
+
+- Developed in-house from hardware to native applications
+- Heavy investment in security 
+- Remote iOS jailbrakes
+- The slides for this topic were horrible :( 

@@ -337,6 +337,64 @@
 <li><a href="#monitoring">Monitoring</a></li>
 </ul>
 </li>
+<li><a href="#state">State</a>
+<ul>
+<li><a href="#program-state">Program State</a></li>
+</ul>
+</li>
+<li><a href="#immutability">Immutability</a>
+<ul>
+<li><a href="#immutability-in-java">Immutability in Java</a>
+<ul>
+<li><a href="#strings-in-java">Strings in Java</a></li>
+<li><a href="#sum-types-in-java">Sum Types in Java</a></li>
+<li><a href="#making-immutable-classes">Making Immutable classes</a></li>
+</ul>
+</li>
+<li><a href="#expressivity">Expressivity</a></li>
+<li><a href="#the-maybe-type">The Maybe Type</a>
+<ul>
+<li><a href="#null-reference">Null Reference</a></li>
+<li><a href="#nullpointerexceptions">NullPointerExceptions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#cert-top-10-secure-coding-practieses">CERT Top 10 Secure Coding Practieses</a></li>
+<li><a href="#privacy-and-legal-rights">Privacy and Legal Rights</a>
+<ul>
+<li><a href="#privacy">Privacy</a></li>
+<li><a href="#legal-protection">Legal Protection</a></li>
+<li><a href="#gdpr">GDPR</a></li>
+<li><a href="#minimise-data-collection">Minimise data collection</a></li>
+<li><a href="#consent">Consent</a></li>
+<li><a href="#obligations-of-the-controller-and-processor">Obligations of the Controller and Processor</a></li>
+<li><a href="#onion-routing">Onion Routing</a>
+<ul>
+<li><a href="#tor">TOR</a></li>
+<li><a href="#i2p">I2P</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#mobile-security">Mobile Security</a>
+<ul>
+<li><a href="#mobile-threats">Mobile Threats</a></li>
+<li><a href="#mobile-network-security">Mobile Network Security</a></li>
+<li><a href="#android-security">Android Security</a>
+<ul>
+<li><a href="#intent-permission">Intent Permission</a></li>
+<li><a href="#android-activities">Android Activities</a></li>
+<li><a href="#universal-cross-sute-scripting-uxss">Universal Cross-Sute Scripting (UXSS)</a></li>
+<li><a href="#sql-injection-in-content-providers">SQL Injection in Content Providers</a></li>
+<li><a href="#sandoxing-and-encryption">Sandoxing and Encryption</a></li>
+<li><a href="#android-storage">Android Storage</a></li>
+<li><a href="#malware-on-android">Malware on Android</a></li>
+</ul>
+</li>
+<li><a href="#ios">iOS</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1843,6 +1901,7 @@ to intentions in an adverserial environment.</li>
 </ul>
 <h2 id="cross-site-request-forgerycsrf">Cross-Site Request Forgery(CSRF)</h2>
 <ul>
+<li>Tricks the browser to use its session cookie to approve actions initiated by a third party site</li>
 <li>Forces a user to execute unwanted actions on a site they are currently authenticated on</li>
 <li>Targets state change requests</li>
 <li>Browser requests automatically includes credentials</li>
@@ -1860,6 +1919,8 @@ to intentions in an adverserial environment.</li>
 <li><strong>Do not</strong> put CSRF token in a cookie
 <ul>
 <li>Attacker could set the cookie from the domain, making him able to forge requests</li>
+<li>Add anti-CSRF tokens on all forms</li>
+<li>SameSite flag</li>
 </ul>
 </li>
 </ul>
@@ -2358,6 +2419,574 @@ to intentions in an adverserial environment.</li>
 <li>Response</li>
 </ol>
 </li>
+</ul>
+<h2 id="state">State</h2>
+<h3 id="program-state">Program State</h3>
+<ul>
+<li>
+<p>Program state consists of:</p>
+<ul>
+<li>Variables</li>
+<li>File descriptors</li>
+<li>Cookies</li>
+<li>Client Storage</li>
+</ul>
+</li>
+<li>
+<p>Some states control the flow of the program</p>
+</li>
+<li>
+<p>Some state is just data being passed around</p>
+</li>
+<li>
+<p>Controlling the state of a program is essential to security</p>
+<ul>
+<li>Bugs can occur if the program reaches an unanticipated state</li>
+</ul>
+</li>
+<li>
+<p>An object is the combinations of a representation and interface</p>
+</li>
+<li>
+<p><strong>Preservation of invariants</strong>: The methods of an object ensures the internal state is a valid representation</p>
+</li>
+<li>
+<p>Problem:</p>
+<ul>
+<li>If you pass reference to a mutable objevt, you give permission to mutate the object</li>
+<li>If you accept a reference to a mutable object, you must also accept it mutates beyond your control</li>
+</ul>
+</li>
+</ul>
+<h2 id="immutability">Immutability</h2>
+<pre><code>An object cannot be changed after creation
+</code></pre>
+<h3 id="immutability-in-java">Immutability in Java</h3>
+<h4 id="strings-in-java">Strings in Java</h4>
+<ul>
+<li>String interning: Every copy is only stored once</li>
+<li>String doesnt change, so we never have to recompute hashcode</li>
+<li>Thread safe</li>
+<li>Security</li>
+</ul>
+<h4 id="sum-types-in-java">Sum Types in Java</h4>
+<ul>
+<li>Any reference in Java can be null</li>
+<li>Every reference behaves like A + 1 (where 1 represents null value)</li>
+</ul>
+<h4 id="making-immutable-classes">Making Immutable classes</h4>
+<ul>
+<li>An immutable class can hide a muteable object by
+<ol>
+<li>Keeping the only reference to this object</li>
+<li>Not modifying the object</li>
+<li>Not providing setters</li>
+<li>Declare the class as final</li>
+</ol>
+</li>
+</ul>
+<h3 id="expressivity">Expressivity</h3>
+<ul>
+<li>
+<p>Which types the language can express</p>
+</li>
+<li>
+<p>Different types for different languages</p>
+</li>
+<li>
+<p><strong>Rich expressivity</strong> allows:</p>
+<ul>
+<li>More chechs to be performed by type-checker</li>
+<li>Easier to read code</li>
+<li>Better code reuse</li>
+</ul>
+</li>
+<li>
+<p>Common type formers:</p>
+<ul>
+<li>Parameterised types (generics)</li>
+<li>Record ttpes/product types</li>
+<li>Sum types</li>
+<li>Function types</li>
+<li>Dependent types</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-maybe-type">The Maybe Type</h3>
+<ul>
+<li>Used to throw exceptions to prevent NullPointerExceptions</li>
+</ul>
+<h4 id="null-reference">Null Reference</h4>
+<ul>
+<li>Often given special meanings by functions or classes
+<ul>
+<li>No elements found</li>
+<li>No parameter present</li>
+</ul>
+</li>
+<li>Important to remeber null checks</li>
+</ul>
+<h4 id="nullpointerexceptions">NullPointerExceptions</h4>
+<ul>
+<li>Leads to unexpected control flows</li>
+<li>Unexprected states could be unsecure</li>
+</ul>
+<h2 id="cert-top-10-secure-coding-practieses">CERT Top 10 Secure Coding Practieses</h2>
+<ol>
+<li>
+<p><strong>Praticse defence in depth</strong></p>
+<ul>
+<li>Keep the number of linchpins down</li>
+<li>Plan for failure of individual components</li>
+<li>Program defensively</li>
+</ul>
+</li>
+<li>
+<p><strong>Validate Input</strong></p>
+<ul>
+<li>Regard all input with suspicion</li>
+<li>Map the surface of the program to detemine the input points</li>
+<li>Formualte explicit descriptions of all possible inputs(protocol, format,...)</li>
+<li>Validate inputs according to theses descriptions</li>
+</ul>
+</li>
+<li>
+<p><strong>Sanitize Data to Other Systems</strong></p>
+<ul>
+<li>
+<p>Covers</p>
+<ul>
+<li>SQL Injections</li>
+<li>XSS</li>
+<li>Command injection</li>
+<li>File paths</li>
+</ul>
+</li>
+<li>
+<p>Whenever a astring is transferred:</p>
+<ol>
+<li>Idenetify protocol of format</li>
+<li>Identify which parts come from unstrusted sources</li>
+<li>Sanitize the data appropriately</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Deny by Default</strong></p>
+</li>
+<li>
+<p><strong>Adhere the principle of least priviledge</strong></p>
+</li>
+<li>
+<p><strong>Architect and design for policy enforcement</strong></p>
+</li>
+<li>
+<p><strong>Keep it simple</strong></p>
+</li>
+<li>
+<p><strong>Adopt a secure coding standard</strong></p>
+<ul>
+<li>How to make programs secure and correct programs vary from language and platform</li>
+<li>Make yourself familiar with how security challenges are handled on your platform</li>
+</ul>
+</li>
+<li>
+<p><strong>Heed compiler warnings</strong></p>
+</li>
+<li>
+<p><strong>Use effective quality assurance tools</strong></p>
+<ul>
+<li>Fuzzers</li>
+<li>Property bases checking</li>
+</ul>
+</li>
+</ol>
+<h2 id="privacy-and-legal-rights">Privacy and Legal Rights</h2>
+<h3 id="privacy">Privacy</h3>
+<pre><code>The ability of the individual to control their personal information
+</code></pre>
+<ul>
+<li><strong>Threats to privacy</strong>
+<ol>
+<li>Collection of information</li>
+<li>Aggregation of information
+<ul>
+<li>To combine existing data to infer new information</li>
+</ul>
+</li>
+<li>Dissemination of information
+<ul>
+<li>Spreading personal information</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="legal-protection">Legal Protection</h3>
+<ul>
+<li><strong>EU directive</strong>
+<ul>
+<li>GDPR</li>
+</ul>
+</li>
+<li><strong>Norwegian law</strong>
+<ul>
+<li>Personopplysnings loven</li>
+<li>Datatilsynet is the norwegian supervidosry authority related to privacy issues</li>
+</ul>
+</li>
+</ul>
+<h3 id="gdpr">GDPR</h3>
+<ul>
+<li>
+<p>General data protection regulation</p>
+</li>
+<li>
+<p>The rights of individuals</p>
+</li>
+<li>
+<p>Obligations of data processesors</p>
+</li>
+<li>
+<p>Fundamental principles:</p>
+<ol>
+<li>Lawfullness</li>
+<li>Fairness
+<ul>
+<li>The data processing should not exceed what the data subject can reasonably expect</li>
+</ul>
+</li>
+<li>Transparancy
+<ul>
+<li>Information about what is collected must be clearly stated</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Rights</p>
+<ol>
+<li>Right of access</li>
+<li>Right to rectification</li>
+<li>Right to erasure</li>
+<li>Right to data restriction</li>
+<li>Right to data portability</li>
+<li>Right to object</li>
+</ol>
+</li>
+<li>
+<p>Should have a &quot;Forget me&quot; function</p>
+</li>
+<li>
+<p>See data collected</p>
+</li>
+<li>
+<p>Be carefull about third part access to data</p>
+</li>
+</ul>
+<h3 id="minimise-data-collection">Minimise data collection</h3>
+<ul>
+<li>Do not collect the data you do not need</li>
+<li>Keep the data log only for as long as you need</li>
+</ul>
+<h3 id="consent">Consent</h3>
+<ul>
+<li>
+<p>Must be demonstratable</p>
+</li>
+<li>
+<p>Must be formulated clear and in plain language</p>
+</li>
+<li>
+<p>Must be specifc to each kind of data</p>
+</li>
+<li>
+<p>Must be possible to withdraw</p>
+</li>
+<li>
+<p><strong>Aquiring consent</strong></p>
+<ul>
+<li>Divide into categories</li>
+<li>Ask for consent for each category upon registration of users</li>
+<li>Store separate consents as field in a database</li>
+<li>Interface for chaning consent settings</li>
+<li>No prefilled checkboxes</li>
+</ul>
+</li>
+</ul>
+<h3 id="obligations-of-the-controller-and-processor">Obligations of the Controller and Processor</h3>
+<ul>
+<li>
+<p>Data protection by design and by default</p>
+</li>
+<li>
+<p>Security of processing</p>
+</li>
+<li>
+<p>Communication of a personal data breach to the data subject</p>
+</li>
+<li>
+<p>Notification of a personal data breach to the supervisory authority</p>
+<ul>
+<li>Not later than 72 hours</li>
+</ul>
+</li>
+<li>
+<p>Data protection impact assessment</p>
+</li>
+<li>
+<p>Position of the data protection officer</p>
+<ul>
+<li>Meant to ensure that the organization complies with privacy laws</li>
+<li>Shall have direct communication with leaders who make decisions in privacy matters</li>
+<li>Must perform audits of compliance</li>
+<li>Protection from being layed-off</li>
+</ul>
+</li>
+<li>
+<p>The processor shall implement</p>
+<ol>
+<li>The pseudonymation and ecryption of personal data</li>
+<li>The ability to ensure the ongoing:
+<ul>
+<li>Confidentiality</li>
+<li>Integrity</li>
+<li>Availability and</li>
+<li>Resilience of processing systems and services</li>
+</ul>
+</li>
+<li>The ability to restore the availability and access to personal data in a timely manner in the event of physical or technical incident</li>
+<li>A process for regularly testing, assessing the evaluating the effectiveness og technical and organisational measures for ensuring the security of the processing</li>
+</ol>
+</li>
+</ul>
+<h3 id="onion-routing">Onion Routing</h3>
+<ul>
+<li>
+<p>Mixed network</p>
+<ul>
+<li>Communication is redirected through several hosts before reaching its destination</li>
+<li>Not usefull if the data reveals information about source/destination</li>
+<li>Solved by onion routing through encryption</li>
+</ul>
+</li>
+<li>
+<p>An onion has encryption layers</p>
+<ul>
+<li>On layer can only be decrypted by a specific relay</li>
+<li>Relay forwards message to next relay until it has reached its destination</li>
+</ul>
+</li>
+</ul>
+<h4 id="tor">TOR</h4>
+<ul>
+<li>Based on firefox</li>
+<li>Can reveal hidden services living in the network</li>
+<li>Node network
+<ul>
+<li>Client</li>
+<li>Relay</li>
+<li>Out-proxy</li>
+</ul>
+</li>
+<li>Attacks on Tor
+<ul>
+<li>Timing attacks</li>
+<li>Browser fingerprinting</li>
+<li>Avoiding proxy</li>
+<li>Malicous exit nodes</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<h4 id="i2p">I2P</h4>
+<ul>
+<li>Garlic routing</li>
+<li>Peer to Peer</li>
+<li>Undirectional routing</li>
+<li>All nodes participate routing for other nodes</li>
+<li>Each peer has a fixed number of client tunnels</li>
+<li>Services have public input tunnels</li>
+</ul>
+<h2 id="mobile-security">Mobile Security</h2>
+<ul>
+<li>
+<p>Attack vectors</p>
+<ul>
+<li>SMS</li>
+<li>Telephone</li>
+<li>Base Stations</li>
+<li>WiFi</li>
+</ul>
+</li>
+<li>
+<p>Mobile applications can access</p>
+<ol>
+<li>Sensors
+<ul>
+<li>Can be used for sureveillance</li>
+</ul>
+</li>
+<li>Network</li>
+<li>Storage</li>
+</ol>
+</li>
+<li>
+<p>Runs bytecode as OS process</p>
+</li>
+<li>
+<p>Can communicated with other devices</p>
+</li>
+<li>
+<p>Can have Two-factor authetication tokens</p>
+</li>
+</ul>
+<h3 id="mobile-threats">Mobile Threats</h3>
+<ul>
+<li>Mobiles are increasingly valuable targets</li>
+<li>Stores a lot of personal data
+<ul>
+<li>Advertisment</li>
+<li>Phising</li>
+<li>Extorrsion</li>
+</ul>
+</li>
+<li>Stores organisational data
+<ul>
+<li>Contacts</li>
+<li>Calendar</li>
+<li>Documents(trade secrets)</li>
+</ul>
+</li>
+<li>Session cookies on phone</li>
+<li>
+<ul>
+<li>Can be coin mined</li>
+</ul>
+</li>
+<li>Connected to bill systems(NFC, phone bills)</li>
+</ul>
+<h3 id="mobile-network-security">Mobile Network Security</h3>
+<ul>
+<li>Networks are encrypted from phones to the base station
+<ul>
+<li>A5 block ciphers</li>
+<li>Encryption can be turned off</li>
+</ul>
+</li>
+<li>Rogue base stations can MITM mobile signals</li>
+<li>Important that applications use TLS or other application layer encryption</li>
+</ul>
+<h3 id="android-security">Android Security</h3>
+<ul>
+<li>
+<p>Based on linux</p>
+<ul>
+<li>Each app has its own UID</li>
+<li>Each app has its own Lonux process</li>
+</ul>
+</li>
+<li>
+<p>Java as application platform</p>
+<ul>
+<li>Each app as its own VM</li>
+</ul>
+</li>
+<li>
+<p>Android are centered around components</p>
+<ol>
+<li>Activities</li>
+<li>Services</li>
+<li>Content providers</li>
+<li>Broadcast providers</li>
+</ol>
+</li>
+<li>
+<p>Each component implemented by a class in Java</p>
+</li>
+<li>
+<p>Components communicate through an Inter Component Communication(ICC) system called intents</p>
+<ul>
+<li>Intents consists of:
+<ul>
+<li>Action string</li>
+<li>Data to operate on (URI)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="intent-permission">Intent Permission</h4>
+<ul>
+<li>Intent listeners are either exported or private to the application
+<ul>
+<li>Exported are accessible from any app</li>
+<li>Private are only accessible from components within the app</li>
+</ul>
+</li>
+</ul>
+<h4 id="android-activities">Android Activities</h4>
+<ul>
+<li>User interface components displayed when the user interacts with the application</li>
+<li>Activities recieve intents, and in response interacts with the user</li>
+</ul>
+<h4 id="universal-cross-sute-scripting-uxss">Universal Cross-Sute Scripting (UXSS)</h4>
+<ul>
+<li>Chrome and firefox have been vulnerable on android through intents</li>
+</ul>
+<h4 id="sql-injection-in-content-providers">SQL Injection in Content Providers</h4>
+<ul>
+<li>Content providers resolve URI's and extract data for activities and services</li>
+<li>Stores in SQLite databases, but interface provides no prevention of SQL injection attacks</li>
+</ul>
+<h4 id="sandoxing-and-encryption">Sandoxing and Encryption</h4>
+<ul>
+<li>Android processes are separated using usual Linux mechanisms
+<ul>
+<li><strong>SELinux</strong> provides Mandatory Access Control(MAC)
+<ul>
+<li>Each application runs in its own SELinux sandbox</li>
+</ul>
+</li>
+<li><strong>Seccomp</strong> filters system calls</li>
+</ul>
+</li>
+</ul>
+<h4 id="android-storage">Android Storage</h4>
+<ul>
+<li>Android uses dm-crypt to encrypt its</li>
+<li>Provides confidentiality, but not integrity</li>
+<li>Provides encrypted storage of encryption keys through Android KeyStore
+<ul>
+<li>Hardware based through trusted execution enviroment or</li>
+<li>Software based</li>
+</ul>
+</li>
+</ul>
+<h4 id="malware-on-android">Malware on Android</h4>
+<ul>
+<li>Dangerous permissions
+<ul>
+<li>Give the application permissions to resources on phone</li>
+</ul>
+</li>
+<li>Preinstalled software
+<ul>
+<li>Sets up backdoors</li>
+<li>Exfiltrate personal information</li>
+<li>Install TLS root certificates</li>
+<li>Some preinstalled apps contained malware</li>
+</ul>
+</li>
+<li>Collusion found in third party libraries</li>
+</ul>
+<h3 id="ios">iOS</h3>
+<ul>
+<li>Developed in-house from hardware to native applications</li>
+<li>Heavy investment in security</li>
+<li>Remote iOS jailbrakes</li>
+<li>The slides for this topic were horrible :(</li>
 </ul>
 
     </body>
