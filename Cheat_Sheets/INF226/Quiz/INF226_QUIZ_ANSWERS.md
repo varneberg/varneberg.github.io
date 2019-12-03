@@ -256,7 +256,10 @@
     * Discretionary Access Control
     * Users specifies permissions for their own objects
 
-41. What are the access control models and how do they work?
+41. What is a capability?
+    * A method of only giving capabilities needed for each object
+
+42. What are the access control models and how do they work?
     1. Access Control Lists
          * Permissions given to each object, giving different users different permissions for it
          * Each object has its own set of permissions for each user
@@ -270,53 +273,53 @@
          * A capability is a reference to an object and a set of permissions for that object
          * A capability is used whenever the resrouce is accessed
 
-42. What is the rôle of the OS?
+43. What is the rôle of the OS?
     * Orchestrate software
     * Communicate with programs through system calls
     * Different protections for different resources(memory, CPU, file systems, files/sockets/network connections)
 
-43. What is the confused deputy problem?
+44. What is the confused deputy problem?
     * A priviliedged process(deputy) is tricked by a prcoess with lower permissions, to do actions on behalf of it
     * For example comilers and browser acting as a deputy
 
-44. What defines users and groups?
+45. What defines users and groups?
     * Each user has a UID
     * Each user is in a group that has a GID
     * Prevents users to access each others memory
     * Each file has a owner UID and a group GID
 
-45. What are file descriptors?
+46. What are file descriptors?
     * The capabilities of accessing a file
     * Each process has its own file-descriptor table
     * OS checks permissions when opening files and creating descriptor
 
-46. What is, and why do we use Virtual Memory Mapping?
+47. What is, and why do we use Virtual Memory Mapping?
     * Virtualize physical memory into pages and devide among processe
     * Its inconvenient to let programs use physical memory
     * Virtual memory is not decided at compile time, making guessing memory locations harder
     * Memory fragmentations gets hidden from the program
 
-47. How does the UNIX file system devide directories?
+48. How does the UNIX file system devide directories?
     * Into logical parts
 
-48. What is chroot?
+49. What is chroot?
     * Changing of root directory
     * Provides system virtualization
 
-49. What is the OpenBSD pledge?
+50. What is the OpenBSD pledge?
     * Mechanisms for restricting what system calls are allowed for each process
 
-50. What is OS virtualization?
+51. What is OS virtualization?
     * Abstracting away OS system calls, hardware or both to not be run directly on the OS's hardware
 
-51. What is Linux kernel namespaces?
+52. What is Linux kernel namespaces?
     * Grouping of processes so each groupt has individual:
       * Filesystem mount tables
       * Process stables
       * Network stack
       * UID tables
 
-52. What is Docker and what mechanisms does it provide?
+53. What is Docker and what mechanisms does it provide?
     * Containers
       * Runs programs separated from the OS using OS mechanisms
       * Templated by images
@@ -334,10 +337,10 @@
       * Dockered daemon attack surface
       * Security of container configuration
 
-53. What is the principle of least priviledge?
+54. What is the principle of least priviledge?
     * No user or program should operate using the least amount of priviledge necessary to complete the job
 
-54. How does SSH practice priviledge separation?
+55. How does SSH practice priviledge separation?
     * With monitors and slaves:
       * **Monitors**
         * Priviledged
@@ -349,7 +352,7 @@
         * Does most of the work
         * Calls monitor when priviledged operations must be performed
 
-55. How does one implement a Monitor/Slave pattern?
+56. How does one implement a Monitor/Slave pattern?
     1. Identifying priviledged operations
          * eg file access, accessing crypto keys, databases,...
     2. Separate request types
@@ -369,7 +372,7 @@
     6. Mechanisms for changing of identity
     7. Retain slave state
 
-56. What priviledged does SSHD have?
+57. What priviledged does SSHD have?
     * Diffie-Hellman
     * User validation
     * Password authentication
@@ -379,18 +382,157 @@
       * Renewing crypto keys
       * Pseudo terminal creation (PTY)
 
-57. Why doesn't increasing the password alphabet, increase security?
+58. Why doesn't increasing the password alphabet, increase security?
     * The length only grows constant with the size of the alphabet
 
-58. What is NIST?
+59. What is NIST?
     * Standard for password creation
     * Allows atleast 64 characters
     * Compares passwords with lists of known password
 
-59. What is the ideal hash function?
+60. What are the uses of a hash function?
+    * Checksumming data
+    * Data identifier
+    * Hashing passwords
+    * Signature verification/generation
+    * Building crypto primitives
+
+61. What is the ideal hash function?
     * Small input = large output
     * Collision free
     * One way
     * Quick to compute
 
-60. 
+62. What is a rainbow table?
+    * Tool to derive password by looking at hash
+    * Time-space tradeoff when creating look-up table for hash values to plaintext
+    * Precomputed table for reversing crypographic functions
+    * Used for cracking passwords
+
+63. What is hashing salt?
+    * A randomly generated string stored in the password hash making it harder to crack
+
+64. What is a key derivation function?
+    * Functions to derive plaintext passwords from hashes
+
+65. What is naïve key derivation?
+    * Generated byte strings placed before and after hash
+    * Making the attacker guess the second string
+    * Second strings works as cost parameter
+  
+66. What is SCrypt?
+    * A maximum memory hard key derivation function
+
+67. What is authetication?
+    * The act of verifying the identity of actors in the system
+  
+68. What is 2FA authentication?
+    * Additional authentication measures to passwords
+
+69. What "is trust upon first use"?
+    * Trust user first time they log in because it is unlikely there is a man-in-the-middle on inital authentication
+    * Use this authetication for the next sessions
+
+70. What is a CA?
+    * A Central Authority trusted to verify public keys and issue certificated for the keys
+
+71. What are the requirements for a session ID?
+    * Session ID must not be guessable
+    * Session ID must not be leaked
+
+72. Why is a stram cipher mallabe?
+    * Fixed input and output length
+    * Same key gives same output
+
+73. What is a keyed hash function?
+    * A function producing a hash dependent on a key
+    * Used to authenticate keys
+    * Provides autheticity and integrity
+
+74. What is TLS?
+    * Transport Layer Security
+    * Provides confidentiality, authetication and forward secrecy
+    * Uses HTTPS
+
+75. What is cross-site scripting?
+    * When an attacker gets a users browser to unintentionally serve javascript to the users session
+
+76. How can an attacker inject malicous scripts?
+    * With user data visible for other users
+    * URL variables
+    * User data from post requests
+    * Evaluating user data in client side script
+
+77. How did the Samy Worm work?
+    * MySpace protections only covered common HTML tags
+    * Samy spread through CSS through any useable tag
+    * Used post request to update user profiles
+
+78. How does XSS through XML HTTP requests work?
+    * Malicous scripts makes HTTP request to the current origin
+    * When sucessfully injected, the attacker has the same rights as the user hijacked
+
+79. How do you prevent XSS?
+    1. Filtering input
+        * Only for simple things
+        * Dissallow characters
+    2. Escaping output
+        * HTML bodies
+        * Quoted attributes
+        * Unquoted attributes
+        * Quoted strings in javascript
+        * CSS attribute values
+        * JSON data
+        * Use libraries for this, do not implement yourselves
+    3. Text formatting
+        * HTML sanitisers
+        * Use markup languages with safe conversion
+
+80. What is CSRF?
+    * Cross-site-request forgery
+    * Tricks the broswer to use its session cookie to approve actions initiated by a third party site
+    * Forces user to execute actions to another site than they are currently autheticated on
+    * Targets state changes
+    * Browser requests automatically include credentials
+    * Sites have a hard time distinguishing between a forges request and a legitimate request from a user
+
+81. What requests should be protected from CSRF?
+    * Links
+    * Forms
+    * Pretty much all other GET/POST
+
+82. Why should a developer not set a anti-CSRF token in a cookie and where should he place it instead?
+    * Attacker could set the cookie from within the domain
+    * Place token on all forms
+
+83. What flags should be set to secure the session token?
+    1. Secure
+        * Sends the cookie through HTTPS only
+    2. SameSite
+        * Cookie is either always sent(None)
+        * Only sent when the request is from the same origin(Strict)  
+        * Only sendt with GET request(LAX)
+    3. HttpOnly
+        * Prevents stealing cookie with javascript
+        * Cookie is always sendt in HTTP header, making it not available to scripts
+
+84. What is CSP?
+    * Content Security Policy
+    * Set in HTTP header
+    * Controls which sources content is allowed to come from
+    * Limits inline scripts
+
+85. What approaches can be used to define capabilities?
+    * Enforced be a supervisor
+    * Unguessable capatilities(random tokens, crypto signature,..)
+
+86. What properties can a capability have?
+    1. Transferable
+       * Should be transferable between users
+       * Capabilities generally dont care who uses them 
+    3. Abstraction
+    4. Memory Safe
+    5. Revoability
+    6. anti-CSRF
+    7. Collaboration
+    8. Universal persistence

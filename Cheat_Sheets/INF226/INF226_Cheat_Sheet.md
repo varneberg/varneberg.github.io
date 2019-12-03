@@ -108,6 +108,7 @@
     - [Rainbow tables](#rainbow-tables)
     - [Salting](#salting)
     - [Key Derivation Functions](#key-derivation-functions)
+      - [Naïve key derivation](#na%c3%afve-key-derivation)
       - [SCrypt](#scrypt)
       - [Other Password Guessing Prevention Measures](#other-password-guessing-prevention-measures)
   - [Authentication](#authentication)
@@ -125,7 +126,7 @@
   - [Cross-Site Scripting](#cross-site-scripting)
     - [Samy Worm](#samy-worm)
       - [How Samy Worm Works](#how-samy-worm-works)
-    - [XML HttpRequest](#xml-httprequest)
+    - [XML HTTPRequest](#xml-httprequest)
     - [XSS Prevention](#xss-prevention)
       - [Filtering Input](#filtering-input)
       - [Escaping Output](#escaping-output)
@@ -1114,7 +1115,6 @@
 - Precomputed table for reversing cryptographic hash functions
 - Mainly used for cracking passwords
 - Uses less processing power than a brute force attack
-- 
 
 ### Salting
 
@@ -1125,6 +1125,7 @@
 
 ### Key Derivation Functions
 
+- Derives plaintext from hashs
 - Requirements:
   - One-way
   - Collision free
@@ -1132,10 +1133,12 @@
   - CPU intensive
   - Memory expensive
   - Sequential
-  - **Naïve key derivation**
-    - Generate random byte-strings and store it before and after hash
-    - attacker must guess the second string
-    - The second string works as a cost parameter
+
+#### Naïve key derivation
+
+- Generate random byte-strings and store it before and after hash
+- attacker must guess the second string
+- The second string works as a cost parameter
 
 #### SCrypt
 
@@ -1235,7 +1238,7 @@
 - Provides:
   - Confidentiality
   - Authentication
-  - Forware secrecy
+  - Forward secrecy
 
 - Uses AES and CBC-MAC
 - ChaCha20 and Poly1305 MAC
@@ -1260,10 +1263,10 @@
 #### How Samy Worm Works
 
 - MySpace tried to protect by only allow < a >, < img > and < div > and strip javascript
-- Javascript in CSS meany eny tag could be used
+- Javascript in CSS any tag who could be used
 - Browsers accept javascript
 
-### XML HttpRequest
+### XML HTTPRequest
 
 - Scripts make HTTP request to the current origin
 - When injected, the attacker could do anything the user could do
@@ -1354,7 +1357,7 @@
 
 - Three values:
     1. **None**: cookie is always sent
-    2. **Strict**: ookie is sent when the request is from the same origin
+    2. **Strict**: cookie is sent when the request is from the same origin
     3. **Lax**: cookie is only sendt only with GET request
 
 ### The HTTP Only Flag
@@ -1366,7 +1369,7 @@
 ### Content Security Policy(CSP)
 
 - Set in the HTTP header
-- Control which sources content are allowed to come from
+- Control which sources content is allowed to come from
 - Voilation reported to the server
 - Limits inline scripts
 - Limitations:
