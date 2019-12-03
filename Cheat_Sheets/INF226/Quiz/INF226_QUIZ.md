@@ -1,4 +1,4 @@
-# INF226 QUIZ ANSWERS
+# INF226 QUIZ
 
 1. What is the definition of software security?
 
