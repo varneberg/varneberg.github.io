@@ -22,383 +22,6 @@
     </head>
     <body class="vscode-light">
         <h1 id="inf226-cheat-sheet">INF226 Cheat Sheet</h1>
-<ul>
-<li><a href="#inf226-cheat-sheet">INF226 Cheat Sheet</a>
-<ul>
-<li><a href="#student-knowlegde">Student Knowlegde</a></li>
-<li><a href="#requirements-assumptions-and-mechanisms">Requirements, assumptions and mechanisms</a>
-<ul>
-<li><a href="#security-definition">Security Definition</a>
-<ul>
-<li><a href="#logical-arguments">Logical Arguments</a></li>
-<li><a href="#software-security-logic">Software Security Logic</a>
-<ul>
-<li><a href="#examples-of-requirements">Examples of requirements</a></li>
-<li><a href="#examples-of-mechanisms">Examples of Mechanisms</a></li>
-<li><a href="#examples-of-assumptions">Examples of assumptions</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#vulnerabilities-and-exploits">Vulnerabilities and Exploits</a>
-<ul>
-<li><a href="#vulnerability-definition">Vulnerability Definition</a></li>
-<li><a href="#vulnerability-disclosure">Vulnerability Disclosure</a></li>
-<li><a href="#exploit-definition">Exploit Definition</a></li>
-<li><a href="#remote-code-executionrce">Remote Code Execution(RCE)</a></li>
-<li><a href="#buffer-overflow">Buffer Overflow</a>
-<ul>
-<li><a href="#the-call-stack">The Call Stack</a></li>
-<li><a href="#buffer-overread">Buffer Overread</a></li>
-<li><a href="#shell-code-exploit">Shell-Code exploit</a></li>
-<li><a href="#no-op-sled">NO-OP sled</a></li>
-<li><a href="#return-oriented-programmingrop">Return Oriented Programming(ROP)</a></li>
-<li><a href="#prevention-of-buffer-overflow">Prevention of Buffer Overflow</a></li>
-<li><a href="#stack-canaries">Stack Canaries</a></li>
-<li><a href="#address-space-layout-randomisationaslr">Address Space Layout Randomisation(ASLR)</a></li>
-<li><a href="#wxwrite-xor-executeable">W^X(Write XOR Executeable)</a></li>
-<li><a href="#best-practieses-to-avoid-buffer-overflow">Best Practieses to Avoid Buffer Overflow</a></li>
-<li><a href="#memory-safety">Memory Safety</a></li>
-</ul>
-</li>
-<li><a href="#undefined-behaviour">Undefined Behaviour</a></li>
-<li><a href="#sql-injection">SQL Injection</a>
-<ul>
-<li><a href="#about-sql">About SQL</a></li>
-<li><a href="#problems-with-sql">Problems with SQL</a></li>
-<li><a href="#preventing-sql-injections">Preventing SQL Injections</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#threats-to-software">Threats to Software</a>
-<ul>
-<li><a href="#stride">STRIDE</a>
-<ul>
-<li><a href="#spoofing">Spoofing</a></li>
-<li><a href="#tampering">Tampering</a></li>
-<li><a href="#repudiation">Repudiation</a></li>
-<li><a href="#information-disclosure">Information Disclosure</a></li>
-<li><a href="#denial-of-service">Denial of Service</a></li>
-<li><a href="#elevation-of-priviledge">Elevation of Priviledge</a></li>
-</ul>
-</li>
-<li><a href="#ranking-threats-dread">Ranking threats (DREAD)</a></li>
-</ul>
-</li>
-<li><a href="#functional-decomposition-and-threat-model">Functional Decomposition and Threat Model</a>
-<ul>
-<li><a href="#functional-decomposition">Functional Decomposition</a></li>
-<li><a href="#threat-model">Threat Model</a>
-<ul>
-<li><a href="#threat-model-example-scenario">Threat Model Example Scenario</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#trusts-and-boundaries">Trusts and Boundaries</a>
-<ul>
-<li><a href="#trust">Trust</a></li>
-<li><a href="#transport-security">Transport Security</a></li>
-<li><a href="#defence-in-depth">Defence in Depth</a></li>
-<li><a href="#trusting-trust">Trusting Trust</a>
-<ul>
-<li><a href="#trusting-compilers">Trusting Compilers</a>
-<ul>
-<li><a href="#functional-equivalence">Functional Equivalence</a></li>
-<li><a href="#detection-strategy">Detection Strategy</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#cve">CVE</a>
-<ul>
-<li><a href="#cnas">CNAs</a></li>
-<li><a href="#cvss">CVSS</a>
-<ul>
-<li><a href="#base-metrics">Base Metrics</a></li>
-<li><a href="#impact-metrics">Impact Metrics</a></li>
-<li><a href="#temporal-metrics">Temporal Metrics</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#cwe">CWE</a></li>
-<li><a href="#nvd">NVD</a></li>
-<li><a href="#security-tools">Security Tools</a>
-<ul>
-<li><a href="#static-analysis">Static analysis</a></li>
-<li><a href="#dynamic-analysis">Dynamic analysis</a></li>
-</ul>
-</li>
-<li><a href="#access-control">Access Control</a>
-<ul>
-<li><a href="#access-control-aspects">Access Control Aspects</a></li>
-<li><a href="#mandatory-access-controlmac">Mandatory Access Control(MAC)</a></li>
-<li><a href="#discretionary-access-controldac">Discretionary Access Control(DAC)</a></li>
-<li><a href="#access-control-models">Access Control Models</a></li>
-<li><a href="#access-control-lists">Access Control lists</a>
-<ul>
-<li><a href="#the-confused-deputy">The Confused Deputy</a></li>
-<li><a href="#users-and-groups">Users and Groups</a></li>
-</ul>
-</li>
-<li><a href="#r%c3%b4le-based-access-controlrbac">Rôle Based Access Control(RBAC)</a>
-<ul>
-<li><a href="#r%c3%b4le-of-os">Rôle of OS</a></li>
-</ul>
-</li>
-<li><a href="#capability-based-access-control">Capability Based Access Control</a>
-<ul>
-<li><a href="#file-descriptors">File Descriptors</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#memory-protection">Memory Protection</a>
-<ul>
-<li><a href="#virtual-memory-mapping">Virtual Memory Mapping</a></li>
-</ul>
-</li>
-<li><a href="#file-system-abstraction">File System Abstraction</a>
-<ul>
-<li><a href="#unix-file-system">Unix File System</a></li>
-</ul>
-</li>
-<li><a href="#system-calls">System Calls</a>
-<ul>
-<li><a href="#openbsd-pledge">OpenBSD Pledge</a></li>
-</ul>
-</li>
-<li><a href="#os-virtualisation">OS Virtualisation</a>
-<ul>
-<li><a href="#linux-kernel-namespaces">Linux Kernel namespaces</a></li>
-<li><a href="#docker">Docker</a>
-<ul>
-<li><a href="#containers">Containers</a></li>
-<li><a href="#separation-mechanisms">Separation mechanisms</a></li>
-<li><a href="#capabilities">Capabilities</a></li>
-<li><a href="#docker-security">Docker Security</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#priviledge-separation">Priviledge Separation</a>
-<ul>
-<li><a href="#principle-of-least-priviledge">Principle of Least Priviledge</a></li>
-</ul>
-</li>
-<li><a href="#preventing-priviledge-escalation-in-ssh">Preventing Priviledge Escalation in SSH</a>
-<ul>
-<li><a href="#privilegde-separation-in-ssh">Privilegde Separation in SSH</a></li>
-<li><a href="#implementing-monitorslave-pattern">Implementing Monitor/Slave Pattern</a>
-<ul>
-<li><a href="#identifying-priviledged-operations">Identifying Priviledged Operations</a></li>
-<li><a href="#request-types">Request types</a></li>
-<li><a href="#phases">Phases</a></li>
-<li><a href="#slavemonitor-connection">Slave/Monitor Connection</a></li>
-<li><a href="#slavemaster-communication">Slave/Master Communication</a></li>
-<li><a href="#change-of-identity">Change of Identity</a></li>
-<li><a href="#retaining-slave-state">Retaining Slave State</a></li>
-</ul>
-</li>
-<li><a href="#priviledge-in-sshd">Priviledge in SSHD</a></li>
-<li><a href="#ssh-attacker-scenario">SSH Attacker Scenario</a></li>
-</ul>
-</li>
-<li><a href="#passwords">Passwords</a>
-<ul>
-<li><a href="#hasing-password">Hasing password</a></li>
-<li><a href="#uses-of-hash-functions">Uses of hash functions</a></li>
-<li><a href="#hashing-issues">Hashing issues</a></li>
-<li><a href="#rainbow-tables">Rainbow tables</a></li>
-<li><a href="#salting">Salting</a></li>
-<li><a href="#key-derivation-functions">Key Derivation Functions</a>
-<ul>
-<li><a href="#na%c3%afve-key-derivation">Naïve key derivation</a></li>
-<li><a href="#scrypt">SCrypt</a></li>
-<li><a href="#other-password-guessing-prevention-measures">Other Password Guessing Prevention Measures</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#authentication">Authentication</a>
-<ul>
-<li><a href="#two-factor-authentication">Two Factor Authentication</a></li>
-<li><a href="#password-recovery">Password Recovery</a></li>
-<li><a href="#centralized-certificate-authorities-ca">Centralized Certificate Authorities (CA)</a></li>
-<li><a href="#other-schemes">Other schemes</a></li>
-<li><a href="#verify-logged-in-users">Verify Logged in Users</a>
-<ul>
-<li><a href="#session-ids">Session IDs</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#stream-ciphers-and-message-authetication-codes">Stream Ciphers and Message Authetication Codes</a>
-<ul>
-<li><a href="#stream-ciphers">Stream Ciphers</a></li>
-<li><a href="#message-authetication-codes">Message Authetication Codes</a>
-<ul>
-<li><a href="#keyed-hash-function">Keyed Hash Function</a></li>
-</ul>
-</li>
-<li><a href="#tls">TLS</a></li>
-</ul>
-</li>
-<li><a href="#cross-site-scripting">Cross-Site Scripting</a>
-<ul>
-<li><a href="#samy-worm">Samy Worm</a>
-<ul>
-<li><a href="#how-samy-worm-works">How Samy Worm Works</a></li>
-</ul>
-</li>
-<li><a href="#xml-httprequest">XML HTTPRequest</a></li>
-<li><a href="#xss-prevention">XSS Prevention</a>
-<ul>
-<li><a href="#filtering-input">Filtering Input</a></li>
-<li><a href="#escaping-output">Escaping Output</a></li>
-<li><a href="#text-formatting">Text Formatting</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#cross-site-request-forgerycsrf">Cross-Site Request Forgery(CSRF)</a>
-<ul>
-<li><a href="#csrf-protection">CSRF Protection</a></li>
-</ul>
-</li>
-<li><a href="#securing-the-session-tokencookie">Securing The Session Token(Cookie)</a>
-<ul>
-<li><a href="#cookies-and-same-origin">Cookies and Same-Origin</a></li>
-<li><a href="#the-secure-flag">The Secure Flag</a></li>
-<li><a href="#the-samesite-flag">The SameSite Flag</a></li>
-<li><a href="#the-http-only-flag">The HTTP Only Flag</a></li>
-<li><a href="#content-security-policycsp">Content Security Policy(CSP)</a></li>
-</ul>
-</li>
-<li><a href="#using-capabilities">Using Capabilities</a>
-<ul>
-<li><a href="#approaces">Approaces</a></li>
-<li><a href="#capabilities-properties">Capabilities Properties</a>
-<ul>
-<li><a href="#transferrable-capabilities">Transferrable Capabilities</a></li>
-<li><a href="#capabilites-abstraction">Capabilites Abstraction</a></li>
-<li><a href="#memory-safe-capabilities">Memory Safe Capabilities</a></li>
-<li><a href="#revokability">Revokability</a></li>
-<li><a href="#csrf-capabilities">CSRF Capabilities</a></li>
-<li><a href="#capabilities-for-collaboration">Capabilities for Collaboration</a></li>
-<li><a href="#universal-persistence">Universal Persistence</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#capsicum">Capsicum</a>
-<ul>
-<li><a href="#capsicum-capabilities">Capsicum Capabilities</a></li>
-<li><a href="#enforcing-capabilities-in-capsicum">Enforcing Capabilities in Capsicum</a></li>
-<li><a href="#restricting-existing-kernel-primitives">Restricting existing kernel primitives</a></li>
-<li><a href="#adopting-programs-to-capsicum">Adopting Programs To Capsicum</a>
-<ul>
-<li><a href="#tcpdump">tcpdump</a></li>
-<li><a href="#dhclient">dhclient</a></li>
-<li><a href="#gzip">gzip</a></li>
-<li><a href="#chromium">Chromium</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#serialization">Serialization</a>
-<ul>
-<li><a href="#incorrect-deserialization">Incorrect Deserialization</a></li>
-</ul>
-</li>
-<li><a href="#security-trough-the-software-development-cycle">Security Trough The Software Development Cycle</a>
-<ul>
-<li><a href="#software-development-cycle">Software Development Cycle</a></li>
-<li><a href="#non-functional-requirements">Non-Functional Requirements</a>
-<ul>
-<li><a href="#availability">Availability</a></li>
-<li><a href="#capacity">Capacity</a></li>
-<li><a href="#scalability">Scalability</a></li>
-<li><a href="#performance">Performance</a></li>
-<li><a href="#effiency">Effiency</a></li>
-<li><a href="#maintainability-and-extensibility">Maintainability and Extensibility</a></li>
-<li><a href="#portability">Portability</a></li>
-<li><a href="#recoverability">Recoverability</a></li>
-<li><a href="#cohesion">Cohesion</a></li>
-</ul>
-</li>
-<li><a href="#security-review">Security Review</a></li>
-<li><a href="#logging">Logging</a></li>
-<li><a href="#monitoring">Monitoring</a></li>
-</ul>
-</li>
-<li><a href="#state">State</a>
-<ul>
-<li><a href="#program-state">Program State</a></li>
-</ul>
-</li>
-<li><a href="#immutability">Immutability</a>
-<ul>
-<li><a href="#immutability-in-java">Immutability in Java</a>
-<ul>
-<li><a href="#strings-in-java">Strings in Java</a></li>
-<li><a href="#sum-types-in-java">Sum Types in Java</a></li>
-<li><a href="#making-immutable-classes">Making Immutable classes</a></li>
-</ul>
-</li>
-<li><a href="#expressivity">Expressivity</a></li>
-<li><a href="#the-maybe-type">The Maybe Type</a>
-<ul>
-<li><a href="#null-reference">Null Reference</a></li>
-<li><a href="#nullpointerexceptions">NullPointerExceptions</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#cert-top-10-secure-coding-practieses">CERT Top 10 Secure Coding Practieses</a></li>
-<li><a href="#privacy-and-legal-rights">Privacy and Legal Rights</a>
-<ul>
-<li><a href="#privacy">Privacy</a></li>
-<li><a href="#legal-protection">Legal Protection</a></li>
-<li><a href="#gdpr">GDPR</a></li>
-<li><a href="#minimise-data-collection">Minimise data collection</a></li>
-<li><a href="#consent">Consent</a></li>
-<li><a href="#obligations-of-the-controller-and-processor">Obligations of the Controller and Processor</a></li>
-<li><a href="#onion-routing">Onion Routing</a>
-<ul>
-<li><a href="#tor">TOR</a></li>
-<li><a href="#i2p">I2P</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#mobile-security">Mobile Security</a>
-<ul>
-<li><a href="#mobile-threats">Mobile Threats</a></li>
-<li><a href="#mobile-network-security">Mobile Network Security</a></li>
-<li><a href="#android-security">Android Security</a>
-<ul>
-<li><a href="#intent-permission">Intent Permission</a></li>
-<li><a href="#android-activities">Android Activities</a></li>
-<li><a href="#universal-cross-sute-scripting-uxss">Universal Cross-Sute Scripting (UXSS)</a></li>
-<li><a href="#sql-injection-in-content-providers">SQL Injection in Content Providers</a></li>
-<li><a href="#sandoxing-and-encryption">Sandoxing and Encryption</a></li>
-<li><a href="#android-storage">Android Storage</a></li>
-<li><a href="#malware-on-android">Malware on Android</a></li>
-</ul>
-</li>
-<li><a href="#ios">iOS</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="student-knowlegde">Student Knowlegde</h2>
 <ul>
 <li>The student has to:
@@ -860,6 +483,19 @@ to intentions in an adverserial environment.</li>
 </ul>
 </li>
 </ul>
+<h2 id="owasp-top-10">OWASP Top 10</h2>
+<ol>
+<li>Injection</li>
+<li>Broken Authentication and Session Management</li>
+<li>Cross-Site Scripting</li>
+<li>Insecure Direct Object References</li>
+<li>Security Misconfiguration</li>
+<li>Sensitive Data Exposure</li>
+<li>Missing Function Level Access Control</li>
+<li>Cross-Site Request Forgery</li>
+<li>Using Components With Known Vulnerabilities</li>
+<li>Unvalidated Redirects And Forwards</li>
+</ol>
 <h2 id="cve">CVE</h2>
 <pre><code>Common Vulnerabilities and Exposures
 </code></pre>
@@ -2501,7 +2137,7 @@ to intentions in an adverserial environment.</li>
 <li>
 <p><strong>Rich expressivity</strong> allows:</p>
 <ul>
-<li>More chechs to be performed by type-checker</li>
+<li>More checks to be performed by type-checker</li>
 <li>Easier to read code</li>
 <li>Better code reuse</li>
 </ul>
@@ -2536,10 +2172,10 @@ to intentions in an adverserial environment.</li>
 <li>Leads to unexpected control flows</li>
 <li>Unexprected states could be unsecure</li>
 </ul>
-<h2 id="cert-top-10-secure-coding-practieses">CERT Top 10 Secure Coding Practieses</h2>
+<h2 id="cert-top-10-secure-coding-practises">CERT Top 10 Secure Coding Practises</h2>
 <ol>
 <li>
-<p><strong>Praticse defence in depth</strong></p>
+<p><strong>Practise defence in depth</strong></p>
 <ul>
 <li>Keep the number of linchpins down</li>
 <li>Plan for failure of individual components</li>
@@ -2638,7 +2274,7 @@ to intentions in an adverserial environment.</li>
 <li><strong>Norwegian law</strong>
 <ul>
 <li>Personopplysnings loven</li>
-<li>Datatilsynet is the norwegian supervidosry authority related to privacy issues</li>
+<li>Datatilsynet is the norwegian supervisory authority related to privacy issues</li>
 </ul>
 </li>
 </ul>
@@ -2651,7 +2287,7 @@ to intentions in an adverserial environment.</li>
 <p>The rights of individuals</p>
 </li>
 <li>
-<p>Obligations of data processesors</p>
+<p>Obligations of data processors</p>
 </li>
 <li>
 <p>Fundamental principles:</p>
@@ -2762,7 +2398,7 @@ to intentions in an adverserial environment.</li>
 </ul>
 </li>
 <li>The ability to restore the availability and access to personal data in a timely manner in the event of physical or technical incident</li>
-<li>A process for regularly testing, assessing the evaluating the effectiveness og technical and organisational measures for ensuring the security of the processing</li>
+<li>A process for regularly testing, assessing the evaluating the effectiveness of technical and organisational measures for ensuring the security of the processing</li>
 </ol>
 </li>
 </ul>
@@ -2865,11 +2501,7 @@ to intentions in an adverserial environment.</li>
 </ul>
 </li>
 <li>Session cookies on phone</li>
-<li>
-<ul>
 <li>Can be coin mined</li>
-</ul>
-</li>
 <li>Connected to bill systems(NFC, phone bills)</li>
 </ul>
 <h3 id="mobile-network-security">Mobile Network Security</h3>
@@ -2936,7 +2568,7 @@ to intentions in an adverserial environment.</li>
 <li>User interface components displayed when the user interacts with the application</li>
 <li>Activities recieve intents, and in response interacts with the user</li>
 </ul>
-<h4 id="universal-cross-sute-scripting-uxss">Universal Cross-Sute Scripting (UXSS)</h4>
+<h4 id="universal-cross-site-scripting-uxss">Universal Cross-Site Scripting (UXSS)</h4>
 <ul>
 <li>Chrome and firefox have been vulnerable on android through intents</li>
 </ul>

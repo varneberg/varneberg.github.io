@@ -181,22 +181,35 @@
     * Compare the results
     * The binaries for each of the executeables will be different, but if they are functionally equivavalent, one can trust the compiler
 
-30. What is CVE?
+30. What is the OWASP top 10 project?
+    * A list of the top 10 most common vulnerabilities present on the internet
+        1. Injection
+        2. Broken Authentication and Session Management
+        3. Cross-Site Scripting
+        4. Insecure Direct Object References
+        5. Security Misconfiguration
+        6. Sensitive Data Exposure
+        7. Missing Function Level Access Control
+        8. Cross-Site Request Forgery
+        9. Using Components With Known Vulnerabilities
+        10. Unvalidated Redirects And Forwards
+
+31. What is CVE?
     * Common Vulnerability Exposures
     * A CVE is an entry stored in the CVE database consiting of a:
       * unique number
       * description
       * at least one public reference
 
-31. What is CNA's?
+32. What is CNA's?
     * CVE numbering authorities
     * Assigns numbers to CVE's
 
-32. What is CVSS?
+33. What is CVSS?
     * Common Vulnerability Scoring System
     * Scores CVS from 1 - 10
 
-33. What are the metrics in CVSS?
+34. What are the metrics in CVSS?
     1. Base metrics
        * Access vectors
          * Local, network or adjacent network
@@ -210,7 +223,7 @@
         * Rated from:
           * Exploitability(Unproven, Proof-of-concept, Functional, High)
   
-34. What is CWE?
+35. What is CWE?
     * Common Weakness Enumeration
     * List of common weaknesses present in software 
     * More fine grained than OWASP's Top 10, but similar
@@ -219,7 +232,7 @@
       * Development concepts
       * Research concepts
 
-35. What is NVD?
+36. What is NVD?
     * National Vulnerability Database
     * Contains analysis of known vulnerabilities 
       * CVE number
@@ -227,39 +240,39 @@
       * CVSS
       * Versions affected
 
-36. What is a static analysis and how do you perform it?
+37. What is a static analysis and how do you perform it?
     * Inspection of source code
       * Program flow analysis
       * Constraints analysis
       * Logic tests
       * Linting
   
-37. What is a dynamic analysis and how do you perform it?
+38. What is a dynamic analysis and how do you perform it?
     * Inspection of running software
       * Fuzzers
       * Crawlers
       * Man-in-the-middle proxy
 
-38. What is access control and what are the aspects of it?
+39. What is access control and what are the aspects of it?
     * The decisions of what users are allowed to do within a system
       * Physical
       * Logical
       * Cryptographic
       * Soscial
 
-39. What is MAC?
+40. What is MAC?
     * Mandatory Access Contorl
     * Access control policies decided by a central authority
     * For example OS's have MAC access over resources(CPU, memory, storage,...)
 
-40. What is DAC?
+41. What is DAC?
     * Discretionary Access Control
     * Users specifies permissions for their own objects
 
-41. What is a capability?
+42. What is a capability?
     * A method of only giving capabilities needed for each object
 
-42. What are the access control models and how do they work?
+43. What are the access control models and how do they work?
     1. Access Control Lists
          * Permissions given to each object, giving different users different permissions for it
          * Each object has its own set of permissions for each user
@@ -273,53 +286,53 @@
          * A capability is a reference to an object and a set of permissions for that object
          * A capability is used whenever the resrouce is accessed
 
-43. What is the rôle of the OS?
+44. What is the rôle of the OS?
     * Orchestrate software
     * Communicate with programs through system calls
     * Different protections for different resources(memory, CPU, file systems, files/sockets/network connections)
 
-44. What is the confused deputy problem?
+45. What is the confused deputy problem?
     * A priviliedged process(deputy) is tricked by a prcoess with lower permissions, to do actions on behalf of it
     * For example comilers and browser acting as a deputy
 
-45. What defines users and groups?
+46. What defines users and groups?
     * Each user has a UID
     * Each user is in a group that has a GID
     * Prevents users to access each others memory
     * Each file has a owner UID and a group GID
 
-46. What are file descriptors?
+47. What are file descriptors?
     * The capabilities of accessing a file
     * Each process has its own file-descriptor table
     * OS checks permissions when opening files and creating descriptor
 
-47. What is, and why do we use Virtual Memory Mapping?
+48. What is, and why do we use Virtual Memory Mapping?
     * Virtualize physical memory into pages and devide among processe
     * Its inconvenient to let programs use physical memory
     * Virtual memory is not decided at compile time, making guessing memory locations harder
     * Memory fragmentations gets hidden from the program
 
-48. How does the UNIX file system devide directories?
+49. How does the UNIX file system devide directories?
     * Into logical parts
 
-49. What is chroot?
+50. What is chroot?
     * Changing of root directory
     * Provides system virtualization
 
-50. What is the OpenBSD pledge?
+51. What is the OpenBSD pledge?
     * Mechanisms for restricting what system calls are allowed for each process
 
-51. What is OS virtualization?
+52. What is OS virtualization?
     * Abstracting away OS system calls, hardware or both to not be run directly on the OS's hardware
 
-52. What is Linux kernel namespaces?
+53. What is Linux kernel namespaces?
     * Grouping of processes so each groupt has individual:
       * Filesystem mount tables
       * Process stables
       * Network stack
       * UID tables
 
-53. What is Docker and what mechanisms does it provide?
+54. What is Docker and what mechanisms does it provide?
     * Containers
       * Runs programs separated from the OS using OS mechanisms
       * Templated by images
@@ -337,10 +350,10 @@
       * Dockered daemon attack surface
       * Security of container configuration
 
-54. What is the principle of least priviledge?
+55. What is the principle of least priviledge?
     * No user or program should operate using the least amount of priviledge necessary to complete the job
 
-55. How does SSH practice priviledge separation?
+56. How does SSH practice priviledge separation?
     * With monitors and slaves:
       * **Monitors**
         * Priviledged
@@ -352,7 +365,7 @@
         * Does most of the work
         * Calls monitor when priviledged operations must be performed
 
-56. How does one implement a Monitor/Slave pattern?
+57. How does one implement a Monitor/Slave pattern?
     1. Identifying priviledged operations
          * eg file access, accessing crypto keys, databases,...
     2. Separate request types
@@ -372,7 +385,7 @@
     6. Mechanisms for changing of identity
     7. Retain slave state
 
-57. What priviledged does SSHD have?
+58. What priviledged does SSHD have?
     * Diffie-Hellman
     * User validation
     * Password authentication
@@ -382,97 +395,97 @@
       * Renewing crypto keys
       * Pseudo terminal creation (PTY)
 
-58. Why doesn't increasing the password alphabet, increase security?
+59. Why doesn't increasing the password alphabet, increase security?
     * The length only grows constant with the size of the alphabet
 
-59. What is NIST?
+60. What is NIST?
     * Standard for password creation
     * Allows atleast 64 characters
     * Compares passwords with lists of known password
 
-60. What are the uses of a hash function?
+61. What are the uses of a hash function?
     * Checksumming data
     * Data identifier
     * Hashing passwords
     * Signature verification/generation
     * Building crypto primitives
 
-61. What is the ideal hash function?
+62. What is the ideal hash function?
     * Small input = large output
     * Collision free
     * One way
     * Quick to compute
 
-62. What is a rainbow table?
+63. What is a rainbow table?
     * Tool to derive password by looking at hash
     * Time-space tradeoff when creating look-up table for hash values to plaintext
     * Precomputed table for reversing crypographic functions
     * Used for cracking passwords
 
-63. What is hashing salt?
+64. What is hashing salt?
     * A randomly generated string stored in the password hash making it harder to crack
 
-64. What is a key derivation function?
+65. What is a key derivation function?
     * Functions to derive plaintext passwords from hashes
 
-65. What is naïve key derivation?
+66. What is naïve key derivation?
     * Generated byte strings placed before and after hash
     * Making the attacker guess the second string
     * Second strings works as cost parameter
   
-66. What is SCrypt?
+67. What is SCrypt?
     * A maximum memory hard key derivation function
 
-67. What is authetication?
+68. What is authetication?
     * The act of verifying the identity of actors in the system
   
-68. What is 2FA authentication?
+69. What is 2FA authentication?
     * Additional authentication measures to passwords
 
-69. What "is trust upon first use"?
+70. What "is trust upon first use"?
     * Trust user first time they log in because it is unlikely there is a man-in-the-middle on inital authentication
     * Use this authetication for the next sessions
 
-70. What is a CA?
+71. What is a CA?
     * A Central Authority trusted to verify public keys and issue certificated for the keys
 
-71. What are the requirements for a session ID?
+72. What are the requirements for a session ID?
     * Session ID must not be guessable
     * Session ID must not be leaked
 
-72. Why is a stram cipher mallabe?
+73. Why is a stram cipher mallabe?
     * Fixed input and output length
     * Same key gives same output
 
-73. What is a keyed hash function?
+74. What is a keyed hash function?
     * A function producing a hash dependent on a key
     * Used to authenticate keys
     * Provides autheticity and integrity
 
-74. What is TLS?
+75. What is TLS?
     * Transport Layer Security
     * Provides confidentiality, authetication and forward secrecy
     * Uses HTTPS
 
-75. What is cross-site scripting?
+76. What is cross-site scripting?
     * When an attacker gets a users browser to unintentionally serve javascript to the users session
 
-76. How can an attacker inject malicous scripts?
+77. How can an attacker inject malicous scripts?
     * With user data visible for other users
     * URL variables
     * User data from post requests
     * Evaluating user data in client side script
 
-77. How did the Samy Worm work?
+78. How did the Samy Worm work?
     * MySpace protections only covered common HTML tags
     * Samy spread through CSS through any useable tag
     * Used post request to update user profiles
 
-78. How does XSS through XML HTTP requests work?
+79. How does XSS through XML HTTP requests work?
     * Malicous scripts makes HTTP request to the current origin
     * When sucessfully injected, the attacker has the same rights as the user hijacked
 
-79. How do you prevent XSS?
+80. How do you prevent XSS?
     1. Filtering input
         * Only for simple things
         * Dissallow characters
@@ -488,7 +501,7 @@
         * HTML sanitisers
         * Use markup languages with safe conversion
 
-80. What is CSRF?
+81. What is CSRF?
     * Cross-site-request forgery
     * Tricks the broswer to use its session cookie to approve actions initiated by a third party site
     * Forces user to execute actions to another site than they are currently autheticated on
@@ -496,16 +509,16 @@
     * Browser requests automatically include credentials
     * Sites have a hard time distinguishing between a forges request and a legitimate request from a user
 
-81. What requests should be protected from CSRF?
+82. What requests should be protected from CSRF?
     * Links
     * Forms
     * Pretty much all other GET/POST
 
-82. Why should a developer not set a anti-CSRF token in a cookie and where should he place it instead?
+83. Why should a developer not set a anti-CSRF token in a cookie and where should he place it instead?
     * Attacker could set the cookie from within the domain
     * Place token on all forms
 
-83. What flags should be set to secure the session token?
+84. What flags should be set to secure the session token?
     1. Secure
         * Sends the cookie through HTTPS only
     2. SameSite
@@ -516,17 +529,17 @@
         * Prevents stealing cookie with javascript
         * Cookie is always sendt in HTTP header, making it not available to scripts
 
-84. What is CSP?
+85. What is CSP?
     * Content Security Policy
     * Set in HTTP header
     * Controls which sources content is allowed to come from
     * Limits inline scripts
 
-85. What approaches can be used to define capabilities?
+86. What approaches can be used to define capabilities?
     * Enforced be a supervisor
     * Unguessable capatilities(random tokens, crypto signature,..)
 
-86. What properties can a capability have?
+87. What properties can a capability have?
     1. Transferable
        * Should be transferable between users
        * Capabilities generally dont care who uses them
@@ -544,34 +557,34 @@
     7. Universal persistence
        * The state of the resource stays the same so it is never restarted
 
-87. What is Capsicum?
+88. What is Capsicum?
     * Provides capability based security based security for UNIX programs
     * Extends the UNIX api's without replacing them or compromise performance
 
-88. What capabilities does Capsicum provide?
+89. What capabilities does Capsicum provide?
     * Capabilities of file descriptors with a set of access rights
       * Around 60
 
-89. What does capability mode in Capsicum do?
+90. What does capability mode in Capsicum do?
     * Restricts access to global name spaces
       * PID
       * File paths
       * POSIX IPC
       * System clocks/times
 
-90. How does Capsicum enforce the restriction in capability mode?
+91.  How does Capsicum enforce the restriction in capability mode?
     * By restricing kernel primitives
     * In capability mode, the only availabe PID is the process's own PID
     * Child processes can only be accessed through capabilities
 
-91. What is serialization and deserialization?
+92.  What is serialization and deserialization?
     * Serialization: The process of turning objects of a programming language into byte arrays for transport
     * Deserialization: Turning transported byte arrays back into objects
 
-92. Why is incorrect deserialization dangerous?
+93.  Why is incorrect deserialization dangerous?
     * The deserialized code is at the forefront of the program. Without is being properly deserialized, it could lead to bugs and give an attacker RCE access
 
-93. What are the entries in the secure software development cycle?
+94.  What are the entries in the secure software development cycle?
     1. Requirements
        * Map security and privacy requirements
     2. Design
@@ -587,10 +600,10 @@
        * Final Security review
        * Application security monitoring and response plan
 
-94. What are the non functional requirements and what does each entry contain?
-    1. **Security and privacy**
+95.  What are the non functional requirements and what does each entry contain?
+    6. **Security and privacy**
           * The program functions according to the intentions in an adverserial enviroment
-    2. **Availability, capacity, performance and efficiency**
+    7. **Availability, capacity, performance and efficiency**
           * *Availability*
             * The proporting of time a system spends in a functional state and not in downtime
             * Do decrease downtime and increase availability:
@@ -604,29 +617,29 @@
             * The Maximum number of simultanious users/transactions*
           * *Performance and effiency*
             * The ability to increase capacity and make use of scarce resources
-    3. **Extensibility, maintainability, portability and scalability**
+    8. **Extensibility, maintainability, portability and scalability**
           * *Portability*
             * The ability of the software to run on different systems with little adaptation
-    4. **Recoverability**
+    9. **Recoverability**
          * How easy it is for the system to recover from disruptive events
-    5. **Manageability and serviceability**
+    10. **Manageability and serviceability**
          * How easy it is to develop, deploy and maintain the code
-    6. *Cohesion*
+    11. *Cohesion*
        * The degree to which parts of system/module belong together
 
-95. What should be reviewed during a security review?
+96.  What should be reviewed during a security review?
     * Security design
     * Peer review
     * Final security review before deployment
 
-96. What aspects of program should be logged?
+97.  What aspects of program should be logged?
     * Authenticated events
     * Attempted intrusions
     * Violations of invariants
     * Unusual behaviour
     * Performance statistics
 
-97. What is a program state and why is it important to security?
+98.  What is a program state and why is it important to security?
     * Program state consists of:
       * Variables
       * File descriptors
@@ -635,11 +648,140 @@
 
     * If a program reaches an unanticipated state, bugs could occur
 
-98. What is preservation of invariants?
+99.  What is preservation of invariants?
     * The methods of an object ensures the internal state is a valid representation
 
-99. What is immutability?
+100. What is immutability?
     * An object can not be changed after creation
     * Provides security since an attacker could not change objects to alter the state
 
-100. How can a program achieve immutability?
+101. What properties does an immutable class have?
+     1. Keeping tue only reference to an object
+     2. Not modifying the object
+     3. Not providing setters
+     4. Declare class as final
+
+102. What is expressivity and rich expressivity?
+     * Which types the language can express
+     * Rich expresivity allows:
+       * More checks to be performed by a type-checker
+       * Easer to read code
+       * Better code reuse
+
+103. What are CERT's top 10 Secure conding practises?
+     1. Pratice defence in depth
+     2. Validate input
+     3. Sanitize data to other systems
+     4. Deny be default
+     5. Adhere the principle of least priviledge
+     6. Architect and design for policy enforcement
+     7. Keep it simple
+     8. Adopt a secure coding standard
+     9. Heed compiler warnings
+     10. Use effective quiality assurance tools
+
+104. What is privacy a
+     * The ability of the individual to control their personal data
+  
+105. What are the threats to privacy?
+     1. Collection of information
+     2. Aggreation of information(combining existing data to infer new information)
+     3. Dissemination of information(spreading personal information)
+
+106. What legal protections do we have in Norway?
+     * EU diretive
+       * GDPR
+     * Norwegian law
+       * Personopplysnings loven
+
+107. What is GDPR?
+     * General Data Protection Regulation
+     * The right for individuals and obligations of data processors
+
+108. What are the fundamental principles in GDPR?
+     1. Lawfullness
+     2. Fairness
+     3. Transparancy
+
+109. What rights does GDPR provide?
+     1. Right of access
+     2. Right of rectification
+     3. Right to erasure
+     4. Right to data restriction
+     5. Right to data portability
+     6. Right to object
+
+110. What MUST consent be?
+     1. Demonstratable
+     2. Formulated clearly
+     3. Specific to each kind of data
+     4. Possible to withdraw
+
+111. How must a service do to aquire consent?
+     1. Divide into categories
+     2. Provide the ability to ensure confidentiality, integreity, availability and resilience
+     3. The ability to restore the availability, assessing the evaluating of the effectiveness of technical and organisational measures for ensuring the security of the processing  
+
+112. What is onion routing?
+     * Provides anonymity
+     * Communication redirected through several hosts before reaching its destination
+     * Each node in the network has an encryption layer that can only be decrypted by specific key
+
+113. What is the TOR?
+     * A network based on onion routing accessed from the TOR browser
+     * Reveals hidden services living in the network
+
+114. Is the TOR network safe from attacks and privacy intervention?
+     * Nope
+     * Timing attacks, browser fingerprinting, avoidance of proxies and malicous exit nodes pose a threat on the users using TOR
+     * NSA also owns most of the exit nodes so...
+
+115. What is I2P?
+     * Garlic routing
+     * Based on the peer to peer protocoll
+     * All nodes in the network participates routing for all other nodes
+
+116. What are some mobile threats and attack vectors?
+     * **Attack vectors**
+       * SMS
+       * Telephone
+       * Base Stations
+       * WiFi
+     * **Threats**
+       * Mobiles stores a lot of personal and organistaional data
+       * Session cookie can be stolen from phone
+       * Phones can be used for crypto mining
+       * NFC, phone bills etc
+
+117. How are phones encrypted and how could an attacker exploit mobile networks?
+     * Phone networks are encrypted from phones to the base stations
+       * A5 block ciphers
+     * An attacker could set up a rogue base station and MITM the mobile signals
+
+118. What is Android components?
+     * Applications are Java based
+       * Each app with its own VM
+     * Centered around components
+       1. Activities
+       2. Services
+       3. Content providers
+       4. Broadcast providers
+     * Each component with its own class in Java
+     * Components communicate through ICC systems called intents
+       * Intents has an action string and data to operate on (URI)
+
+119. What are Android activities?
+     * User interface component displayed when the user interacts with the application
+     * Activities recieve intents and in response interacts with the user
+
+120. What are some vulnerabilies present on Android?
+     1. Universal cross-site scripting(UXXS) through chrome and firefox through intents
+     2. SQL injection in content providers. Providers resolve URI's and extract data for activities and services. The data is stored in SQLite databases. Interface provides no defence
+
+121. How does most malware exploit Android?
+     * By recieving dangerous permissions from the user
+     * Preinstalled software
+       * Sets up backdoors
+       * Exfiltrate personal information
+       * Installs its own TLS root certificates
+     * Many collusions found in third party libraries

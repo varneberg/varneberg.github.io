@@ -1,214 +1,4 @@
 # INF226 Cheat Sheet
-- [INF226 Cheat Sheet](#inf226-cheat-sheet)
-  - [Student Knowlegde](#student-knowlegde)
-  - [Requirements, assumptions and mechanisms](#requirements-assumptions-and-mechanisms)
-    - [Security Definition](#security-definition)
-      - [Logical Arguments](#logical-arguments)
-      - [Software Security Logic](#software-security-logic)
-        - [Examples of requirements](#examples-of-requirements)
-        - [Examples of Mechanisms](#examples-of-mechanisms)
-        - [Examples of assumptions](#examples-of-assumptions)
-  - [Vulnerabilities and Exploits](#vulnerabilities-and-exploits)
-    - [Vulnerability Definition](#vulnerability-definition)
-    - [Vulnerability Disclosure](#vulnerability-disclosure)
-    - [Exploit Definition](#exploit-definition)
-    - [Remote Code Execution(RCE)](#remote-code-executionrce)
-    - [Buffer Overflow](#buffer-overflow)
-      - [The Call Stack](#the-call-stack)
-      - [Buffer Overread](#buffer-overread)
-      - [Shell-Code exploit](#shell-code-exploit)
-      - [NO-OP sled](#no-op-sled)
-      - [Return Oriented Programming(ROP)](#return-oriented-programmingrop)
-      - [Prevention of Buffer Overflow](#prevention-of-buffer-overflow)
-      - [Stack Canaries](#stack-canaries)
-      - [Address Space Layout Randomisation(ASLR)](#address-space-layout-randomisationaslr)
-      - [W^X(Write XOR Executeable)](#wxwrite-xor-executeable)
-      - [Best Practieses to Avoid Buffer Overflow](#best-practieses-to-avoid-buffer-overflow)
-      - [Memory Safety](#memory-safety)
-    - [Undefined Behaviour](#undefined-behaviour)
-    - [SQL Injection](#sql-injection)
-      - [About SQL](#about-sql)
-      - [Problems with SQL](#problems-with-sql)
-      - [Preventing SQL Injections](#preventing-sql-injections)
-  - [Threats to Software](#threats-to-software)
-    - [STRIDE](#stride)
-      - [Spoofing](#spoofing)
-      - [Tampering](#tampering)
-      - [Repudiation](#repudiation)
-      - [Information Disclosure](#information-disclosure)
-      - [Denial of Service](#denial-of-service)
-      - [Elevation of Priviledge](#elevation-of-priviledge)
-    - [Ranking threats (DREAD)](#ranking-threats-dread)
-  - [Functional Decomposition and Threat Model](#functional-decomposition-and-threat-model)
-    - [Functional Decomposition](#functional-decomposition)
-    - [Threat Model](#threat-model)
-      - [Threat Model Example Scenario](#threat-model-example-scenario)
-  - [Trusts and Boundaries](#trusts-and-boundaries)
-    - [Trust](#trust)
-    - [Transport Security](#transport-security)
-    - [Defence in Depth](#defence-in-depth)
-    - [Trusting Trust](#trusting-trust)
-      - [Trusting Compilers](#trusting-compilers)
-        - [Functional Equivalence](#functional-equivalence)
-        - [Detection Strategy](#detection-strategy)
-  - [CVE](#cve)
-    - [CNAs](#cnas)
-    - [CVSS](#cvss)
-      - [Base Metrics](#base-metrics)
-      - [Impact Metrics](#impact-metrics)
-      - [Temporal Metrics](#temporal-metrics)
-  - [CWE](#cwe)
-  - [NVD](#nvd)
-  - [Security Tools](#security-tools)
-    - [Static analysis](#static-analysis)
-    - [Dynamic analysis](#dynamic-analysis)
-  - [Access Control](#access-control)
-    - [Access Control Aspects](#access-control-aspects)
-    - [Mandatory Access Control(MAC)](#mandatory-access-controlmac)
-    - [Discretionary Access Control(DAC)](#discretionary-access-controldac)
-    - [Access Control Models](#access-control-models)
-    - [Access Control lists](#access-control-lists)
-      - [The Confused Deputy](#the-confused-deputy)
-      - [Users and Groups](#users-and-groups)
-    - [Rôle Based Access Control(RBAC)](#r%c3%b4le-based-access-controlrbac)
-      - [Rôle of OS](#r%c3%b4le-of-os)
-    - [Capability Based Access Control](#capability-based-access-control)
-      - [File Descriptors](#file-descriptors)
-  - [Memory Protection](#memory-protection)
-    - [Virtual Memory Mapping](#virtual-memory-mapping)
-  - [File System Abstraction](#file-system-abstraction)
-    - [Unix File System](#unix-file-system)
-  - [System Calls](#system-calls)
-    - [OpenBSD Pledge](#openbsd-pledge)
-  - [OS Virtualisation](#os-virtualisation)
-    - [Linux Kernel namespaces](#linux-kernel-namespaces)
-    - [Docker](#docker)
-      - [Containers](#containers)
-      - [Separation mechanisms](#separation-mechanisms)
-      - [Capabilities](#capabilities)
-      - [Docker Security](#docker-security)
-  - [Priviledge Separation](#priviledge-separation)
-    - [Principle of Least Priviledge](#principle-of-least-priviledge)
-  - [Preventing Priviledge Escalation in SSH](#preventing-priviledge-escalation-in-ssh)
-    - [Privilegde Separation in SSH](#privilegde-separation-in-ssh)
-    - [Implementing Monitor/Slave Pattern](#implementing-monitorslave-pattern)
-      - [Identifying Priviledged Operations](#identifying-priviledged-operations)
-      - [Request types](#request-types)
-      - [Phases](#phases)
-      - [Slave/Monitor Connection](#slavemonitor-connection)
-      - [Slave/Master Communication](#slavemaster-communication)
-      - [Change of Identity](#change-of-identity)
-      - [Retaining Slave State](#retaining-slave-state)
-    - [Priviledge in SSHD](#priviledge-in-sshd)
-    - [SSH Attacker Scenario](#ssh-attacker-scenario)
-  - [Passwords](#passwords)
-    - [Hasing password](#hasing-password)
-    - [Uses of hash functions](#uses-of-hash-functions)
-    - [Hashing issues](#hashing-issues)
-    - [Rainbow tables](#rainbow-tables)
-    - [Salting](#salting)
-    - [Key Derivation Functions](#key-derivation-functions)
-      - [Naïve key derivation](#na%c3%afve-key-derivation)
-      - [SCrypt](#scrypt)
-      - [Other Password Guessing Prevention Measures](#other-password-guessing-prevention-measures)
-  - [Authentication](#authentication)
-    - [Two Factor Authentication](#two-factor-authentication)
-    - [Password Recovery](#password-recovery)
-    - [Centralized Certificate Authorities (CA)](#centralized-certificate-authorities-ca)
-    - [Other schemes](#other-schemes)
-    - [Verify Logged in Users](#verify-logged-in-users)
-      - [Session IDs](#session-ids)
-  - [Stream Ciphers and Message Authetication Codes](#stream-ciphers-and-message-authetication-codes)
-    - [Stream Ciphers](#stream-ciphers)
-    - [Message Authetication Codes](#message-authetication-codes)
-      - [Keyed Hash Function](#keyed-hash-function)
-    - [TLS](#tls)
-  - [Cross-Site Scripting](#cross-site-scripting)
-    - [Samy Worm](#samy-worm)
-      - [How Samy Worm Works](#how-samy-worm-works)
-    - [XML HTTPRequest](#xml-httprequest)
-    - [XSS Prevention](#xss-prevention)
-      - [Filtering Input](#filtering-input)
-      - [Escaping Output](#escaping-output)
-      - [Text Formatting](#text-formatting)
-  - [Cross-Site Request Forgery(CSRF)](#cross-site-request-forgerycsrf)
-    - [CSRF Protection](#csrf-protection)
-  - [Securing The Session Token(Cookie)](#securing-the-session-tokencookie)
-    - [Cookies and Same-Origin](#cookies-and-same-origin)
-    - [The Secure Flag](#the-secure-flag)
-    - [The SameSite Flag](#the-samesite-flag)
-    - [The HTTP Only Flag](#the-http-only-flag)
-    - [Content Security Policy(CSP)](#content-security-policycsp)
-  - [Using Capabilities](#using-capabilities)
-    - [Approaces](#approaces)
-    - [Capabilities Properties](#capabilities-properties)
-      - [Transferrable Capabilities](#transferrable-capabilities)
-      - [Capabilites Abstraction](#capabilites-abstraction)
-      - [Memory Safe Capabilities](#memory-safe-capabilities)
-      - [Revokability](#revokability)
-      - [CSRF Capabilities](#csrf-capabilities)
-      - [Capabilities for Collaboration](#capabilities-for-collaboration)
-      - [Universal Persistence](#universal-persistence)
-  - [Capsicum](#capsicum)
-    - [Capsicum Capabilities](#capsicum-capabilities)
-    - [Enforcing Capabilities in Capsicum](#enforcing-capabilities-in-capsicum)
-    - [Restricting existing kernel primitives](#restricting-existing-kernel-primitives)
-    - [Adopting Programs To Capsicum](#adopting-programs-to-capsicum)
-      - [tcpdump](#tcpdump)
-      - [dhclient](#dhclient)
-      - [gzip](#gzip)
-      - [Chromium](#chromium)
-  - [Serialization](#serialization)
-    - [Incorrect Deserialization](#incorrect-deserialization)
-  - [Security Trough The Software Development Cycle](#security-trough-the-software-development-cycle)
-    - [Software Development Cycle](#software-development-cycle)
-    - [Non-Functional Requirements](#non-functional-requirements)
-      - [Availability](#availability)
-      - [Capacity](#capacity)
-      - [Scalability](#scalability)
-      - [Performance](#performance)
-      - [Effiency](#effiency)
-      - [Maintainability and Extensibility](#maintainability-and-extensibility)
-      - [Portability](#portability)
-      - [Recoverability](#recoverability)
-      - [Cohesion](#cohesion)
-    - [Security Review](#security-review)
-    - [Logging](#logging)
-    - [Monitoring](#monitoring)
-  - [State](#state)
-    - [Program State](#program-state)
-  - [Immutability](#immutability)
-    - [Immutability in Java](#immutability-in-java)
-      - [Strings in Java](#strings-in-java)
-      - [Sum Types in Java](#sum-types-in-java)
-      - [Making Immutable classes](#making-immutable-classes)
-    - [Expressivity](#expressivity)
-    - [The Maybe Type](#the-maybe-type)
-      - [Null Reference](#null-reference)
-      - [NullPointerExceptions](#nullpointerexceptions)
-  - [CERT Top 10 Secure Coding Practieses](#cert-top-10-secure-coding-practieses)
-  - [Privacy and Legal Rights](#privacy-and-legal-rights)
-    - [Privacy](#privacy)
-    - [Legal Protection](#legal-protection)
-    - [GDPR](#gdpr)
-    - [Minimise data collection](#minimise-data-collection)
-    - [Consent](#consent)
-    - [Obligations of the Controller and Processor](#obligations-of-the-controller-and-processor)
-    - [Onion Routing](#onion-routing)
-      - [TOR](#tor)
-      - [I2P](#i2p)
-  - [Mobile Security](#mobile-security)
-    - [Mobile Threats](#mobile-threats)
-    - [Mobile Network Security](#mobile-network-security)
-    - [Android Security](#android-security)
-      - [Intent Permission](#intent-permission)
-      - [Android Activities](#android-activities)
-      - [Universal Cross-Sute Scripting (UXSS)](#universal-cross-sute-scripting-uxss)
-      - [SQL Injection in Content Providers](#sql-injection-in-content-providers)
-      - [Sandoxing and Encryption](#sandoxing-and-encryption)
-      - [Android Storage](#android-storage)
-      - [Malware on Android](#malware-on-android)
-    - [iOS](#ios)
 
 ## Student Knowlegde
 
@@ -570,6 +360,19 @@
     4. Compile ${S_{A}}$ using ${Y}$ to get an executable ${W}$
     5. Compare ${V}$ and ${W}$ bitwise
   - ${X}$ and ${Y}$ will be different binaries, but functionally equivalent
+
+## OWASP Top 10
+
+1. Injection
+2. Broken Authentication and Session Management
+3. Cross-Site Scripting
+4. Insecure Direct Object References
+5. Security Misconfiguration
+6. Sensitive Data Exposure
+7. Missing Function Level Access Control
+8. Cross-Site Request Forgery
+9. Using Components With Known Vulnerabilities
+10. Unvalidated Redirects And Forwards
 
 ## CVE
 
@@ -1738,8 +1541,8 @@
 - Which types the language can express
 - Different types for different languages
 - **Rich expressivity** allows:
-  - More chechs to be performed by type-checker
-  - Easier to read code 
+  - More checks to be performed by type-checker
+  - Easier to read code
   - Better code reuse
 
 - Common type formers:
@@ -1765,10 +1568,9 @@
 - Leads to unexpected control flows
 - Unexprected states could be unsecure
 
-## CERT Top 10 Secure Coding Practieses
+## CERT Top 10 Secure Coding Practises
 
-
-1. **Praticse defence in depth**
+1. **Practise defence in depth**
    - Keep the number of linchpins down
    - Plan for failure of individual components
    - Program defensively
@@ -1828,13 +1630,13 @@
   - GDPR
 - **Norwegian law**
   - Personopplysnings loven
-  - Datatilsynet is the norwegian supervidosry authority related to privacy issues
+  - Datatilsynet is the norwegian supervisory authority related to privacy issues
 
 ### GDPR
 
 - General data protection regulation
 - The rights of individuals
-- Obligations of data processesors
+- Obligations of data processors
 
 - Fundamental principles:
   1. Lawfullness
@@ -1896,7 +1698,7 @@
      - Availability and
      - Resilience of processing systems and services
   3. The ability to restore the availability and access to personal data in a timely manner in the event of physical or technical incident
-  4. A process for regularly testing, assessing the evaluating the effectiveness og technical and organisational measures for ensuring the security of the processing
+  4. A process for regularly testing, assessing the evaluating the effectiveness of technical and organisational measures for ensuring the security of the processing
   
 ### Onion Routing
 
@@ -1962,7 +1764,7 @@
   - Calendar
   - Documents(trade secrets)
 - Session cookies on phone
-- - Can be coin mined
+- Can be coin mined
 - Connected to bill systems(NFC, phone bills)
 
 ### Mobile Network Security
@@ -2003,7 +1805,7 @@
 - User interface components displayed when the user interacts with the application
 - Activities recieve intents, and in response interacts with the user
 
-#### Universal Cross-Sute Scripting (UXSS)
+#### Universal Cross-Site Scripting (UXSS)
 
 - Chrome and firefox have been vulnerable on android through intents
 
