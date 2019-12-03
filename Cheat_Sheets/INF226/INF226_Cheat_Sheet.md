@@ -667,7 +667,7 @@
     Inspects source code
 
 - Program flow analysis
-- Contrains analysis
+- Contraints analysis
 - Logic tests
 - Linting
 
@@ -850,14 +850,14 @@
 
 - **With virtual memory:**
   - Each program gets their own virtual address space
-  - Memory locations not decided at compile time 
+  - Memory locations not decided at compile time
   - Memory fragmentation hidden from programs
   - Easy to page out to swap
-- As a consequence processes cannot directly adress the memory of other processes 
+- As a consequence processes cannot directly adress the memory of other processes
 
 - **Exceptions:**
   - Processes can allocate shared memory
-  - Processes can attach them selves as a debugger for another process 
+  - Processes can attach them selves as a debugger for another process
 
 ## File System Abstraction
 
@@ -890,7 +890,7 @@
 ## OS Virtualisation
 
 - In addition to manually separate priviledges using the OS's mechanisms we can:
-  - Abstract away the the OS systematicalle
+  - Abstract away the the OS system calls
     - OS virtualization(Docker, FreeBSD..)
   - Abstract away hardware:
     - Full virtualization: run different ISA
@@ -910,7 +910,7 @@
 
 - Not virtual machines!
   - If resource not namespaced by linux kernel, it is global and can be affected by the container
-- Containers are systematicalli separated using OS mechanisms
+- Containers are systematically separated using OS mechanisms
 - Templated by images
   - Image constructs container
   - Predictable enviroment
@@ -925,7 +925,7 @@
     - Process tables
     - Network stack
     - UID tables
-- Cgroups to limit resrouces of each container
+- Cgroups to limit resources of each container
 
 #### Capabilities
 
@@ -940,7 +940,7 @@
   - Dockererd daemon attack surface
   - Security of container configuration
 
-## Priviledge Separation 
+## Priviledge Separation
 
 ### Principle of Least Priviledge
 
@@ -987,7 +987,7 @@
 
 - Information
 - Capabilities
-- Change of identy
+- Change of identity
 
 #### Phases
 
@@ -1027,8 +1027,8 @@
 
 #### Retaining Slave State
 
-- To retain a slave_
-  - Serialize data structures and transfer to master 
+- To retain a slave:
+  - Serialize data structures and transfer to master
   - Allocate dynamic memory resources on memory shared with master
 
 - When new slave is spawned:
@@ -1080,7 +1080,7 @@
 
 - **Nist**
   - Require a minimum length of 8 or greater
-  - Allow atleast 64 character
+  - Allow atleast 64 characters
   - Check lists of known passwords
     - Dictionairy words
     - Repetetive characters
@@ -1109,7 +1109,12 @@
 
 ### Rainbow tables
 
+- Tool to derive passwords by looking only at hash value
 - time-space tradeoff when creating look-up table for hash values -> plaintext
+- Precomputed table for reversing cryptographic hash functions
+- Mainly used for cracking passwords
+- Uses less processing power than a brute force attack
+- 
 
 ### Salting
 

@@ -1,6 +1,6 @@
 # INF226 QUIZ ANSWERS
 
-1. What is the definition of security?
+1. What is the definition of software security?
    * When a program functions according to the intentions in an adverserial enviroment
 
 2. What does software security logic consist of? And what are some examples of these?
@@ -205,16 +205,192 @@
          * Confidentiality
          * Integrity
          * Availability
-    4. Temporal metrics 
+    3. Temporal metrics
         * Metrics who changes overtime
         * Rated from:
           * Exploitability(Unproven, Proof-of-concept, Functional, High)
-34. What is CWE? 
+  
+34. What is CWE?
+    * Common Weakness Enumeration
+    * List of common weaknesses present in software 
+    * More fine grained than OWASP's Top 10, but similar
+    * Structure:
+      * Architecture components
+      * Development concepts
+      * Research concepts
+
 35. What is NVD?
+    * National Vulnerability Database
+    * Contains analysis of known vulnerabilities 
+      * CVE number
+      * CWE numbers
+      * CVSS
+      * Versions affected
+
 36. What is a static analysis and how do you perform it?
+    * Inspection of source code
+      * Program flow analysis
+      * Constraints analysis
+      * Logic tests
+      * Linting
+  
 37. What is a dynamic analysis and how do you perform it?
-38. What is access control?
+    * Inspection of running software
+      * Fuzzers
+      * Crawlers
+      * Man-in-the-middle proxy
+
+38. What is access control and what are the aspects of it?
+    * The decisions of what users are allowed to do within a system
+      * Physical
+      * Logical
+      * Cryptographic
+      * Soscial
+
 39. What is MAC?
+    * Mandatory Access Contorl
+    * Access control policies decided by a central authority
+    * For example OS's have MAC access over resources(CPU, memory, storage,...)
+
 40. What is DAC?
+    * Discretionary Access Control
+    * Users specifies permissions for their own objects
+
 41. What are the access control models and how do they work?
-42. What are file descriptors?
+    1. Access Control Lists
+         * Permissions given to each object, giving different users different permissions for it
+         * Each object has its own set of permissions for each user
+         * Structured according to users and groups
+    2. Rôle based access control
+         * A set of roles abstract the permissions from the users
+         * Actions are always performed by a rôle
+         * Users must reauthenticate to change rôles
+    3. Capability based access control
+         * Users has their own capabilities  
+         * A capability is a reference to an object and a set of permissions for that object
+         * A capability is used whenever the resrouce is accessed
+
+42. What is the rôle of the OS?
+    * Orchestrate software
+    * Communicate with programs through system calls
+    * Different protections for different resources(memory, CPU, file systems, files/sockets/network connections)
+
+43. What is the confused deputy problem?
+    * A priviliedged process(deputy) is tricked by a prcoess with lower permissions, to do actions on behalf of it
+    * For example comilers and browser acting as a deputy
+
+44. What defines users and groups?
+    * Each user has a UID
+    * Each user is in a group that has a GID
+    * Prevents users to access each others memory
+    * Each file has a owner UID and a group GID
+
+45. What are file descriptors?
+    * The capabilities of accessing a file
+    * Each process has its own file-descriptor table
+    * OS checks permissions when opening files and creating descriptor
+
+46. What is, and why do we use Virtual Memory Mapping?
+    * Virtualize physical memory into pages and devide among processe
+    * Its inconvenient to let programs use physical memory
+    * Virtual memory is not decided at compile time, making guessing memory locations harder
+    * Memory fragmentations gets hidden from the program
+
+47. How does the UNIX file system devide directories?
+    * Into logical parts
+
+48. What is chroot?
+    * Changing of root directory
+    * Provides system virtualization
+
+49. What is the OpenBSD pledge?
+    * Mechanisms for restricting what system calls are allowed for each process
+
+50. What is OS virtualization?
+    * Abstracting away OS system calls, hardware or both to not be run directly on the OS's hardware
+
+51. What is Linux kernel namespaces?
+    * Grouping of processes so each groupt has individual:
+      * Filesystem mount tables
+      * Process stables
+      * Network stack
+      * UID tables
+
+52. What is Docker and what mechanisms does it provide?
+    * Containers
+      * Runs programs separated from the OS using OS mechanisms
+      * Templated by images
+      * Construced and administrated through container daemon
+    * Separation mechanisms
+      * chroot
+      * Individual namespaces to containers
+      * CGroups to limit resources to containers
+    * Capabilities
+      * For each container
+      * Abstraction through OS level restrictions
+      * Only whitelisted capabilities allowed
+    * Security configuration
+      * Underlying OS level separation mechanisms
+      * Dockered daemon attack surface
+      * Security of container configuration
+
+53. What is the principle of least priviledge?
+    * No user or program should operate using the least amount of priviledge necessary to complete the job
+
+54. How does SSH practice priviledge separation?
+    * With monitors and slaves:
+      * **Monitors**
+        * Priviledged
+        * Provides interface for slaves to perform priviledged actions
+        * Validated requests
+        * Performs actions on slaves behalf
+      * **Slaves**
+        * Unpriviledged
+        * Does most of the work
+        * Calls monitor when priviledged operations must be performed
+
+55. How does one implement a Monitor/Slave pattern?
+    1. Identifying priviledged operations
+         * eg file access, accessing crypto keys, databases,...
+    2. Separate request types
+         * Information
+         * Capabilites
+         * Change of identity
+    3. Devide into phases
+         * Pre authentication
+         * Post authetication
+    4. Define Slave/Monitor connection
+         * On connection, the service spawns a new connection between slave/monitor pair
+    5. Define Slave/Master communication
+         * Communicate through IPC mechanisms
+           * Pipe
+           * Shared memory
+           * Socket-pair
+    6. Mechanisms for changing of identity
+    7. Retain slave state
+
+56. What priviledged does SSHD have?
+    * Diffie-Hellman
+    * User validation
+    * Password authentication
+    * Public key authentication
+    * Transferrable shared memory
+    * **Priviledged operations in SSHD**:
+      * Renewing crypto keys
+      * Pseudo terminal creation (PTY)
+
+57. Why doesn't increasing the password alphabet, increase security?
+    * The length only grows constant with the size of the alphabet
+
+58. What is NIST?
+    * Standard for password creation
+    * Allows atleast 64 characters
+    * Compares passwords with lists of known password
+
+59. What is the ideal hash function?
+    * Small input = large output
+    * Collision free
+    * One way
+    * Quick to compute
+
+60. 
