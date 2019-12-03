@@ -982,12 +982,230 @@
 </ul>
 </li>
 <li>Abstraction</li>
-<li>Memory Safe</li>
-<li>Revoability</li>
-<li>anti-CSRF</li>
-<li>Collaboration</li>
-<li>Universal persistence</li>
+<li>Memory Safe
+<ul>
+<li>Endownment: A user might have instrisic capabilities given at creation</li>
+<li>Creation: User gets capabilities to access an object he creates</li>
+<li>Introduction: User transers a capability to another user</li>
+</ul>
+</li>
+<li>Revokability
+<ul>
+<li>The creator of a capability should be able to revoke it</li>
+</ul>
+</li>
+<li>anti-CSRF
+<ul>
+<li>Limits permissions to a specifies request type</li>
+</ul>
+</li>
+<li>Collaboration
+<ul>
+<li>Run a program with shared capabilities to access shared resources</li>
+</ul>
+</li>
+<li>Universal persistence
+<ul>
+<li>The state of the resource stays the same so it is never restarted</li>
+</ul>
+</li>
 </ol>
+</li>
+<li>
+<p>What is Capsicum?</p>
+<ul>
+<li>Provides capability based security based security for UNIX programs</li>
+<li>Extends the UNIX api's without replacing them or compromise performance</li>
+</ul>
+</li>
+<li>
+<p>What capabilities does Capsicum provide?</p>
+<ul>
+<li>Capabilities of file descriptors with a set of access rights
+<ul>
+<li>Around 60</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>What does capability mode in Capsicum do?</p>
+<ul>
+<li>Restricts access to global name spaces
+<ul>
+<li>PID</li>
+<li>File paths</li>
+<li>POSIX IPC</li>
+<li>System clocks/times</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>How does Capsicum enforce the restriction in capability mode?</p>
+<ul>
+<li>By restricing kernel primitives</li>
+<li>In capability mode, the only availabe PID is the process's own PID</li>
+<li>Child processes can only be accessed through capabilities</li>
+</ul>
+</li>
+<li>
+<p>What is serialization and deserialization?</p>
+<ul>
+<li>Serialization: The process of turning objects of a programming language into byte arrays for transport</li>
+<li>Deserialization: Turning transported byte arrays back into objects</li>
+</ul>
+</li>
+<li>
+<p>Why is incorrect deserialization dangerous?</p>
+<ul>
+<li>The deserialized code is at the forefront of the program. Without is being properly deserialized, it could lead to bugs and give an attacker RCE access</li>
+</ul>
+</li>
+<li>
+<p>What are the entries in the secure software development cycle?</p>
+<ol>
+<li>Requirements
+<ul>
+<li>Map security and privacy requirements</li>
+</ul>
+</li>
+<li>Design
+<ul>
+<li>Threat modeling</li>
+<li>Security design preview</li>
+</ul>
+</li>
+<li>Implementations
+<ul>
+<li>Static analysis</li>
+<li>Peer review</li>
+</ul>
+</li>
+<li>Testing
+<ul>
+<li>Security test cases</li>
+<li>Dynamic analysis</li>
+</ul>
+</li>
+<li>Deployment
+<ul>
+<li>Final Security review</li>
+<li>Application security monitoring and response plan</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>What are the non functional requirements and what does each entry contain?</p>
+<ol>
+<li><strong>Security and privacy</strong>
+<ul>
+<li>The program functions according to the intentions in an adverserial enviroment</li>
+</ul>
+</li>
+<li><strong>Availability, capacity, performance and efficiency</strong>
+<ul>
+<li><em>Availability</em>
+<ul>
+<li>The proporting of time a system spends in a functional state and not in downtime</li>
+<li>Do decrease downtime and increase availability:</li>
+<li>Write secure software</li>
+<li>Not having bugs</li>
+<li>Redundance</li>
+<li>Rely less on service</li>
+<li>Testing</li>
+<li>Scalability</li>
+</ul>
+</li>
+<li><em>Capacity</em>
+<ul>
+<li>The Maximum number of simultanious users/transactions*</li>
+</ul>
+</li>
+<li><em>Performance and effiency</em>
+<ul>
+<li>The ability to increase capacity and make use of scarce resources</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Extensibility, maintainability, portability and scalability</strong>
+<ul>
+<li><em>Portability</em>
+<ul>
+<li>The ability of the software to run on different systems with little adaptation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Recoverability</strong>
+<ul>
+<li>How easy it is for the system to recover from disruptive events</li>
+</ul>
+</li>
+<li><strong>Manageability and serviceability</strong>
+<ul>
+<li>How easy it is to develop, deploy and maintain the code</li>
+</ul>
+</li>
+<li><em>Cohesion</em>
+<ul>
+<li>The degree to which parts of system/module belong together</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>What should be reviewed during a security review?</p>
+<ul>
+<li>Security design</li>
+<li>Peer review</li>
+<li>Final security review before deployment</li>
+</ul>
+</li>
+<li>
+<p>What aspects of program should be logged?</p>
+<ul>
+<li>Authenticated events</li>
+<li>Attempted intrusions</li>
+<li>Violations of invariants</li>
+<li>Unusual behaviour</li>
+<li>Performance statistics</li>
+</ul>
+</li>
+<li>
+<p>What is a program state and why is it important to security?</p>
+<ul>
+<li>
+<p>Program state consists of:</p>
+<ul>
+<li>Variables</li>
+<li>File descriptors</li>
+<li>Cookies</li>
+<li>Client storage</li>
+</ul>
+</li>
+<li>
+<p>If a program reaches an unanticipated state, bugs could occur</p>
+</li>
+</ul>
+</li>
+<li>
+<p>What is preservation of invariants?</p>
+<ul>
+<li>The methods of an object ensures the internal state is a valid representation</li>
+</ul>
+</li>
+<li>
+<p>What is immutability?</p>
+<ul>
+<li>An object can not be changed after creation</li>
+<li>Provides security since an attacker could not change objects to alter the state</li>
+</ul>
+</li>
+<li>
+<p>How can a program achieve immutability?</p>
 </li>
 </ol>
 

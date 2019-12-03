@@ -529,10 +529,117 @@
 86. What properties can a capability have?
     1. Transferable
        * Should be transferable between users
-       * Capabilities generally dont care who uses them 
-    3. Abstraction
-    4. Memory Safe
-    5. Revoability
-    6. anti-CSRF
-    7. Collaboration
-    8. Universal persistence
+       * Capabilities generally dont care who uses them
+    2. Abstraction
+    3. Memory Safe
+       * Endownment: A user might have instrisic capabilities given at creation
+       * Creation: User gets capabilities to access an object he creates
+       * Introduction: User transers a capability to another user
+    4. Revokability
+       * The creator of a capability should be able to revoke it
+    5. anti-CSRF
+       * Limits permissions to a specifies request type
+    6. Collaboration
+       * Run a program with shared capabilities to access shared resources
+    7. Universal persistence
+       * The state of the resource stays the same so it is never restarted
+
+87. What is Capsicum?
+    * Provides capability based security based security for UNIX programs
+    * Extends the UNIX api's without replacing them or compromise performance
+
+88. What capabilities does Capsicum provide?
+    * Capabilities of file descriptors with a set of access rights
+      * Around 60
+
+89. What does capability mode in Capsicum do?
+    * Restricts access to global name spaces
+      * PID
+      * File paths
+      * POSIX IPC
+      * System clocks/times
+
+90. How does Capsicum enforce the restriction in capability mode?
+    * By restricing kernel primitives
+    * In capability mode, the only availabe PID is the process's own PID
+    * Child processes can only be accessed through capabilities
+
+91. What is serialization and deserialization?
+    * Serialization: The process of turning objects of a programming language into byte arrays for transport
+    * Deserialization: Turning transported byte arrays back into objects
+
+92. Why is incorrect deserialization dangerous?
+    * The deserialized code is at the forefront of the program. Without is being properly deserialized, it could lead to bugs and give an attacker RCE access
+
+93. What are the entries in the secure software development cycle?
+    1. Requirements
+       * Map security and privacy requirements
+    2. Design
+       * Threat modeling
+       * Security design preview
+    3. Implementations
+       * Static analysis
+       * Peer review
+    4. Testing
+       * Security test cases
+       * Dynamic analysis
+    5. Deployment
+       * Final Security review
+       * Application security monitoring and response plan
+
+94. What are the non functional requirements and what does each entry contain?
+    1. **Security and privacy**
+          * The program functions according to the intentions in an adverserial enviroment
+    2. **Availability, capacity, performance and efficiency**
+          * *Availability*
+            * The proporting of time a system spends in a functional state and not in downtime
+            * Do decrease downtime and increase availability:
+            * Write secure software
+            * Not having bugs
+            * Redundance
+            * Rely less on service
+            * Testing
+            * Scalability
+          * *Capacity* 
+            * The Maximum number of simultanious users/transactions*
+          * *Performance and effiency*
+            * The ability to increase capacity and make use of scarce resources
+    3. **Extensibility, maintainability, portability and scalability**
+          * *Portability*
+            * The ability of the software to run on different systems with little adaptation
+    4. **Recoverability**
+         * How easy it is for the system to recover from disruptive events
+    5. **Manageability and serviceability**
+         * How easy it is to develop, deploy and maintain the code
+    6. *Cohesion*
+       * The degree to which parts of system/module belong together
+
+95. What should be reviewed during a security review?
+    * Security design
+    * Peer review
+    * Final security review before deployment
+
+96. What aspects of program should be logged?
+    * Authenticated events
+    * Attempted intrusions
+    * Violations of invariants
+    * Unusual behaviour
+    * Performance statistics
+
+97. What is a program state and why is it important to security?
+    * Program state consists of:
+      * Variables
+      * File descriptors
+      * Cookies
+      * Client storage
+
+    * If a program reaches an unanticipated state, bugs could occur
+
+98. What is preservation of invariants?
+    * The methods of an object ensures the internal state is a valid representation
+
+99. What is immutability?
+    * An object can not be changed after creation
+    * Provides security since an attacker could not change objects to alter the state
+
+100. How can a program achieve immutability?

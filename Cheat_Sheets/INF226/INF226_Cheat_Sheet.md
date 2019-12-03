@@ -1419,7 +1419,7 @@
 #### Memory Safe Capabilities
 
 - Can be obtained by:
-  - Endowment: a user might have intrinsic capabilite given at creation
+  - Endowment: a user might have intrinsic capabilities given at creation
   - Creation: User gets capability to access an object he creates
   - Introduction: User transfers a capability to another user
 - Approach relies on memory safety of the language
@@ -1444,7 +1444,7 @@
 - The state of a resource stay the same with the same capabilities
 - E.g a program state stays the same so it's never restarted
 - Problem:
-  - Hoe to retain capabilities when a program restarts?
+  - How to retain capabilities when a program restarts?
     - A login manages could reconnect the user to their running programs
 
 ## Capsicum
@@ -1461,14 +1461,14 @@
 
 ### Capsicum Capabilities
 
-- Capabilities are file descriptors along with a set of access rights
+- Capabilities of file descriptors along with a set of access rights
   - Around 60 access rights
 - New capabilities are created through cap_new by giving it a file descriptor and rights mask
   - Capabilities transferre through inter process communication(IPC) channels(e.g sockets)
 
 ### Enforcing Capabilities in Capsicum
 
-- Capability modes restricts access to globlal name spaces such as:
+- Capability modes restricts access to global name spaces such as:
   - Process ID
   - File paths
   - POSIX IPC(inter process-communication)
@@ -1480,7 +1480,7 @@
 - opennat(desc, path) opens a file located at relative path from the directory refrenced in desc
   - No " .. " allowed in capability mode to repent path traversal
 - In capability mode, the only PID is the process's own PID
-- Child processes can be accessed through capabilities 
+- Child processes can be accessed through capabilities
 
 ### Adopting Programs To Capsicum
 
@@ -1524,7 +1524,7 @@
 
 - **Serialization**: The process of turning objects of a programming language into byte arrays for transport
 
-- **Deserialization**: The process or turning byte statck back into objects
+- **Deserialization**: The process or turning byte stack back into objects
 
 - Java serialization
   - Has reflection, gives dunamic method invocation
@@ -1579,7 +1579,7 @@
   - Malicous attacks
   - Software bugs
   - Hardware failures
-  - Failure of service 
+  - Failure of service
   - Excessive usage
 
 - Increasing availability
@@ -1603,7 +1603,7 @@
   - Location
   - Secure communicaton between instances
   - Secure communication between instances
-  - Eventual consistency 
+  - Eventual consistency
 
 #### Performance
 
@@ -1612,7 +1612,7 @@
 
 #### Effiency
 
-    The ability to make use of scares resources
+    The ability to make use of scarce resources
 
 - Memory/cache
 - CPU power
@@ -1635,7 +1635,7 @@
 
 #### Portability
 
-    The ability of the software to run on different system with little adaptation
+    The ability of the software to run on different systems with little adaptation
 
 #### Recoverability
 
@@ -1651,7 +1651,7 @@
 
 - Strong cohesion: Each module is robust and reusable
 
-### Security Review 
+### Security Review
 
 - Security design review
 - Peer review
@@ -1662,7 +1662,7 @@
 ### Logging
 
 - Error messages should:
-  - Be logged to a separate safe storage 
+  - Be logged to a separate safe storage
   - be append only
 - What to log:
   1. Authentication events
@@ -1679,7 +1679,7 @@
 
 ### Monitoring
 
-- To respons to an ongiong threat:
+- To respond to an ongiong threat:
   1. Detection
   2. Logging
   3. Monitoring
