@@ -26,8 +26,8 @@
 - Identify security requirements
   - Capture the intentions of the software
   - Making requirements = spelling out our intentions
-- Make assumptions about the enviroment the software until run
-  - Making assumptions = spelling out our knowledge of the enviroment
+- Make assumptions about the environment the software until run
+  - Making assumptions = spelling out our knowledge of the environment
 - Design mechanisms satisfying the requirements given the assumptions
 
 ##### Examples of requirements
@@ -67,7 +67,7 @@
 
 ### Vulnerability Definition
 
-- When software is in a cirumstance where the program fails to hehave according to intentions
+- When software is in a circumstance where the program fails to behave according to intentions
 - When the program fails to be secure
 
 ### Vulnerability Disclosure
@@ -88,14 +88,14 @@
 ### Remote Code Execution(RCE)
 
 - The most serious vulnerability
-- Gives that attacker premission to execute code on the victims machine
+- Gives that attacker permission to execute code on the victims machine
 
 ### Buffer Overflow
 
 #### The Call Stack
 
 - Stores return address for function call
-- On funciton call the pointer is pushed on the stack
+- On function call the pointer is pushed on the stack
 - When function is down the pointer is popped from the stack
 
 #### Buffer Overread
@@ -129,25 +129,25 @@
 
 - Secret value placed on the stack every time program is started
 - When function returns the value, checks if return pointer has been modified
-- If modified, program exits immeadiately
+- If modified, program exits immediately
 
 #### Address Space Layout Randomisation(ASLR)
 
 - Practise of randomising the layout when allocating memory in the system
 - Makes it more difficult, because attacker must guess the location of functions and libraries
 
-#### W^X(Write XOR Executeable)
+#### W^X(Write XOR Executable)
 
 - Memory allocations gives the memory different properties
 
   - Writeable
-  - Executeable
+  - Executable
 
-- OS enfoces that writeable memory cannot be executeable
+- OS enforces that writeable memory cannot be executable
   - Prevents loading shell code in writeable buffers
   - Does not prevent ROP
 
-#### Best Practieses to Avoid Buffer Overflow
+#### Best Practises to Avoid Buffer Overflow
 
 - Use memory-safe languages
 - Use memory-safe abstractions in unsafe languages(e.g vectors and smart pointers in C++)
@@ -162,7 +162,7 @@
     - Arguments from the caller
     - Local variables
     - Global variables
-  - **Not** variabes of other functions
+  - **Not** variables of other functions
 - **Breaking memory-safety:**
 
   - Pointer arithmetic
@@ -187,7 +187,7 @@
 ### Undefined Behaviour
 
 - When code behaves unspecified be the language standard
-  - For example in C, dereffering Null
+  - For example in C, deferring Null
 
 ### SQL Injection
 
@@ -195,7 +195,7 @@
 
 - Relation databases
 - Domain specific language
-- Queries contructed for other languages
+- Queries constructed for other languages
 - Queries are constructed from user input
 
 #### Problems with SQL
@@ -226,8 +226,8 @@
 
 #### Spoofing
 
-- Transmissions with intentialle mislabeled source
-- When a person tricks the program to think he is someone else, giving him the credentiability of someone else
+- Transmissions with intentional mislabeled source
+- When a person tricks the program to think he is someone else, giving him the creditability of someone else
 
 - URL spoofing
   - www.apple.com/ is actually www.xn--80ak6aa92e.com/
@@ -235,22 +235,22 @@
 
 #### Tampering
 
-- Modification of persistend data or data in transport
+- Modification of persistent data or data in transport
 - Examples
   - Injecting ads, malware etc in open wifi networks webpages
   - SQL injection to tamper with database
 
 #### Repudiation
 
-- Denial of perfoming unauthorized operations in systems where this cannot be tranced
+- Denial of performing unauthorised operations in systems where this cannot be tranced
 - Repudiate: to refuse acknowledge
 - For example a E-mails spoof, an untoward email was sent by a politician to another
 - Does the sender have repudiation?
 
 #### Information Disclosure
 
-- Access data in an unauthorized fashiong
-- Debug infor on production systems
+- Access data in an unauthorised fashion
+- Debug info on production systems
 - Passwords and other sensitive information logged as part of requests
 
 #### Denial of Service
@@ -260,7 +260,7 @@
 - Exploiting vulnerability
 - DNS hijacking
 
-#### Elevation of Priviledge
+#### Elevation of Privilege
 
 - User gains more rights within a system then expected
 
@@ -277,21 +277,21 @@
 ### Functional Decomposition
 
 - An overview of components of the system
-- A detailed map of comunication between componenents
+- A detailed map of communication between components
 - Description of the function of each of the components
 
 ### Threat Model
 
-- Applicates our assumptions about a system
+- Applicate’s our assumptions about a system
 - What threats (Stride) applies to each component?
 - Trust relationship between components?
-- Which threats apply to each relationshipt?
+- Which threats apply to each relationship?
 - What motivates an attacker?
 - What attack vectors can an attacker use?
 - **To perform this analysis**:
   - Functional decomposition(diagram of software components)
   - An overview of trust-relationships between components
-  - Good knowledge of security pitfalls(injectio, XSS, CSRF,..)
+  - Good knowledge of security pitfalls(injection, XSS, CSRF,..)
 
 #### Threat Model Example Scenario
 
@@ -325,7 +325,7 @@
 - Linchpins?
 - When mechanisms fails
   - Detect failure
-  - Migitate failure
+  - Mitigate failure
 
 ### Trusting Trust
 
@@ -335,7 +335,7 @@
 #### Trusting Compilers
 
 - Must trust the compiler to compile correctly
-- A compiler could recognize code and compile backdoors
+- A compiler could recognise code and compile backdoors
 - To trust a compiler:
   - Read compiler source code
   - The circle of compilers:
@@ -351,9 +351,9 @@
 - To test a compiler:
   - Requires independent compiler
   - ${S_{A}}$ is the source code of compiler ${A}$
-  - ${E_{A}}$ the executeable of ${A}$
+  - ${E_{A}}$ the executable of ${A}$
   - ${T}$ is a compiler independent of ${A}$
-  - ${E_{T}}$ is the executeable of ${T}$
+  - ${E_{T}}$ is the executable of ${T}$
     1. Compile ${S_{A}}$ using ${E_{A}}$ to get an executable ${X}$
     2. Compile ${S_{A}}$ using ${E_{T}}$ to get an executable ${Y}$
     3. Compile ${S_{A}}$ using ${X}$ to get an executable ${V}$
@@ -379,7 +379,7 @@
     Common Vulnerabilities and Exposures
 
 - Maintained be The Mitre Corporation
-- Allows referencing vulnerabilities accross systems
+- Allows referencing vulnerabilities across systems
 - Easy to track and find vulnerabilities and fixes
 - Entries consists of:
   - A unique number
@@ -405,7 +405,7 @@
 - Metrics:
   - Base metrics, intrinsic properties
   - Temporal metrics, changes to the vulnerability over time
-  - Enviromental metrics, specifics to the enviroment of the software
+  - Environmental metrics, specifics to the environment of the software
 
 #### Base Metrics
 
@@ -420,7 +420,7 @@
 
 - Rated on a scale from None/Partial/Complete impact
   - Confidentiality
-  - Integreity
+  - Integrity
   - Availability
 
 #### Temporal Metrics
@@ -447,12 +447,12 @@
     Common Weakness Enumeration
 
 - List of common weaknesses present in software
-- More fine-grained then Owasp Top 10, but similar
+- More fine-grained then OWASP Top 10, but similar
 - CWE's often given as outputs from security analysis tools
 - Structured by:
   - Architecture concepts
   - Development concepts
-  - Research conepts
+  - Research concepts
 
 ## NVD
 
@@ -471,7 +471,7 @@
     Inspects source code
 
 - Program flow analysis
-- Contraints analysis
+- Constraints analysis
 - Logic tests
 - Linting
 
@@ -491,7 +491,7 @@
     Decides which users can do what
 
 - Read/write to objects
-- Perform operations(start processes, allocat memory,..)
+- Perform operations(start processes, allocate memory,..)
 - Grant/revoke access
 
 ### Access Control Aspects
@@ -515,9 +515,9 @@
 
 ### Discretionary Access Control(DAC)
 
-    Users specifies premissions for their own objects
+    Users specifies permissions for their own objects
 
-- At least some priviledges are transferable
+- At least some privileges are transferable
 - File systems
 - E-mail
 - WIFI passwords
@@ -530,22 +530,22 @@
 
 ### Access Control lists
 
-- Premissions are given to each object, giving users different permissions with it
+- Permissions are given to each object, giving users different permissions with it
 - Each object has a list of permissions assigned to different users
-- Premissions structured according to **users and groups**
+- Permissions structured according to **users and groups**
 
 #### The Confused Deputy
 
-- Typical faillure
-- Priviledged process(deputy) is tricked to perform bad actions on behalf of less priviledged process
-- Can for be e.g copilers, browsers acting as deputy on the behalf
+- Typical failure
+- Privileged process(deputy) is tricked to perform bad actions on behalf of less privileged process
+- Can for be e.g compilers, browsers acting as deputy on the behalf
 
 #### Users and Groups
 
 - User ID (UID)
 - Group ID (GID)
 - A program gets a Process ID(PID) when its run
-  - Prevents users accessing eachothers memory
+  - Prevents users accessing each others memory
   - Files has Owner UID and Group GID
     - Read
     - Write
@@ -564,7 +564,7 @@
     A set of roles abstract the permissions from the users
 
 - Actions are always performed by a rôle
-- Users must reauthenticate to change a rôle
+- Users must re-authenticate to change a rôle
 
 ```haskell
                     [Role0]         -->   [Permission0]
@@ -587,7 +587,7 @@
 
 #### Rôle of OS
 
-- Ochestrate processes(software)
+- Orchestrate processes(software)
   - Provide abstract interface for hardware(drivers)
   - Communicate with programs through **system calls**
     - Interrupts and returns control to OS
@@ -644,7 +644,7 @@
 
 - OS checks permissions when opening files and creating descriptor
   - Can be transferred between processes
-  - Recipient processs does nt need to have permission to access the file to use the file-descriptor
+  - Recipient processes doesnt need to have permission to access the file to use the file-descriptor
 
 ## Memory Protection
 
@@ -657,7 +657,7 @@
   - Memory locations not decided at compile time
   - Memory fragmentation hidden from programs
   - Easy to page out to swap
-- As a consequence processes cannot directly adress the memory of other processes
+- As a consequence processes cannot directly address the memory of other processes
 
 - **Exceptions:**
   - Processes can allocate shared memory
@@ -680,8 +680,8 @@
   - Provides system virtualisation
   - Chroot does not however:
   - Restrict network access
-  - Restrict usage of system resrouces
-  - Prevent comunication between processes
+  - Restrict usage of system resources
+  - Prevent communication between processes
 
 ## System Calls
 
@@ -689,16 +689,16 @@
 
     Mechanism restricting what system calls are allowed for each process
 
-- Calling plegde with a list of system call groups, restricts the process from accessing most system calls not on the list
+- Calling pledge with a list of system call groups, restricts the process from accessing most system calls not on the list
 
 ## OS Virtualisation
 
-- In addition to manually separate priviledges using the OS's mechanisms we can:
+- In addition to manually separate privileges using the OS's mechanisms we can:
   - Abstract away the the OS system calls
-    - OS virtualization(Docker, FreeBSD..)
+    - OS virtualisation(Docker, FreeBSD..)
   - Abstract away hardware:
-    - Full virtualization: run different ISA
-    - Paravirtualization: Runs cpu instructions natively
+    - Full virtualisation: run different ISA
+    - Paravirtualisation: Runs cpu instructions natively
 
 ### Linux Kernel namespaces
 
@@ -713,11 +713,11 @@
 #### Containers
 
 - Not virtual machines!
-  - If resource not namespaced by linux kernel, it is global and can be affected by the container
+  - If resource not name spaced by linux kernel, it is global and can be affected by the container
 - Containers are systematically separated using OS mechanisms
 - Templated by images
   - Image constructs container
-  - Predictable enviroment
+  - Predictable environment
 - Construction and administration through container daemon
 
 #### Separation mechanisms
@@ -744,40 +744,40 @@
   - Dockererd daemon attack surface
   - Security of container configuration
 
-## Priviledge Separation
+## Privilege Separation
 
-### Principle of Least Priviledge
+### Principle of Least Privilege
 
-        Every program and every user should operate using the least amount og priviledge necessary to complete the job
+        Every program and every user should operate using the least amount of privilege necessary to complete the job
 
-## Preventing Priviledge Escalation in SSH
+## Preventing Privilege Escalation in SSH
 
 - **OpenSSH**
   - Part of OpenBSD project
   - Found on most unix systems
   - Secure remote access (PKI)
 
-### Privilegde Separation in SSH
+### Privilege Separation in SSH
 
 - **Monitor**
-  - Priviledged
-  - Provides interface for slaves to perform priviledged operations
+  - Privileged
+  - Provides interface for slaves to perform privileged operations
   - Validates requests
   - Finite state machine
   - Perform actions on slaves behalf
 
 - **Slave**
-  - Unpriviledged
+  - Unprivileged
   - Does most of the work
-  - Calls on monitor when priviledged operations must be performed
+  - Calls on monitor when privileged operations must be performed
 
 - [Encryption keys] [File system] <--> [Monitor] <--> [Slave] <--> [Client]
 
 ### Implementing Monitor/Slave Pattern
 
-- **Goal:** Limit the amount of code running in a priviledged process
+- **Goal:** Limit the amount of code running in a privileged process
 
-#### Identifying Priviledged Operations
+#### Identifying Privileged Operations
 
         Defines a service specific monitor/slave interface
 
@@ -796,16 +796,16 @@
 #### Phases
 
 - **Pre authentication**
-  - Slave has as little priviledge as possible 
-  - Monitor only accespts authentication from slave
+  - Slave has as little privilege as possible 
+  - Monitor only accepts authentication from slave
 
 - **Post authentication**
-  - Slave has normal user priviledges
-  - Monitor validates requests requiring additional priviledges
+  - Slave has normal user privileges
+  - Monitor validates requests requiring additional privileges
 
 #### Slave/Monitor Connection
 
-- On connection, service spawns a seperate monitor/slave pair for that connection
+- On connection, service spawns a separate monitor/slave pair for that connection
 - Slave is created by:
     1. Changing UID and GID to unused values
     2. Chrooted into an empty, unwriteable directory
@@ -822,8 +822,8 @@
 
 #### Change of Identity
 
-- Slave should run as normal user when autheticated
-- Unix does however not support changing UID of a rpocess without UID=0
+- Slave should run as normal user when authenticated
+- Unix does however not support changing UID of a process without UID=0
   - Solution:
     1. Terminate slave and
     2. Monitor spawns a new process with correct UID/GID
@@ -832,27 +832,27 @@
 #### Retaining Slave State
 
 - To retain a slave:
-  - Serialize data structures and transfer to master
+  - Serialise data structures and transfer to master
   - Allocate dynamic memory resources on memory shared with master
 
 - When new slave is spawned:
-  - Serialize data structures are passed through IPC
+  - Serialise data structures are passed through IPC
   - Memory shared with new slave
 
-### Priviledge in SSHD
+### Privilege in SSHD
 
 - **Allows:**
   - Access allow Diffie-Hellman
-  - Signes a challenge with server private key to authenticate the connection
+  - Signs a challenge with server private key to authenticate the connection
   - User validation
   - Password authentication
   - Public key authentication
 
 - **Change of identity**
-  - Data structures are serialized
+  - Data structures are serialised
   - Shared memory transferred
 
-- **Priviledged operations in sshd**
+- **Privileged operations in SSHD**
   - In post-authentication phase:
     - Key exchange supports renewing crypto keys
     - Pseudo terminal creation (PTY)
@@ -862,12 +862,12 @@
 ### SSH Attacker Scenario
 
 - **Assumption**: RCE gives an attacker control over the slave
-  - Possible Esclation paths:
+  - Possible Escalation paths:
     - **Taking over system processes**
       - Restricted by UID
       - Other slaves protected by P_SGUID
     - **System calls to change the file system**
-      - Root file system empty and unwriteable
+      - Root file system empty and unwritable
     - **Local network connections**
       - Not preventable by this mechanism
       - May abuse IP trust relationships
@@ -884,10 +884,10 @@
 
 - **Nist**
   - Require a minimum length of 8 or greater
-  - Allow atleast 64 characters
+  - Allow at least 64 characters
   - Check lists of known passwords
     - Dictionairy words
-    - Repetetive characters
+    - Repetitive characters
     - Context specific words
     - Previous breached passwords
 
@@ -909,7 +909,7 @@
 ### Hashing issues
 
 - Same hash for same reused password
-- Hashes can be computed in a dictionairy an attacker could use to brute force the password
+- Hashes can be computed in a dictionary an attacker could use to brute force the password
 
 ### Rainbow tables
 
@@ -923,12 +923,12 @@
 
 - Generates random string and store it in the hash
 - Harder to crack
-- Does not help againt brute force attack on single password
+- Does not help against brute force attack on single password
 - Unix systems use 128-bit salts
 
 ### Key Derivation Functions
 
-- Derives plaintext from hashs
+- Derives plaintext from hash
 - Requirements:
   - One-way
   - Collision free
@@ -945,9 +945,9 @@
 
 #### SCrypt
 
-- Previous key derivation is trivially computed in paralell at no additional memory cost
+- Previous key derivation is trivially computed in parallel at no additional memory cost
 - SCrypt is maximally memory hard
-- **Downside:** Due to its use in crypto-currencies, fast specialized circuits for scrpyt
+- **Downside:** Due to its use in crypto-currencies, fast specialised circuits for scrpyt
 
 - r block size parameter
 - N CPU/Memory cost parameter
@@ -964,15 +964,15 @@
 
 ### Two Factor Authentication
 
-- Additional authetication mechanism to passwords
+- Additional authentication mechanism to passwords
 - Examples:
   - SMS codes
   - Print out codes
   - Time based passwords (TOTP)
-  - Approval from allready authenticated device
+  - Approval from already authenticated device
   - Public key crypto(U2F/FIDO, WebAuth)
 
-- Could be vulnerable to phising
+- Could be vulnerable to phishing
 - Public-key systems in browsers can prevent proxy-attacks
 - WebAuthn is a new W3C standard
 
@@ -982,10 +982,10 @@
   - Man in the middle does not strike first
   - Trust upon first session and use that as authentication for the next sessions
 
-### Centralized Certificate Authorities (CA)
+### Centralised Certificate Authorities (CA)
 
 - Trust a central authority to verify public keys
-- Issues ceritificates for public keys
+- Issues certificates for public keys
 
 ### Other schemes
 
@@ -1004,10 +1004,10 @@
 
 - **Entropy**
   - Finite resource on any system
-  - Not all random generators are suitabe for creating session ID
+  - Not all random generators are suitable for creating session ID
     - Java.util.random for examples, is guessable by only looking at a few bytes
 
-## Stream Ciphers and Message Authetication Codes
+## Stream Ciphers and Message Authentication Codes
 
 ### Stream Ciphers
 
@@ -1015,20 +1015,20 @@
   - Fixed input and output length
   - Same key gives same output
   - [Seed = key] --> [Crypto RNG] --> [ [Pseudo random stream] [Plaintext data stream] ]--> (XOR) --> [Cipher Stream]
-  - Based on cryto pseudo-random generators
+  - Based on crypto pseudo-random generators
   - Proves safe extension to arbitrary inputs
-  - **Are mallabe**
+  - **Are malleable**
 
-### Message Authetication Codes
+### Message Authentication Codes
 
 #### Keyed Hash Function
 
 - [[Key]  [Message]] --> [Keyed hash function] --> [MAC]
 - Produces a hash dependent on key
-- Used to autheticate keys
+- Used to authenticate keys
   - Derive a key from shared secret
   - Sender computes hash of encrypted message and attaches hash
-  - Reciever computes keyed hash recieved message and compare with attached hash
+  - Receiver computes keyed hash received message and compare with attached hash
 - Provides authenticity and integrity
 
 - **Message structure**
@@ -1049,7 +1049,7 @@
 
 ## Cross-Site Scripting
 
-- When web-server unintentionally serves javasript from an attacker to client browser
+- When web-server unintentionally serves javascript from an attacker to client browser
 - How to inject script:
   - User data from one user visible to another
   - URL variables
@@ -1060,7 +1060,7 @@
 
 - Spread MySpace
 - Fastest worm
-- Mostly harless
+- Mostly harmless
 - Cross site scripting worm
 
 #### How Samy Worm Works
@@ -1096,12 +1096,12 @@
   - CSS attribute values
   - JSON data
   - ...
-- Do not implement youself!!
+- Do not implement yourself!!
 - For String places in HTML
   - " & → & amp; "
   - " < → & lt; "
   - " > → & gt; "
-  - " " → & quot; "
+  - " " → & quote; "
   - " ' → & #x27; "
   - " / → & #x2F; "
 
@@ -1161,7 +1161,7 @@
 - Three values:
     1. **None**: cookie is always sent
     2. **Strict**: cookie is sent when the request is from the same origin
-    3. **Lax**: cookie is only sendt only with GET request
+    3. **Lax**: cookie is only sent only with GET request
 
 ### The HTTP Only Flag
 
@@ -1173,7 +1173,7 @@
 
 - Set in the HTTP header
 - Control which sources content is allowed to come from
-- Voilation reported to the server
+- Violation reported to the server
 - Limits inline scripts
 - Limitations:
   - Correctly escaped HTML output is still needed
@@ -1182,7 +1182,7 @@
 - Asset types
   - default-src: all assets
   - style-src: stylesheets
-  - frame-src: iframe srouces
+  - frame-src: iframe sources
   - EventSource -font-src: font files(flash and others)
 
 ## Using Capabilities
@@ -1194,14 +1194,14 @@
   - Used whenever a resource is accessed
 
 - Give only the capabilities needed
-- Decide what capabilites to give to different resrouces
-- Capabilites should be **unforgeable**, otherwise it's a usesless security measure
+- Decide what capabilities to give to different resources
+- Capabilities should be **unforgeable**, otherwise it's a useless security measure
 
-### Approaces
+### Approaches
 
 1. **Enforced by supervisor(os, vm, compiler, ...)**
-2. **Unguessable capabilites(random tokens, crypto signatures,...)**
-     - Relies on entropy and cryptograhic security
+2. **Unguessable capabilities(random tokens, crypto signatures,...)**
+     - Relies on entropy and cryptographic security
      - Can be referenced by random number
      - Can be signed
 
@@ -1210,10 +1210,10 @@
 #### Transferrable Capabilities
 
 - Should be transferrable between users
-  - Generally capabilites do not care who uses them
+  - Generally capabilities do not care who uses them
   - This prevents possibly confused deputies
 
-#### Capabilites Abstraction
+#### Capabilities Abstraction
 
 - The following properties are treated the same:
   - The capability of reading from a file
@@ -1227,16 +1227,16 @@
   - Introduction: User transfers a capability to another user
 - Approach relies on memory safety of the language
 
-#### Revokability
+#### Revocability
 
 - The creator of a capability should be able to revoke it
 - Can be temporal or partial
 
 #### CSRF Capabilities
 
-- CSRF-tokens can be viewd as capabilities
+- CSRF-tokens can be viewed as capabilities
 - Denotes and object and limits permissions to specified request types
-- Unforgable(unguessable)
+- Unforgeable(unguessable)
 
 #### Capabilities for Collaboration
 
@@ -1255,19 +1255,19 @@
 - Design goals:
   1. Provide capability based security for Unix programs
   2. Extend, not replace Unix API's
-  3. Performance comparable to already emplyed priviledge separation mechanisms
+  3. Performance comparable to already employed privilege separation mechanisms
 
 - Introduces a special capability mode for processes
 - Provides new kernel primitives(cap_enter, cap_new, ...)
 - Changing external primitives when in capability mode
-- USerspace library
+- Userspace library
 
 ### Capsicum Capabilities
 
 - Capabilities of file descriptors along with a set of access rights
   - Around 60 access rights
 - New capabilities are created through cap_new by giving it a file descriptor and rights mask
-  - Capabilities transferre through inter process communication(IPC) channels(e.g sockets)
+  - Capabilities transferred through inter process communication(IPC) channels(e.g sockets)
 
 ### Enforcing Capabilities in Capsicum
 
@@ -1280,16 +1280,16 @@
 ### Restricting existing kernel primitives
 
 - In order to enforce these restrictives, man kernel primitives must be changed
-- opennat(desc, path) opens a file located at relative path from the directory refrenced in desc
+- opennat(desc, path) opens a file located at relative path from the directory referenced in desc
   - No " .. " allowed in capability mode to repent path traversal
 - In capability mode, the only PID is the process's own PID
 - Child processes can be accessed through capabilities
 
 ### Adopting Programs To Capsicum
 
-- Typical strucutre of programs using capsicum:
-  - Obtain resrouces(using system abient authorities)
-  - Wrap resrouces in capabilities
+- Typical structure of programs using capsicum:
+  - Obtain resources(using system ambient authorities)
+  - Wrap resources in capabilities
   - Enter capability mode
   - Use resources
 - Each program uses capability in isolation. The system itself is based on the traditional security model
@@ -1298,54 +1298,54 @@
 
 - Outputs descriptions of network packets matching given filter
 
-- Priviledges are aquired early
-- Priviledged operations are separate from the messy parsing of packets
-- DNS resolver relied on file access, therefor hade to be changed to external daemon
+- Privileges are acquired early
+- Privileged operations are separate from the messy parsing of packets
+- DNS resolver relied on file access, therefor had to be changed to external daemon
 
 #### dhclient
 
-- Is OpenBSD's DHCP client and is already using priviledge separation
+- Is OpenBSD's DHCP client and is already using privilege separation
 
 #### gzip
 
     Command-line-compression tool
 
-- Priviledge separation through chroot/unprivildged UID is stupid
+- Privilege separation through chroot/unprivileged UID is stupid
 - Modifying gzip to use libcapsicum
   - Three critical functions are put in capability mode
   - 409 lines added to gzip
 
 #### Chromium
 
-- Open souce siblig of Chrome browser
+- Open source sibling of Chrome browser
 - Has different sandboxing with different implementations on different platforms
   - Each tab is a rendered platform
   - Resources already forwarded through file descriptors
 - Before capsicum, the FreeBSD port of chrome did not use any sandboxing
 
-## Serialization
+## Serialisation
 
-- **Serialization**: The process of turning objects of a programming language into byte arrays for transport
+- **Serialisation**: The process of turning objects of a programming language into byte arrays for transport
 
-- **Deserialization**: The process or turning byte stack back into objects
+- **Deserialisation**: The process or turning byte stack back into objects
 
-- Java serialization
-  - Has reflection, gives dunamic method invocation
-    - Takes a method name string, ang argument strings
+- Java serialisation
+  - Has reflection, gives dynamic method invocation
+    - Takes a method name string, and argument strings
     - Applies it to an object
 - JSON
 - Pickle(Python)
   - Pickle library is dangerous
 - Protocol buffers
 
-### Incorrect Deserialization
+### Incorrect Deserialisation
 
-- The code deserialating is at the forefront of the program security
+- The code deserialises is at the forefront of the program security
 - Bugs could lead to RCE
 
 ## Security Trough The Software Development Cycle
 
-- Definition: The ability of software to function according to intentions in an adverserial enviroment
+- Definition: The ability of software to function according to intentions in an adversarial environment
 - Assumptions -> Security mechanisms -> Security requirements
 
 ### Software Development Cycle
@@ -1353,7 +1353,7 @@
   1. Requirements
       - Map security and privacy requirements
   2. Design
-       - Threat Modeling
+       - Threat Modelling
        - Security design review  
   3. Implementations
        - Static analysis
@@ -1379,7 +1379,7 @@
     The proportion of time a system spends in a functional state
 
 - Causes for downtime:
-  - Malicous attacks
+  - Malicious attacks
   - Software bugs
   - Hardware failures
   - Failure of service
@@ -1388,14 +1388,14 @@
 - Increasing availability
   - Write secure software
   - Not having bugs
-  - Redundance
+  - Redundancy
   - Less reliance of service
   - Testing
   - Scalability
 
 #### Capacity
 
-    The maximum number of simulaneous users/transactions
+    The maximum number of simultaneous users/transactions
 
 #### Scalability
 
@@ -1404,7 +1404,7 @@
 - What are the bottle-necks?
   - Load balancing
   - Location
-  - Secure communicaton between instances
+  - Secure communication between instances
   - Secure communication between instances
   - Eventual consistency
 
@@ -1413,7 +1413,7 @@
 - Responsiveness of the software to users
 - Rate of transaction processing
 
-#### Effiency
+#### Efficiency
 
     The ability to make use of scarce resources
 
@@ -1458,7 +1458,7 @@
 
 - Security design review
 - Peer review
-  - Reviweing commits
+  - Reviewing commits
   - Pair programming
 - Final security review before deployment
 
@@ -1469,7 +1469,7 @@
   - be append only
 - What to log:
   1. Authentication events
-  2. Attempted instrusions
+  2. Attempted intrusions
   3. Violations of invariants
   4. Unusual behaviour
   5. Performance statistics
@@ -1482,7 +1482,7 @@
 
 ### Monitoring
 
-- To respond to an ongiong threat:
+- To respond to an ongoing threat:
   1. Detection
   2. Logging
   3. Monitoring
@@ -1507,7 +1507,7 @@
 - **Preservation of invariants**: The methods of an object ensures the internal state is a valid representation
 
 - Problem:
-  - If you pass reference to a mutable objevt, you give permission to mutate the object
+  - If you pass reference to a mutable object, you give permission to mutate the object
   - If you accept a reference to a mutable object, you must also accept it mutates beyond your control
 
 ## Immutability
@@ -1519,7 +1519,7 @@
 #### Strings in Java
 
 - String interning: Every copy is only stored once
-- String doesnt change, so we never have to recompute hashcode
+- String doesn’t change, so we never have to recompute hash-code
 - Thread safe
 - Security
 
@@ -1530,7 +1530,7 @@
 
 #### Making Immutable classes
 
-- An immutable class can hide a muteable object by
+- An immutable class can hide a mutable object by
   1. Keeping the only reference to this object
   2. Not modifying the object
   3. Not providing setters
@@ -1547,7 +1547,7 @@
 
 - Common type formers:
   - Parameterised types (generics)
-  - Record ttpes/product types
+  - Record types/product types
   - Sum types
   - Function types
   - Dependent types
@@ -1561,12 +1561,12 @@
 - Often given special meanings by functions or classes
   - No elements found
   - No parameter present
-- Important to remeber null checks
+- Important to remember null checks
 
 #### NullPointerExceptions
 
 - Leads to unexpected control flows
-- Unexprected states could be unsecure
+- Unexpected states could be unsecured
 
 ## CERT Top 10 Secure Coding Practises
 
@@ -1577,25 +1577,25 @@
 
 2. **Validate Input**
    - Regard all input with suspicion
-   - Map the surface of the program to detemine the input points
-   - Formualte explicit descriptions of all possible inputs(protocol, format,...)
+   - Map the surface of the program to determine the input points
+   - Formulate explicit descriptions of all possible inputs(protocol, format,...)
    - Validate inputs according to theses descriptions
 
-3. **Sanitize Data to Other Systems**
+3. **Sanitise Data to Other Systems**
    - Covers
      - SQL Injections
      - XSS
      - Command injection
      - File paths
 
-   - Whenever a astring is transferred:
-     1. Idenetify protocol of format
-     2. Identify which parts come from unstrusted sources
-     3. Sanitize the data appropriately
+   - Whenever a string is transferred:
+     1. Identify protocol of format
+     2. Identify which parts come from untrusted sources
+     3. Sanitise the data appropriately
 
 4. **Deny by Default**
 
-5. **Adhere the principle of least priviledge**
+5. **Adhere the principle of least privilege**
 
 6. **Architect and design for policy enforcement**
 
@@ -1630,7 +1630,7 @@
   - GDPR
 - **Norwegian law**
   - Personopplysnings loven
-  - Datatilsynet is the norwegian supervisory authority related to privacy issues
+  - Datatilsynet is the Norwegian supervisory authority related to privacy issues
 
 ### GDPR
 
@@ -1639,10 +1639,10 @@
 - Obligations of data processors
 
 - Fundamental principles:
-  1. Lawfullness
+  1. Lawfulness
   2. Fairness
       - The data processing should not exceed what the data subject can reasonably expect
-  3. Transparancy
+  3. Transparency
       - Information about what is collected must be clearly stated
 
 - Rights
@@ -1655,7 +1655,7 @@
 
 - Should have a "Forget me" function
 - See data collected
-- Be carefull about third part access to data
+- Be careful about third part access to data
 
 ### Minimise data collection
 
@@ -1664,17 +1664,17 @@
 
 ### Consent
 
-- Must be demonstratable
+- Must be demonstrable
 - Must be formulated clear and in plain language
-- Must be specifc to each kind of data
+- Must be specific to each kind of data
 - Must be possible to withdraw
 
-- **Aquiring consent**
+- **Acquiring consent**
   - Divide into categories
   - Ask for consent for each category upon registration of users
   - Store separate consents as field in a database
-  - Interface for chaning consent settings
-  - No prefilled checkboxes
+  - Interface for changing consent settings
+  - No pre-filled checkboxes
 
 ### Obligations of the Controller and Processor
 
@@ -1685,13 +1685,13 @@
   - Not later than 72 hours
 - Data protection impact assessment
 - Position of the data protection officer
-  - Meant to ensure that the organization complies with privacy laws
+  - Meant to ensure that the organisation complies with privacy laws
   - Shall have direct communication with leaders who make decisions in privacy matters
   - Must perform audits of compliance
   - Protection from being layed-off
 
 - The processor shall implement
-  1. The pseudonymation and ecryption of personal data
+  1. The pseudonymation and encryption of personal data
   2. The ability to ensure the ongoing:
      - Confidentiality
      - Integrity
@@ -1704,7 +1704,7 @@
 
 - Mixed network
   - Communication is redirected through several hosts before reaching its destination
-  - Not usefull if the data reveals information about source/destination
+  - Not useful if the data reveals information about source/destination
   - Solved by onion routing through encryption
 
 - An onion has encryption layers
@@ -1713,7 +1713,7 @@
 
 #### TOR
 
-- Based on firefox
+- Based on Firefox
 - Can reveal hidden services living in the network
 - Node network
   - Client
@@ -1745,20 +1745,20 @@
 
 - Mobile applications can access
   1. Sensors
-     - Can be used for sureveillance
+     - Can be used for surveillance
   2. Network
   3. Storage
-- Runs bytecode as OS process
+- Runs byte-code as OS process
 - Can communicated with other devices
-- Can have Two-factor authetication tokens 
+- Can have Two-factor authentication tokens 
 
 ### Mobile Threats
 
 - Mobiles are increasingly valuable targets
 - Stores a lot of personal data
-  - Advertisment
-  - Phising
-  - Extorrsion
+  - Advertisement
+  - Phishing
+  - Extortion
 - Stores organisational data
   - Contacts
   - Calendar
@@ -1779,11 +1779,11 @@
 
 - Based on linux
   - Each app has its own UID
-  - Each app has its own Lonux process
+  - Each app has its own Linux process
 - Java as application platform
   - Each app as its own VM
 
-- Android are centered around components
+- Android are centred around components
   1. Activities
   2. Services
   3. Content providers
@@ -1803,18 +1803,18 @@
 #### Android Activities
 
 - User interface components displayed when the user interacts with the application
-- Activities recieve intents, and in response interacts with the user
+- Activities receive intents, and in response interacts with the user
 
 #### Universal Cross-Site Scripting (UXSS)
 
-- Chrome and firefox have been vulnerable on android through intents
+- Chrome and Firefox have been vulnerable on android through intents
 
 #### SQL Injection in Content Providers
 
 - Content providers resolve URI's and extract data for activities and services
 - Stores in SQLite databases, but interface provides no prevention of SQL injection attacks
 
-#### Sandoxing and Encryption
+#### Sandboxing and Encryption
 
 - Android processes are separated using usual Linux mechanisms
   - **SELinux** provides Mandatory Access Control(MAC)
@@ -1826,7 +1826,7 @@
 - Android uses dm-crypt to encrypt its 
 - Provides confidentiality, but not integrity
 - Provides encrypted storage of encryption keys through Android KeyStore
-  - Hardware based through trusted execution enviroment or
+  - Hardware based through trusted execution environment or
   - Software based
 
 #### Malware on Android
@@ -1844,5 +1844,5 @@
 
 - Developed in-house from hardware to native applications
 - Heavy investment in security 
-- Remote iOS jailbrakes
+- Remote iOS jail-brakes
 - The slides for this topic were horrible :( 
