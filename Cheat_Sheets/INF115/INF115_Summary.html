@@ -513,8 +513,6 @@ code {
 </li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><a href="#kapittel-8---fra-modell-til-database">Kapittel 8 - Fra modell til database</a>
 <ul>
 <li><a href="#oppsummeringer-av-enkle-regler">Oppsummeringer av enkle regler</a></li>
@@ -523,6 +521,8 @@ code {
 <li><a href="#mange-til-mange-forhold">Mange-til-mange forhold</a></li>
 <li><a href="#en-til-en-forhold">En-til-en forhold</a></li>
 <li><a href="#h%c3%a5ndtere-minimumskardinalitet-i-databaser">Håndtere minimumskardinalitet i databaser</a></li>
+</ul>
+<ul>
 <li><a href="#todo-subtyper">TODO Subtyper</a></li>
 <li><a href="#todo-ikke-atmo%C3%A6re-attributter">TODO Ikke-atmoære attributter</a></li>
 <li><a href="#normalisering">Normalisering</a>
@@ -537,6 +537,8 @@ code {
 </li>
 </ul>
 </li>
+</ul>
+<ul>
 <li><a href="#kapittel-9---filer-og-indekser">Kapittel 9 - Filer og indekser</a>
 <ul>
 <li><a href="#lagringsmedier">Lagringsmedier</a>
@@ -687,7 +689,162 @@ code {
 <li>Testing</li>
 <li>Produksjon</li>
 </ol>
+<h3 id="databasesystem">Databasesystem</h3>
+<ul>
+<li>DBHS - Databasehåndteringssystem</li>
+<li>DBHS + database
+<ul>
+<li>Skal lagre store mengder data over lang tid på en sikker måte</li>
+<li>Må tilby brukermekanismer(SQL)</li>
+<li>Effektive søk</li>
+<li>Brukertillgangsrettigheter</li>
+<li>Kæsjhåntering</li>
+<li>Flerbrukerkompitabel</li>
+<li>Mulighet å lage applikasjoner som kan bruke systemet</li>
+</ul>
+</li>
+<li>Inkonsistent når dataen i databasen er motstridene</li>
+</ul>
+<h3 id="utf%C3%B8ring-av-sql-sp%C3%B8rringer">Utføring av SQL-spørringer</h3>
+<ul>
+<li>
+<p>Parsering(parsing) - feilretting</p>
+</li>
+<li>
+<p>Optimalisering - Spørringer blir gjort mest mulig effektiv. Resulterer i en ekseverinsplan der den mest effektive planen blir utført</p>
+</li>
+<li>
+<p>Inekder- Effektiviserer søk i kolonner</p>
+</li>
+<li>
+<p>Transaksjoner</p>
+<ul>
+<li>Operasjoner brukere utføere på databasen</li>
+<li>Utføres i helget så ikke noe går galt med databasen. Fikses med b.l.a logging</li>
+</ul>
+</li>
+</ul>
+<h3 id="dbhs-familiene">DBHS-familiene</h3>
+<ul>
+<li>Relasjonsdatabaser - Tabeller,SQL</li>
+<li>Objektdatabaser - Kart, bilder, lyd, osv</li>
+<li>No SQL databaser - Nyere enn SQL</li>
+<li>Hierarkiske databaser - Tresstruktur</li>
+<li>Nettverksdatabase - Nettverksgrafer</li>
+<li>Logiske databaser - Data lagres som logiske utsagn</li>
+</ul>
 <h2 id="kapittel-2---sp%C3%B8rringer-mot-%C3%A9n-tabell">Kapittel 2 - Spørringer mot én tabell</h2>
+<ul>
+<li>
+<p>Nullmerker - &quot;ikke verdier&quot;</p>
+</li>
+<li>
+<p>Primærnøkkel - En per tabell. Effektiv måte å identifiserer data på</p>
+</li>
+<li>
+<p>Nøkkelord:</p>
+<ul>
+<li><strong>SELECT</strong> - Hvilke kolonner?</li>
+<li><strong>FROM</strong> - Hvilken tabell?</li>
+<li><strong>WHERE</strong> - Hvilke rader?</li>
+<li><strong>ORDER BY</strong> - Hvilken rekkefølge?</li>
+</ul>
+</li>
+</ul>
+<h3 id="utvalgssp%C3%B8rringer">Utvalgsspørringer</h3>
+<ul>
+<li>
+<p>Vise samtlige kolonner:</p>
+<ul>
+<li>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">SELECT</span> * 
+  <span class="hljs-keyword">FROM</span> db
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="operatorer">Operatorer</h3>
+<ul>
+<li>
+<p>Aritmetiske</p>
+<ul>
+<li>-,+,*,/,%</li>
+</ul>
+</li>
+<li>
+<p>Sammenligning</p>
+<ul>
+<li>&lt;, &gt;, =&gt; , &lt;=, =, &lt;&gt;</li>
+</ul>
+</li>
+<li>
+<p>Logiske</p>
+<ul>
+<li>AND, NOT</li>
+</ul>
+</li>
+<li>
+<p>Operator prioritet:</p>
+<ol>
+<li>-(tall)</li>
+<li>/ *</li>
+<li>+-</li>
+<li>&lt;,&gt;,&lt;= =&gt; =, &lt;&gt;</li>
+<li>NOT</li>
+<li>AND</li>
+<li>OR</li>
+</ol>
+</li>
+</ul>
+<h3 id="jokernotasjon">Jokernotasjon</h3>
+<ul>
+<li><code>WHERE COL LIKE 'M%'</code>
+<ul>
+<li>Finner alt som starter på M</li>
+</ul>
+</li>
+<li><code>WHERE UPPER(col) LIKE %SØKEORD%</code>
+<ul>
+<li>Finner alt som inneholder søkeordet</li>
+</ul>
+</li>
+<li><code>WHERE cole LIKE 'A1_'</code>
+<ul>
+<li>Returnerer alt som har A1 og et tegn etter seg</li>
+</ul>
+</li>
+</ul>
+<h3 id="sortering">Sortering</h3>
+<ul>
+<li>Etter kolonner
+<ul>
+<li><code>ORDER BY col1 ASC(stigende), col2 DESC(synkende)</code></li>
+</ul>
+</li>
+<li>Etter legnde på ord
+<ul>
+<li><code>ORDER BY CHAR_LENGTH(col)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="mengdefunksjoner">Mengdefunksjoner</h3>
+<ul>
+<li>AVG - Gjennomsnitt</li>
+<li>SUM - Sum</li>
+<li>COUNT - Antall</li>
+<li>MIN - Minimum</li>
+<li>MAX - Maksimum</li>
+</ul>
+<h3 id="gruppering">Gruppering</h3>
+<ul>
+<li><code>GROUP BY col</code></li>
+</ul>
+<h3 id="filtrere-resultat">Filtrere resultat</h3>
+<ul>
+<li><code>HAVING COUNT(*) &gt; 1</code></li>
+<li><strong>DISTINCT</strong> - Fjerner duplikater</li>
+</ul>
 <h2 id="kapittel-3---lage-og-bruke-tabeller">Kapittel 3 - Lage og bruke tabeller</h2>
 <h3 id="datatyper">Datatyper</h3>
 <ul>
